@@ -1,12 +1,10 @@
 /*! ------------------------------------------------
  * Project Name: Name: Sarvech - Personal Portfolio & Resume HTML Template
  * Project Description: Show yourself brightly with Braxton - unique and creative portfolio and resume template!
- * Tags: Spring Boot, Thymleaf, resume, portfolio, personal page, cv, template, one page, responsive, html5, css3, creative, clean 
+ * Tags: Spring Boot, Thymeleaf, resume, portfolio, personal page, cv, template, one page, responsive, html5, css3, creative, clean 
  * Version: 1.0.0
  * Build Date: January 2024
  * Last Update: -- 2024
- * This product is available exclusively on Themeforest
- * Author: mix_design
 /*! File name: main.css
  * ------------------------------------------------
  *
@@ -40,6 +38,7 @@
  * ------------------------------------------------
  * Table of Contents End
  * ------------------------------------------------ */
+
 /* ------------------------------------------------*/
 /* Fonts Start */
 /* ------------------------------------------------*/
@@ -48,6 +47,7 @@
 /* ------------------------------------------------*/
 /* Fonts End */
 /* ------------------------------------------------*/
+
 /* ------------------------------------------------*/
 /* Template Backgrounds Start */
 /* ------------------------------------------------*/
@@ -58,6 +58,7 @@
 /* ------------------------------------------------*/
 /* Template Backgrounds End */
 /* ------------------------------------------------*/
+
 /* ------------------------------------------------*/
 /* Variables Start */
 /* ------------------------------------------------*/
@@ -249,6 +250,7 @@
 /* ------------------------------------------------*/
 /* Variables End */
 /* ------------------------------------------------*/
+
 /* ------------------------------------------------*/
 /* Basic Styles Start */
 /* ------------------------------------------------*/
@@ -589,6 +591,7 @@ img {
 /* ------------------------------------------------*/
 /* Animations - Backgrounds End */
 /* ------------------------------------------------*/
+
 /* ------------------------------------------------*/
 /* Elements - Typography Start */
 /* ------------------------------------------------*/
@@ -1130,6 +1133,7 @@ p.additional-text a {
 /* ------------------------------------------------*/
 /* Elements - Typography End */
 /* ------------------------------------------------*/
+
 /* ------------------------------------------------*/
 /* Elements - Controls Start */
 /* ------------------------------------------------*/
