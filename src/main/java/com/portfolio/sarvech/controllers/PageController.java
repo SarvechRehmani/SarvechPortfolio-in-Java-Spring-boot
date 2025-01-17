@@ -16,4 +16,9 @@ public class PageController {
     public String home() {
         return "redirect:/";
     }
+
+    @GetMapping("admin/sarvech")
+    public String adminLogin() {
+        return "admin/login";
+    }
 }

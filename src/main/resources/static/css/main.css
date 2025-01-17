@@ -74,6 +74,7 @@
   --_animspeed-medium: 0.3s;
   --_animspeed-slow: 0.6s;
   --_animbezier: cubic-bezier(0.23, 0.65, 0.74, 1.09);
+
   /* light color scheme */
   --base--light: #e6ebf4;
   --base-tint--light: #ebf0f7;
@@ -89,39 +90,46 @@
   --t-muted--light: #666a79;
   --t-accent--light: #8f56cc;
   --t-secondary--light: #5d4ec4;
-  --t-disabled--light: #717586;
-  --t-placeholder--light: #969bb2;
+  --t-disabled--light: #3c3e48;
+  --t-placeholder--light: #626570;
   --base-opp--light: #111111;
-  --t-opp-bright--light: #ebf0f7;
+  --t-opp-bright--light: #12131b;
   --t-opp-medium--light: #c7c6d3;
   --t-opp-muted--light: #a1a1af;
-  --gradient-one--light: #cec4ef;
-  --gradient-two--light: #f5c5cd;
-  --gradient-three--light: #ac8fe3;
+  --gradient-one--light: #498acb; /* Gradient start */
+  --gradient-two--light: #97cbff; /* Gradient middle */
+  --gradient-three--light: #5683b1; /* Gradient end */
+
   /* dark color scheme */
-  --base--dark: #111111;
-  --base-tint--dark: #161616;
-  --base-shade--dark: #000000;
-  --accent--dark: #e4b8bf;
-  --secondary--dark: #cec4ef;
-  --secondary-rgba--dark: rgba(206, 196, 239, 0.2);
-  --stroke-controls--dark: #4b4b51;
-  --stroke-controls-neutral--dark: rgba(255, 255, 255, 0.3);
-  --stroke-elements--dark: #303033;
-  --t-bright--dark: #e9e9f1;
-  --t-medium--dark: #c7c6d3;
-  --t-muted--dark: #a1a1af;
-  --t-accent--dark: #e1bac5;
-  --t-secondary--dark: #cec4ef;
-  --t-disabled--dark: #8b8a91;
-  --t-placeholder--dark: #58585e;
-  --base-opp--dark: #fafafa;
-  --t-opp-bright--dark: #121319;
-  --t-opp-medium--dark: #626577;
-  --t-opp-muted--dark: #717586;
-  --gradient-one--dark: #a287d5;
-  --gradient-two--dark: #e4b8bf;
-  --gradient-three--dark: #8b6bc5;
+  --base--dark: #0c0d13; /* Base dark background */
+  --base-tint--dark: #12131b; /* Slightly lighter for elements */
+  --base-shade--dark: #000000; /* Deepest dark */
+  --accent--dark: #6e57e0; /* Primary accent */
+  --secondary--dark: #5a45c4; /* Secondary accent */
+  --secondary-rgba--dark: rgba(110, 87, 224, 0.5); /* Transparent secondary */
+  --stroke-controls--dark: #2c2d3a; /* Border for controls */
+  --stroke-controls-neutral--dark: rgba(
+    255,
+    255,
+    255,
+    0.2
+  ); /* Neutral border */
+  --stroke-elements--dark: #1f202b; /* Element borders */
+  --t-bright--dark: #dedffa; /* Bright text */
+  --t-medium--dark: #c7c6eb; /* Medium text */
+  --t-muted--dark: #a1a1d3; /* Muted text */
+  --t-accent--dark: #a08bec; /* Highlight text */
+  --t-secondary--dark: #6e57e0; /* Secondary text */
+  --t-disabled--dark: #d9d9d9; /* Disabled text */
+  --t-placeholder--dark: #7c7c9b; /* Placeholder text */
+  --base-opp--dark: #f2f2f5; /* Opposite base */
+  --t-opp-bright--dark: #ebf0f7; /* Opposite bright text */
+  --t-opp-medium--dark: #3c3d57; /* Opposite medium text */
+  --t-opp-muted--dark: #4a4a64; /* Opposite muted text */
+  --gradient-one--dark: #7e1199; /* Gradient start */
+  --gradient-two--dark: #cb00fe; /* Gradient middle */
+  --gradient-three--dark: #9445a8; /* Gradient end */
+
   /* permanent colors */
   --per-base: #111111;
   --per-base-tint: #212121;
@@ -1283,6 +1291,7 @@ p.additional-text a {
 }
 
 .btn-hover-accent::before {
+  border: 1px solid var(--stroke-controls);
   background: var(--accent);
   background: -moz-linear-gradient(
     315deg,
@@ -3000,7 +3009,8 @@ form textarea:required:valid {
   height: 4.4rem;
   -moz-border-radius: 2rem;
   border-radius: 2rem;
-  color: var(--t-muted);
+  border: 1px solid var(--t-opp-bright);
+  color: var(--t-disabled);
   font-size: 1.6rem;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
@@ -3251,11 +3261,11 @@ form textarea:required:valid {
     position: relative;
   }
   .menu__link.active {
-    background-color: transparent;
+    background-color: #c1b0ff81; /* sarvech */
     border: 1px solid var(--stroke-controls-neutral);
     color: var(--t-bright);
-    -webkit-backdrop-filter: blur(6px);
-    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
   }
 }
 @media only screen and (min-width: 1200px) {
@@ -3591,10 +3601,7 @@ form textarea:required:valid {
   background-color: var(--base);
   color: var(--t-bright);
 }
-.gallery__descr .rounded-tag.opposite {
-  background-color: var(--base-opp);
-  color: var(--t-opp-bright);
-}
+
 @media only screen and (min-width: 1400px) {
   .gallery__descr {
     position: absolute;
