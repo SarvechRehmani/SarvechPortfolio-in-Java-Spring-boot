@@ -93,12 +93,13 @@
   --t-disabled--light: #3c3e48;
   --t-placeholder--light: #626570;
   --base-opp--light: #111111;
-  --t-opp-bright--light: #12131b;
+  --t-opp-bright--light: #ebf0f7;
   --t-opp-medium--light: #c7c6d3;
   --t-opp-muted--light: #a1a1af;
   --gradient-one--light: #498acb; /* Gradient start */
   --gradient-two--light: #97cbff; /* Gradient middle */
   --gradient-three--light: #5683b1; /* Gradient end */
+  --c-base-light: #fefeff82; /* Container transparent base */
 
   /* dark color scheme */
   --base--dark: #0c0d13; /* Base dark background */
@@ -129,6 +130,7 @@
   --gradient-one--dark: #7e1199; /* Gradient start */
   --gradient-two--dark: #cb00fe; /* Gradient middle */
   --gradient-three--dark: #9445a8; /* Gradient end */
+  --c-base-dark: #1b1c2576; /* Container transparent base */
 
   /* permanent colors */
   --per-base: #111111;
@@ -174,6 +176,7 @@
     --gradient-one: var(--gradient-one--light);
     --gradient-two: var(--gradient-two--light);
     --gradient-three: var(--gradient-three--light);
+    --c-base: var(--c-base-light);
   }
 }
 @media (prefers-color-scheme: dark) {
@@ -201,6 +204,7 @@
     --gradient-one: var(--gradient-one--dark);
     --gradient-two: var(--gradient-two--dark);
     --gradient-three: var(--gradient-three--dark);
+    --c-base: var(--c-base-dark);
   }
 }
 [color-scheme="light"] {
@@ -227,6 +231,7 @@
   --gradient-one: var(--gradient-one--light);
   --gradient-two: var(--gradient-two--light);
   --gradient-three: var(--gradient-three--light);
+  --c-base: var(--c-base-light);
 }
 
 [color-scheme="dark"] {
@@ -253,6 +258,7 @@
   --gradient-one: var(--gradient-one--dark);
   --gradient-two: var(--gradient-two--dark);
   --gradient-three: var(--gradient-three--dark);
+  --c-base: var(--c-base-dark);
 }
 
 /* ------------------------------------------------*/

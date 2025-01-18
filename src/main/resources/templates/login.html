@@ -69,20 +69,20 @@
     />
     <style>
       .container {
-        width: 50%;
-        margin: 30px auto;
+        width: 45%;
+        margin: 40px auto;
       }
       .login-wrapper {
-        background-color: rgba(88, 88, 88, 0.359);
+        background-color: var(--c-base);
         border-radius: 15px;
         padding: 40px;
         text-align: center;
       }
-      .login-form {
+      .row {
         display: flex;
         flex-direction: column;
-        gap: 50px;
-        padding: 30px;
+        gap: 15px;
+        padding: 18px;
         margin-top: 20px;
       }
       .title {
@@ -122,40 +122,51 @@
       <div class="login-wrapper">
         <h1 class="title">Welcome Back! Sarvech</h1>
         <p class="subtitle">Sign-in to your account</p>
-        <form class="form login-form" id="login-form">
-          <div class="container-fluid p-0">
-            <div class="row gx-0">
-              <div class="col-12 form__item animate-in-up">
-                <input
-                  type="text"
-                  name="username"
-                  placeholder="Please Enter Username here*"
-                  required
-                />
-              </div>
+        <form
+          th:action="@{/authenticate}"
+          method="POST"
+          class="form login-form"
+          id="login-form"
+        >
+          <div class="row gx-0">
+            <div class="col-12 form__item animate-in-up">
+              <input
+                type="text"
+                name="username"
+                id="username"
+                placeholder="Please Enter Username here*"
+                required
+              />
+            </div>
 
-              <div class="col-12 form__item animate-in-up">
-                <input
-                  type="password"
-                  name="passowrd"
-                  placeholder="Please Enter Password here*"
-                  required
-                />
-              </div>
+            <div class="col-12 form__item animate-in-up">
+              <input
+                type="password"
+                name="password"
+                id="passowrd"
+                placeholder="Please Enter Password here*"
+                required
+              />
+            </div>
 
-              <div class="col-12 form__item animate-in-up">
-                <button
-                  class="btn btn-default btn-hover btn-hover-accent"
-                  type="submit"
-                >
-                  <span class="btn-caption">Send Message</span>
-                  <i class="ph-bold ph-paper-plane-tilt"></i>
-                </button>
-              </div>
+            <div class="col-12 form__item animate-in-up">
+              <button
+                class="btn btn-default btn-hover btn-hover-accent"
+                type="submit"
+              >
+                <span class="btn-caption">Sign-in</span>
+                <i class="ph-bold ph-paper-plane-tilt"></i>
+              </button>
             </div>
           </div>
         </form>
       </div>
+    </div>
+    <div th:text="${session}"></div>
+
+    <div th:if="${session.message}" th:object="${session.message}">
+      <h2 th:text="*{content}"></h2>
+      <p th:text="*{type}"></p>
     </div>
 
     <!-- Template Scripts Start -->

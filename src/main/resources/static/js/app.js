@@ -487,8 +487,14 @@ window.addEventListener("DOMContentLoaded", () => {
 // --------------------------------------------- //
 // Typing Text Start
 // --------------------------------------------- //
+var typedTexts = document.querySelectorAll(".text");
+var designations = [];
+typedTexts.forEach((text) => {
+  designations.push(text.textContent);
+});
+console.log(designations);
 var typingEffect = new Typed("#typedText", {
-  strings: ["Java Developer.", "Spring Boot Dev.", "Angular Developer."],
+  strings: designations,
   typeSpeed: 100,
   backSpeed: 80,
   smartBackspace: true, // this is a default

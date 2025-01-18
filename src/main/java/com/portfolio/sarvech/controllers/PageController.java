@@ -1,13 +1,15 @@
 package com.portfolio.sarvech.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class PageController {
 
     @GetMapping
-    public String index() {
+    public String index(Model model) {
+        model.addAttribute("nn","fa-brands fa-pinterest-p");
         System.out.println("Home page");
         return "index";
     }
@@ -17,8 +19,9 @@ public class PageController {
         return "redirect:/";
     }
 
-    @GetMapping("admin/sarvech")
+    @GetMapping("/login/admin-sarvech")
     public String adminLogin() {
-        return "admin/login";
+
+        return "login";
     }
 }
