@@ -1,4 +1,7 @@
 package com.portfolio.sarvech.repositories;
 
-public interface DetailsRepo {
+import com.portfolio.sarvech.models.Details;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface DetailsRepo extends JpaRepository<Details, Long> {
 }
