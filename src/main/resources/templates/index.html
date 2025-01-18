@@ -80,7 +80,7 @@
     <!-- Custom Browser Color End -->
   </head>
 
-  <body>
+  <body th:object="${details}">
     <!-- Loader Start -->
     <div id="loader" class="loader">
       <div id="loaderContent" class="loader__content">
@@ -219,7 +219,12 @@
               </svg> -->
             </div>
             <div class="logo__caption">
-              <p>Sarvech<br />Rehmani</p>
+              <p>
+                <span th:text="*{firstName}">Sarvech </span><br /><span
+                  th:text="*{lastName}"
+                  >Rehmani</span
+                >
+              </p>
             </div>
           </div>
           <div class="avatar__image">
