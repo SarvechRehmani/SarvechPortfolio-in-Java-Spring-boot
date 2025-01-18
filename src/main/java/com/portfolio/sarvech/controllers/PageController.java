@@ -6,6 +6,7 @@ import com.portfolio.sarvech.services.DetailsService;
 import com.portfolio.sarvech.services.SocialLinkService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,8 +43,10 @@ public class PageController {
     }
 
     @GetMapping("/login/admin-sarvech")
-    public String adminLogin() {
-
+    public String adminLogin(Authentication authentication) {
+        if (authentication != null) {
+            return "redirect:/admin/dashboard";
+        }
         return "login";
     }
 }
