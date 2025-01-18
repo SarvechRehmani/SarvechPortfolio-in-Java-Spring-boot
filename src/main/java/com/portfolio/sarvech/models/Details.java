@@ -4,10 +4,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Getter
 @Setter
+@ToString
 public class Details {
 
     @Id
@@ -25,7 +27,7 @@ public class Details {
     private String descriptionOne;
     private String descriptionTwo;
 
-
-
-
+    public Details(long id) {
+        this.id = id;
+    }
 }
