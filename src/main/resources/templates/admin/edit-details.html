@@ -27,14 +27,15 @@
               <div class="card-head d-flex justify-content-between">
                 <h1 class="title">Details</h1>
                 <div>
-                  <a th:href="@{#}" class="header__trigger btn">
-                    <span class="btn-caption">Add</span>
-                    <i class="fa-solid fa-plus"></i>
+                  <a th:href="@{/admin/dashboard}" class="header__trigger btn">
+                    <span class="btn-caption">back</span>
+                    <i class="fa-solid fa-circle-arrow-left"></i>
                   </a>
                 </div>
               </div>
               <form
-                th:action="@{/authenticate}"
+                th:action="@{/admin/edit-details}"
+                th:object="${details}"
                 method="POST"
                 class="form contact-form"
                 id="contact-form"
@@ -44,6 +45,7 @@
                     <div class="col-12 col-md-6 form__item animate-in-up">
                       <input
                         type="text"
+                        th:field="*{firstName}"
                         placeholder="Your First Name*"
                         required
                       />
@@ -51,15 +53,15 @@
                     <div class="col-12 col-md-6 form__item animate-in-up">
                       <input
                         type="text"
-                        name="Company"
-                        placeholder="Your Last Name"
+                        th:field="*{lastName}"
+                        placeholder="Your Last Name*"
                       />
                     </div>
 
                     <div class="col-12 col-md-6 form__item animate-in-up">
                       <input
                         type="email"
-                        id="email"
+                        th:field="*{email}"
                         placeholder="Your Email*"
                         required
                       />
@@ -68,7 +70,7 @@
                     <div class="col-12 col-md-6 form__item animate-in-up">
                       <input
                         type="text"
-                        id="phone"
+                        th:field="*{phoneNumber}"
                         placeholder="Your Phone Number*"
                         required
                       />
@@ -77,7 +79,7 @@
                     <div class="col-12 col-md-6 form__item animate-in-up">
                       <input
                         type="text"
-                        id="address"
+                        th:field="*{address}"
                         placeholder="Your Address*"
                         required
                       />
@@ -86,7 +88,7 @@
                     <div class="col-12 col-md-6 form__item animate-in-up">
                       <input
                         type="text"
-                        id="specialization"
+                        th:field="*{specialization}"
                         placeholder="Your Specialization*"
                         required
                       />
@@ -95,7 +97,7 @@
                     <div class="col-12 col-md-6 form__item animate-in-up">
                       <input
                         type="number"
-                        id="happyClients"
+                        th:field="*{happyClients}"
                         placeholder="Happy Clients*"
                         required
                       />
@@ -104,7 +106,7 @@
                     <div class="col-12 col-md-6 form__item animate-in-up">
                       <input
                         type="number"
-                        id="projects"
+                        th:field="*{projects}"
                         placeholder="Projects Completed*"
                         required
                       />
@@ -113,14 +115,14 @@
                     <div class="col-12 col-md-6 form__item animate-in-up">
                       <input
                         type="number"
-                        id="experience"
+                        th:field="*{experience}"
                         placeholder="Happy Experience*"
                         required
                       />
                     </div>
 
                     <div class="col-12 col-md-6 form__item animate-in-up">
-                      <select name="" id="experiencedIn">
+                      <select th:field="*{experiencedIn}" id="experiencedIn">
                         <option value="">Select Experience</option>
                         <option value="Month">Month</option>
                         <option value="Months">Months</option>
@@ -131,15 +133,35 @@
 
                     <div class="col-12 form__item animate-in-up">
                       <textarea
+                        th:field="*{descriptionOne}"
                         placeholder="Your Description 1*"
                         required
                       ></textarea>
                     </div>
                     <div class="col-12 form__item animate-in-up">
                       <textarea
+                        th:field="*{descriptionTwo}"
                         placeholder="Your Description 2"
                         required
                       ></textarea>
+                    </div>
+
+                    <div class="col-12 col-md-12 form__item animate-in-up">
+                      <input
+                        type="url"
+                        th:field="*{resumeLink}"
+                        placeholder="Paste resume link*"
+                        required
+                      />
+                    </div>
+
+                    <div class="col-12 col-md-12 form__item animate-in-up">
+                      <input
+                        type="url"
+                        th:field="*{addressLink}"
+                        placeholder="Paste Location link*"
+                        required
+                      />
                     </div>
 
                     <div class="col-12 form__item animate-in-up">

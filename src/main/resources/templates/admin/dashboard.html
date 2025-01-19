@@ -12,26 +12,27 @@
   <body>
     <div>
       <!-- Page Content Start -->
-      <div id="content" class="content">
+      <div id="content" class="content" th:object="${details}">
         <div class="content__wrapper">
-          <div style="margin: 40px 0 0 65px">
+          <div class="dashboard-title">
             <h2>Welcome Back to your portfolio Admin Panel</h2>
           </div>
 
           <div class="container">
-            <div class="main_container">
+            <div class="main_container mb-3">
               <div class="card-head d-flex justify-content-between">
                 <h1 class="title">Details</h1>
-                <div>
+                <div class="d-flex align-items-center">
                   <a
                     th:href="@{/admin/update-details}"
                     class="header__trigger btn"
                   >
                     <span class="btn-caption">Edit</span>
-                    <i class="fa-solid fa-plus"></i>
+                    <i class="fa-solid fa-pen-to-square"></i>
                   </a>
                 </div>
               </div>
+              <div th:replace="~{admin/message :: alert}"></div>
 
               <div class="container-fluid p-0">
                 <!-- Content Block - Achievements Start -->
@@ -44,7 +45,12 @@
                       class="achievements__item d-flex flex-column grid-item animate-card-3 p-0"
                     >
                       <div class="achievements__card">
-                        <p class="achievements__number">40+</p>
+                        <p
+                          class="achievements__number"
+                          th:text="*{happyClients+'+'}"
+                        >
+                          40+
+                        </p>
                         <p class="achievements__descr">Happy clients</p>
                       </div>
                     </div>
@@ -53,8 +59,16 @@
                       class="achievements__item d-flex flex-column grid-item animate-card-3 p-0"
                     >
                       <div class="achievements__card">
-                        <p class="achievements__number">1+</p>
-                        <p class="achievements__descr">Years of experience</p>
+                        <p
+                          class="achievements__number"
+                          th:text="*{experience+'+'}"
+                        >
+                          1+
+                        </p>
+                        <p class="achievements__descr">
+                          <span th:text="*{experiencedIn}">Years</span> of
+                          experience
+                        </p>
                       </div>
                     </div>
                     <!-- achievements single item -->
@@ -62,7 +76,12 @@
                       class="achievements__item d-flex flex-column grid-item animate-card-3 p-0"
                     >
                       <div class="achievements__card">
-                        <p class="achievements__number">15+</p>
+                        <p
+                          class="achievements__number"
+                          th:text="*{projects+'+'}"
+                        >
+                          15+
+                        </p>
                         <p class="achievements__descr">Projects done</p>
                       </div>
                     </div>
@@ -71,83 +90,93 @@
                 <!-- Content Block - Achievements End -->
 
                 <!-- Content Block - About Me Data Start -->
-                <div class="content__block grid-block block-large p-0">
-                  <div class="container-fluid">
-                    <div class="row g-0 justify-content-between p-0">
-                      <!-- About Me Information Start -->
-                      <div class="col-12 col-xl-4 grid-item about-info">
-                        <div class="about-info__item animate-in-up">
-                          <h6>
-                            <small class="top">Name</small>
-                            Sarvech Rehmani
-                          </h6>
-                        </div>
-                        <div class="about-info__item animate-in-up">
-                          <h6>
-                            <small class="top">Phone</small>
-                            <a class="text-link-bold" href="tel:+923133599267"
-                              >+92 313-3599267</a
-                            >
-                          </h6>
-                        </div>
-                        <div class="about-info__item animate-in-up">
-                          <h6>
-                            <small class="top">Email</small>
-                            <a
-                              class="text-link-bold"
-                              href="mailto:sarwech99@gmail.com?subject=Message%20From%20Your%20Site"
-                              >sarwech99@gmail.com</a
-                            >
-                          </h6>
-                        </div>
-                        <div class="about-info__item animate-in-up">
-                          <h6>
-                            <small class="top">Location</small>
-                            <a
-                              class="text-link-bold"
-                              href="https://maps.app.goo.gl/uersU2G9wwhu8cZU7"
-                              target="_blank"
-                              >Karachi, Pakistan</a
-                            >
-                          </h6>
-                        </div>
+                <div class="container-fluid">
+                  <div class="row g-0 justify-content-between p-0">
+                    <!-- About Me Information Start -->
+                    <div class="col-12 col-xl-4 grid-item about-info">
+                      <div class="about-info__item animate-in-up">
+                        <h6>
+                          <small class="top">Name</small>
+                          <span th:text="*{firstName +' '+ lastName}"></span>
+                        </h6>
                       </div>
-                      <!-- About Me Information End -->
-
-                      <!-- About Me Description Start -->
-                      <div class="col-12 col-xl-8 grid-item about-descr">
-                        <p class="about-descr__text animate-in-up text-justify">
-                          I wonder if I've been changed in the night? Let me
-                          think. Was I the same when I got up this morning? I
-                          almost think I can remember feeling a little
-                          different. But if I'm not the same, the
-                          <a href="#0" class="text-link">next question</a>
-                          is 'Who in the world am I?' Ah, that's the great
-                          puzzle!
-                        </p>
-                        <p class="about-descr__text animate-in-up text-justify">
-                          Be what you would seem to be - or, if you'd like it
-                          put more simply - never imagine yourself not to be
-                          otherwise than what it might appear to others that
-                          what you were or
-                          <a href="#0" class="text-link">might have been</a>
-                          was not otherwise than what you had been would have
-                          appeared to them to be otherwise.
-                        </p>
-                        <div
-                          class="btn-group about-descr__btnholder animate-in-up"
-                        >
+                      <div class="about-info__item animate-in-up">
+                        <h6>
+                          <small class="top">Phone</small>
                           <a
-                            class="btn mobile-vertical btn-default btn-hover btn-hover-accent"
-                            href="#0"
-                          >
-                            <span class="btn-caption">Download CV</span>
-                            <i class="ph-bold ph-download-simple"></i>
-                          </a>
-                        </div>
+                            class="text-link-bold"
+                            th:href="@{*{'tel:'+phoneNumber}}"
+                            th:text="*{phoneNumber}"
+                          ></a>
+                        </h6>
                       </div>
-                      <!-- About Me Description End -->
+                      <div class="about-info__item animate-in-up">
+                        <h6>
+                          <small class="top">Email</small>
+                          <a
+                            class="text-link-bold"
+                            th:href="@{*{'mailto:'+email+'?subject=Message%20From%20Your%20Site'}}"
+                            th:text="*{email}"
+                          >
+                          </a>
+                        </h6>
+                      </div>
+                      <div class="about-info__item animate-in-up">
+                        <h6>
+                          <small class="top">Location</small>
+                          <a
+                            class="text-link-bold"
+                            th:href="@{*{addressLink}}"
+                            target="_blank"
+                            th:text="*{address}"
+                            >Karachi, Pakistan
+                          </a>
+                        </h6>
+                      </div>
+                      <div
+                        class="btn-group about-descr__btnholder animate-in-up"
+                      >
+                        <a
+                          target="_blank"
+                          class="btn mobile-vertical btn-default btn-hover btn-hover-accent"
+                          th:href="@{*{resumeLink}}"
+                        >
+                          <span class="btn-caption">Download CV</span>
+                          <i class="ph-bold ph-download-simple"></i>
+                        </a>
+                      </div>
                     </div>
+                    <!-- About Me Information End -->
+
+                    <!-- About Me Description Start -->
+                    <div class="col-12 col-xl-8 grid-item about-descr">
+                      <small class="top">Description 1</small>
+                      <p
+                        class="about-descr__text animate-in-up text-justify"
+                        th:text="*{descriptionOne}"
+                      >
+                        I wonder if I've been changed in the night? Let me
+                        think. Was I the same when I got up this morning? I
+                        almost think I can remember feeling a little different.
+                        But if I'm not the same, the
+                        <a href="#0" class="text-link">next question</a>
+                        is 'Who in the world am I?' Ah, that's the great puzzle!
+                      </p>
+                      <small class="top">Description 2</small>
+                      <p
+                        class="about-descr__text animate-in-up text-justify"
+                        th:text="*{descriptionTwo}"
+                      >
+                        Be what you would seem to be - or, if you'd like it put
+                        more simply - never imagine yourself not to be otherwise
+                        than what it might appear to others that what you were
+                        or
+                        <a href="#0" class="text-link">might have been</a>
+                        was not otherwise than what you had been would have
+                        appeared to them to be otherwise.
+                      </p>
+                    </div>
+                    <!-- About Me Description End -->
                   </div>
                 </div>
                 <!-- Content Block - About Me Data End -->

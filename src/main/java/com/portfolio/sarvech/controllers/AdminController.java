@@ -1,18 +1,22 @@
 package com.portfolio.sarvech.controllers;
 
 import com.portfolio.sarvech.helper.AppConstants;
+import com.portfolio.sarvech.helper.Message;
+import com.portfolio.sarvech.helper.MessageType;
 import com.portfolio.sarvech.models.Details;
 import com.portfolio.sarvech.services.DetailsService;
 import com.portfolio.sarvech.services.SocialLinkService;
+import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.thymeleaf.model.IModel;
 
 @Controller
-@RequestMapping("admin")
+@RequestMapping("/admin")
 public class AdminController {
 
     private final Logger logger = LoggerFactory.getLogger(AdminController.class);
@@ -35,6 +39,11 @@ public class AdminController {
         return "admin/dashboard";
     }
 
+    @RequestMapping("/")
+    public String dashboard() {
+        return "redirect:admin/dashboard";
+    }
+
     @RequestMapping("/update-details")
     public String updateDetails(Model model) {
         Details details = this.detailsService.findById(this.constants.DetailsID).orElse(null);
@@ -42,6 +51,12 @@ public class AdminController {
         return "admin/edit-details";
     }
 
-
+    @PostMapping("/edit-details")
+    public String editDetails(Details details, Model model, HttpSession session) {
+        System.out.println(details);
+//        this.detailsService.updateDetails(details);
+        session.setAttribute("message", new Message("Details updated successfully!", MessageType.SUCCESS));
+        return "redirect:/admin/dashboard";
+    }
 
 }
