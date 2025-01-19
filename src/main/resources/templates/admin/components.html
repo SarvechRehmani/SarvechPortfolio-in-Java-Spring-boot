@@ -1,0 +1,77 @@
+<!-- Loader Start -->
+<div id="loader" class="loader" th:fragment="loader">
+  <div id="loaderContent" class="loader__content">
+    <div class="loader__shadow"></div>
+    <div class="loader__box"></div>
+  </div>
+</div>
+<!-- Loader End -->
+<!-- Header Start -->
+<header
+  id="header"
+  class="header d-flex gap-3 justify-content-end"
+  th:fragment="header"
+>
+  <a th:href="@{/logout}" class="header__trigger btn">
+    <span class="btn-caption">Sign-out</span>
+    <i class="fa-solid fa-person-running"></i>
+  </a>
+
+  <button
+    id="color-switcher"
+    class="color-switcher header__switcher btn"
+    type="button"
+    role="switch"
+    aria-label="light/dark mode"
+    aria-checked="true"
+  ></button>
+</header>
+<!-- Header End -->
+<!-- Gradient Background Start -->
+<div class="gradient-background" style="z-index: -1" th:fragment="bg">
+  <div class="blur"></div>
+  <div class="blur"></div>
+  <div class="blur"></div>
+</div>
+<!-- Gradient Background End -->
+
+<!-- Avatar Side Block Start -->
+<div id="avatar" class="sidebar" th:fragment="sidebar">
+  <div class="sidebar__container d-flex flex-column align-items-center gap-3">
+    <!-- image and logo -->
+    <div class="avatar__block d-flex flex-column align-items-center">
+      <div class="sidebar_avatar_image">
+        <img
+          th:src="@{/img/avatars/1024x1024_a02.webp}"
+          alt="Sarvech Portfolio Profile Photo"
+        />
+      </div>
+    </div>
+    <a th:href="@{#}" class="btn btn-sidebar btn-hover btn-hover-accent">
+      <span class="btn-caption">Dashboard</span>
+      <i class="fa-solid fa-table-columns"></i>
+    </a>
+    <a th:href="@{#}" class="btn btn-sidebar btn-hover btn-hover-accent">
+      <span class="btn-caption">Projects</span>
+      <i class="fa-solid fa-list-check"></i>
+    </a>
+    <a th:href="@{#}" class="btn btn-sidebar btn-hover btn-hover-accent">
+      <span class="btn-caption">Educations</span>
+      <i class="fa-solid fa-user-graduate"></i>
+    </a>
+
+    <a th:href="@{#}" class="btn btn-sidebar btn-hover btn-hover-accent">
+      <span class="btn-caption">Work Experience</span>
+      <i class="fa-regular fa-calendar-days"></i>
+    </a>
+    <a th:href="@{#}" class="btn btn-sidebar btn-hover btn-hover-accent">
+      <span class="btn-caption">Skills</span>
+      <i class="fa-solid fa-lightbulb"></i>
+    </a>
+    <a th:href="@{#}" class="btn btn-sidebar btn-hover btn-hover-accent">
+      <span class="btn-caption">Favourite Tools</span>
+      <i class="fa-solid fa-star"></i>
+    </a>
+  </div>
+</div>
+<!-- Avatar Side Block End -->

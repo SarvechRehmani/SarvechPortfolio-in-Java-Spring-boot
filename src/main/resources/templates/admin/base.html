@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  dir="ltr"
+  xmlns:th="http://www.thymeleaf.org"
+  th:fragment="parent(content, title, script)"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Page Title -->
+    <title th:replace="${title}">Dashboard - Sarvech Rehmani</title>
+
+    <!-- Viewport Meta -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <!-- Standard Favicon -->
+    <link rel="icon" type="image/x-icon" th:href="@{/img/favi/favicon.ico}" />
+
+    <!-- PNG Favicons -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      th:href="@{/img/favi/favicon-32x32.png}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      th:href="@{/img/favi/favicon-16x16.png}"
+    />
+
+    <!-- Apple Touch Icon -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      th:href="@{/img/favi/apple-touch-icon.png}"
+    />
+
+    <!-- Android Chrome Favicons -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      th:href="@{/img/favi/android-chrome-192x192.png}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="512x512"
+      th:href="@{/img/favi/android-chrome-512x512.png}"
+    />
+    <!-- Template Styles Start -->
+    <link rel="stylesheet" th:href="@{/css/loaders/loader.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/plugins.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <!-- Template Styles End -->
+
+    <!-- Custom Browser Color Start -->
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: light)"
+      content="#dcdce7"
+    />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: dark)"
+      content="#111111"
+    />
+  </head>
+  <body>
+    <div th:replace="~{admin/components :: loader}"></div>
+    <div th:replace="~{admin/components :: header}"></div>
+    <div th:replace="~{admin/components :: bg}"></div>
+    <div th:replace="~{admin/components :: sidebar}"></div>
+    <section th:replace="${content}"></section>
+
+    <!-- Template Scripts Start -->
+    <script th:src="@{/js/libs.min.js}"></script>
+    <script th:src="@{/js/app.js}"></script>
+    <script th:src="@{/js/bg.js}"></script>
+    <!-- Template Scripts End -->
+  </body>
+</html>

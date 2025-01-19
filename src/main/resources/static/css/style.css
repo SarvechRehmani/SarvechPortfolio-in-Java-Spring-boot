@@ -1,0 +1,21 @@
+.container {
+  width: 90%;
+  margin: 40px auto;
+}
+.main_container {
+  background-color: var(--c-base);
+  border: 1px solid var(--stroke-elements);
+  -moz-border-radius: var(--_radius-xl);
+  border-radius: var(--_radius-xl);
+  padding: 40px;
+}
+/* .row {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 18px;
+    margin-top: 20px;
+  } */
+.title {
+  font-size: 4.5rem;
+}

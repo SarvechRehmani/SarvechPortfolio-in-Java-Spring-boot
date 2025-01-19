@@ -70,6 +70,7 @@
   --_radius-m: 2.2rem;
   --_radius-l: 3rem;
   --_radius-xl: 3.6rem;
+  --_radius-50: 50%;
   --_animspeed-fast: 0.1s;
   --_animspeed-medium: 0.3s;
   --_animspeed-slow: 0.6s;
@@ -285,13 +286,15 @@ button::-moz-focus-inner {
   border: 0 !important;
 }
 
-input::-moz-focus-inner {
+input::-moz-focus-inner,
+select::-moz-focus-inner {
   border: 0 !important;
 }
 
 a:focus,
 button:focus,
 input:focus,
+select:focus,
 textarea:focus {
   -webkit-tap-highlight-color: transparent;
 }
@@ -1217,7 +1220,8 @@ p.additional-text a {
   margin-right: 0;
 }
 
-.btn-default {
+.btn-default,
+.btn-sidebar {
   width: auto;
   height: 5rem;
   padding: 0 2rem;
@@ -1225,22 +1229,33 @@ p.additional-text a {
   border-radius: var(--_radius-m);
   font: normal 700 1.6rem/5rem var(--_font-default);
 }
+.btn-sidebar {
+  width: 26rem;
+}
 .btn-default i,
-.btn-default span {
+.btn-sidebar i,
+.btn-default span,
+.btn-sidebar span {
   position: relative;
 }
-.btn-default i {
+.btn-default i,
+.btn-sidebar i {
   font-size: 1.8rem;
   margin-left: 0.6rem;
 }
 @media only screen and (min-width: 1600px) {
-  .btn-default {
+  .btn-default,
+  .btn-sidebar {
     height: 6rem;
     line-height: 6rem;
     padding: 0 2.4rem;
     font-size: 2rem;
   }
-  .btn-default i {
+  .btn-sidebar {
+    width: 32rem;
+  }
+  .btn-default i,
+  .btn-sidebar i {
     font-size: 2.2rem;
   }
 }
@@ -2292,6 +2307,7 @@ form {
   width: 100%;
 }
 form input,
+form select,
 form textarea {
   position: relative;
   display: block;
@@ -2306,6 +2322,7 @@ form textarea {
   color: var(--t-bright);
 }
 form input:focus,
+form select:focus,
 form textarea:focus {
   border-bottom: 2px solid var(--accent);
 }
@@ -2313,7 +2330,8 @@ form textarea {
   height: 16rem;
   resize: none;
 }
-form ::-webkit-input-placeholder {
+form ::-webkit-input-placeholder,
+form ::-webkit-selecy-placeholder {
   color: var(--t-placeholder);
 }
 form :-moz-placeholder {
@@ -2322,14 +2340,17 @@ form :-moz-placeholder {
 form ::-moz-placeholder {
   color: var(--t-placeholder);
 }
-form :-ms-input-placeholder {
+form :-ms-input-placeholder,
+form :-ms-select-placeholder {
   color: var(--t-placeholder);
 }
 form input:focus:required:invalid,
+form select:focus:required:invalid,
 form textarea:focus:required:invalid {
   color: var(--t-default);
 }
 form input:required:valid,
+form select:required:valid,
 form textarea:required:valid {
   color: var(--t-default);
 }
@@ -3108,6 +3129,9 @@ form textarea:required:valid {
     height: -moz-calc(100% - 10rem);
     height: calc(100% - 10rem);
   }
+  .sidebar {
+    top: 1rem;
+  }
 }
 @media only screen and (min-width: 1600px) {
   .avatar,
@@ -3234,10 +3258,10 @@ form textarea:required:valid {
 }
 
 .sidebar_avatar_image {
-  width: 40%;
+  width: 48%;
   overflow: hidden;
-  -moz-border-radius: var(--_radius-l);
-  border-radius: var(--_radius-l);
+  -moz-border-radius: var(--_radius-50);
+  border-radius: var(--_radius-50);
   margin-bottom: 0.8rem;
 }
 

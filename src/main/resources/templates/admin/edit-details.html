@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  dir="ltr"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{admin/base :: parent(~{::#content},~{::title}, ~{::script})}"
+>
+  <head>
+    <!-- Page Title -->
+    <title>Update PortFolio Details - Sarvech Rehmani</title>
+  </head>
+  <body>
+    <div>
+      <!-- Page Content Start -->
+      <div id="content" class="content">
+        <div class="content__wrapper">
+          <div style="margin: 40px 0 0 65px">
+            <h2>Update Your Portfolio Details</h2>
+          </div>
+
+          <div th:if="${session.message}" th:object="${session.message}">
+            <h2 th:text="*{content}"></h2>
+            <p th:text="*{type}"></p>
+          </div>
+          <div class="container">
+            <div class="main_container">
+              <div class="card-head d-flex justify-content-between">
+                <h1 class="title">Details</h1>
+                <div>
+                  <a th:href="@{#}" class="header__trigger btn">
+                    <span class="btn-caption">Add</span>
+                    <i class="fa-solid fa-plus"></i>
+                  </a>
+                </div>
+              </div>
+              <form
+                th:action="@{/authenticate}"
+                method="POST"
+                class="form contact-form"
+                id="contact-form"
+              >
+                <div class="container-fluid p-0">
+                  <div class="row gx-0">
+                    <div class="col-12 col-md-6 form__item animate-in-up">
+                      <input
+                        type="text"
+                        placeholder="Your First Name*"
+                        required
+                      />
+                    </div>
+                    <div class="col-12 col-md-6 form__item animate-in-up">
+                      <input
+                        type="text"
+                        name="Company"
+                        placeholder="Your Last Name"
+                      />
+                    </div>
+
+                    <div class="col-12 col-md-6 form__item animate-in-up">
+                      <input
+                        type="email"
+                        id="email"
+                        placeholder="Your Email*"
+                        required
+                      />
+                    </div>
+
+                    <div class="col-12 col-md-6 form__item animate-in-up">
+                      <input
+                        type="text"
+                        id="phone"
+                        placeholder="Your Phone Number*"
+                        required
+                      />
+                    </div>
+
+                    <div class="col-12 col-md-6 form__item animate-in-up">
+                      <input
+                        type="text"
+                        id="address"
+                        placeholder="Your Address*"
+                        required
+                      />
+                    </div>
+
+                    <div class="col-12 col-md-6 form__item animate-in-up">
+                      <input
+                        type="text"
+                        id="specialization"
+                        placeholder="Your Specialization*"
+                        required
+                      />
+                    </div>
+
+                    <div class="col-12 col-md-6 form__item animate-in-up">
+                      <input
+                        type="number"
+                        id="happyClients"
+                        placeholder="Happy Clients*"
+                        required
+                      />
+                    </div>
+
+                    <div class="col-12 col-md-6 form__item animate-in-up">
+                      <input
+                        type="number"
+                        id="projects"
+                        placeholder="Projects Completed*"
+                        required
+                      />
+                    </div>
+
+                    <div class="col-12 col-md-6 form__item animate-in-up">
+                      <input
+                        type="number"
+                        id="experience"
+                        placeholder="Happy Experience*"
+                        required
+                      />
+                    </div>
+
+                    <div class="col-12 col-md-6 form__item animate-in-up">
+                      <select name="" id="experiencedIn">
+                        <option value="">Select Experience</option>
+                        <option value="Month">Month</option>
+                        <option value="Months">Months</option>
+                        <option value="Year">Year</option>
+                        <option value="Years">Years</option>
+                      </select>
+                    </div>
+
+                    <div class="col-12 form__item animate-in-up">
+                      <textarea
+                        placeholder="Your Description 1*"
+                        required
+                      ></textarea>
+                    </div>
+                    <div class="col-12 form__item animate-in-up">
+                      <textarea
+                        placeholder="Your Description 2"
+                        required
+                      ></textarea>
+                    </div>
+
+                    <div class="col-12 form__item animate-in-up">
+                      <button
+                        class="btn btn-default btn-hover btn-hover-accent"
+                        type="submit"
+                      >
+                        <span class="btn-caption">Update</span>
+                        <i class="ph-bold ph-paper-plane-tilt"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

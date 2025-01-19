@@ -32,8 +32,6 @@ public class SecurityConfigurations {
             formLogin.loginPage("/login/admin-sarvech");
             formLogin.loginProcessingUrl("/authenticate");
             formLogin.successHandler((request, response, authentication) -> {
-                HttpSession session = request.getSession();
-                session.setAttribute("message", new Message("Welcome back to your portfolio Admin Panel!", MessageType.SUCCESS));
                 response.sendRedirect("/admin/dashboard");
             });
             formLogin.failureHandler((request, response, exception) -> {

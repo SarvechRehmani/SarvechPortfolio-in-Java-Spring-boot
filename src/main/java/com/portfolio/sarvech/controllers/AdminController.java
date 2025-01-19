@@ -35,6 +35,13 @@ public class AdminController {
         return "admin/dashboard";
     }
 
+    @RequestMapping("/update-details")
+    public String updateDetails(Model model) {
+        Details details = this.detailsService.findById(this.constants.DetailsID).orElse(null);
+        model.addAttribute("details", details);
+        return "admin/edit-details";
+    }
+
 
 
 }
