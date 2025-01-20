@@ -7396,6 +7396,10 @@ table {
   gap: 1rem !important;
 }
 
+.gap-3-5 {
+  gap: 2rem !important;
+}
+
 .gap-4 {
   gap: 1.5rem !important;
 }
