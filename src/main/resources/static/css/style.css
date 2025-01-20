@@ -84,7 +84,7 @@
   box-shadow: 0 0 0 2px #3182ce8b;
 }
 
-.DEFAULD {
+.DEFAULT {
   background-color: var(--bg-alert-default);
   color: var(--t-alert-default);
 }

@@ -51,9 +51,6 @@
       th:href="@{img/favi/android-chrome-512x512.png}"
     />
 
-    <!-- Manifest for Progressive Web App (PWA) -->
-    <link rel="manifest" th:href="@{/manifest.json}" />
-
     <!-- Template Styles Start -->
     <link rel="stylesheet" th:href="@{css/loaders/loader.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{css/plugins.css}" />
@@ -73,6 +70,7 @@
     />
     <meta name="msapplication-navbutton-color" content="#111111" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
     <meta
       name="apple-mobile-web-app-status-bar-style"
       content="black-translucent"
@@ -291,7 +289,7 @@
                   target="_blank"
                 >
                   <i class="fa-brands fa-pinterest" th:class="${nn}"></i>
-                  <!-- <i class="ph-bold ph-pinterest-logo"></i> -->
+                  <i class="ph-bold ph-pinterest-logo"></i>
                 </a>
               </li>
             </ul>
@@ -1698,6 +1696,7 @@
     <script th:scr="@{js/bg/js}"></script>
     <script th:src="@{js/app.js}"></script>
     <script th:src="@{js/gallery-init.js}"></script>
+
     <!-- Load Scripts End -->
   </body>
 </html>

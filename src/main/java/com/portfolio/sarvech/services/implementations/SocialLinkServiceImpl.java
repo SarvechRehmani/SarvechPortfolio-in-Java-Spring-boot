@@ -5,6 +5,8 @@ import com.portfolio.sarvech.repositories.SocialLinkRepo;
 import com.portfolio.sarvech.services.SocialLinkService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SocialLinkServiceImpl implements SocialLinkService {
 
@@ -35,7 +37,7 @@ public class SocialLinkServiceImpl implements SocialLinkService {
     }
 
     @Override
-    public Iterable<SocialLink> findAllSocialLinks() {
+    public List<SocialLink> findAllSocialLinks() {
         return this.socialLinkRepo.findAll();
     }
 }

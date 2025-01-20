@@ -492,7 +492,6 @@ var designations = [];
 typedTexts.forEach((text) => {
   designations.push(text.textContent);
 });
-console.log(designations);
 var typingEffect = new Typed("#typedText", {
   strings: designations,
   typeSpeed: 100,

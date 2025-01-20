@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  dir="ltr"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{admin/base :: parent(~{::#content},~{::title}, ~{::script})}"
+>
+  <head>
+    <!-- Page Title -->
+    <title>Add Sicial Link - Sarvech Rehmani</title>
+  </head>
+  <body>
+    <div>
+      <!-- Page Content Start -->
+      <div id="content" class="content">
+        <div class="content__wrapper">
+          <div style="margin: 40px 0 0 65px">
+            <h2>Add Social Link</h2>
+          </div>
+
+          <div class="container">
+            <div class="main_container">
+              <div class="card-head d-flex justify-content-between">
+                <h1 class="title">Social Link</h1>
+                <div>
+                  <a th:href="@{/admin/dashboard}" class="header__trigger btn">
+                    <span class="btn-caption">back</span>
+                    <i class="fa-solid fa-circle-arrow-left"></i>
+                  </a>
+                </div>
+              </div>
+              <form
+                th:action="@{/admin/social-link/save}"
+                th:object="${socialLink}"
+                method="POST"
+                class="form contact-form"
+                id="contact-form"
+              >
+                <div class="container-fluid p-0">
+                  <div class="row gx-0">
+                    <div class="col-12 form__item animate-in-up">
+                      <input
+                        type="text"
+                        th:field="*{name}"
+                        placeholder="Social Title here*"
+                        required
+                      />
+                    </div>
+                    <div class="col-12 form__item animate-in-up">
+                      <input
+                        type="text"
+                        th:field="*{icon}"
+                        placeholder="Social Icon here*"
+                      />
+                    </div>
+
+                    <div class="col-12 form__item animate-in-up">
+                      <input
+                        type="url"
+                        th:field="*{link}"
+                        placeholder="Your Social Media Link here*"
+                        required
+                      />
+                    </div>
+
+                    <div class="col-12 form__item animate-in-up">
+                      <button
+                        class="btn btn-default btn-hover btn-hover-accent"
+                        type="submit"
+                      >
+                        <span class="btn-caption">Save</span>
+                        <i class="fa-solid fa-floppy-disk"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
