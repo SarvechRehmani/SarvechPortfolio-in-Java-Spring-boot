@@ -97,6 +97,7 @@
   --t-opp-bright--light: #ebf0f7;
   --t-opp-medium--light: #c7c6d3;
   --t-opp-muted--light: #a1a1af;
+  --icon-bright--light: #3f3f3f;
   --gradient-one--light: #498acb; /* Gradient start */
   --gradient-two--light: #97cbff; /* Gradient middle */
   --gradient-three--light: #5683b1; /* Gradient end */
@@ -138,6 +139,7 @@
   --t-opp-bright--dark: #ebf0f7; /* Opposite bright text */
   --t-opp-medium--dark: #3c3d57; /* Opposite medium text */
   --t-opp-muted--dark: #4a4a64; /* Opposite muted text */
+  --icon-bright--dark: #ebf0f7; /* Opposite bright text */
   --gradient-one--dark: #7e1199; /* Gradient start */
   --gradient-two--dark: #cb00fe; /* Gradient middle */
   --gradient-three--dark: #9445a8; /* Gradient end */
@@ -193,6 +195,7 @@
     --t-opp-bright: var(--t-opp-bright--light);
     --t-opp-medium: var(--t-opp-medium--light);
     --t-opp-muted: var(--t-opp-muted--light);
+    --icon-bright: var(--icon-bright--light);
     --gradient-one: var(--gradient-one--light);
     --gradient-two: var(--gradient-two--light);
     --gradient-three: var(--gradient-three--light);
@@ -230,6 +233,7 @@
     --t-opp-bright: var(--t-opp-bright--dark);
     --t-opp-medium: var(--t-opp-medium--dark);
     --t-opp-muted: var(--t-opp-muted--dark);
+    --icon-bright: var(--icon-bright--dark);
     --gradient-one: var(--gradient-one--dark);
     --gradient-two: var(--gradient-two--dark);
     --gradient-three: var(--gradient-three--dark);
@@ -266,6 +270,7 @@
   --t-opp-bright: var(--t-opp-bright--light);
   --t-opp-medium: var(--t-opp-medium--light);
   --t-opp-muted: var(--t-opp-muted--light);
+  --icon-bright: var(--icon-bright--light);
   --gradient-one: var(--gradient-one--light);
   --gradient-two: var(--gradient-two--light);
   --gradient-three: var(--gradient-three--light);
@@ -302,6 +307,7 @@
   --t-opp-bright: var(--t-opp-bright--dark);
   --t-opp-medium: var(--t-opp-medium--dark);
   --t-opp-muted: var(--t-opp-muted--dark);
+  --icon-bright: var(--icon-bright--dark);
   --gradient-one: var(--gradient-one--dark);
   --gradient-two: var(--gradient-two--dark);
   --gradient-three: var(--gradient-three--dark);

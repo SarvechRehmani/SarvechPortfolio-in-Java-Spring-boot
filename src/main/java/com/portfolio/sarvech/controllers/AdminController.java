@@ -40,7 +40,10 @@ public class AdminController {
     @RequestMapping("/dashboard")
     public String dashboard(Model model) {
         Details details = this.detailsService.findById(this.constants.DetailsID).orElse(null);
+        List<SocialLink> socialLinks = this.socialLinkService.findAllSocialLinks();
         model.addAttribute("details", details);
+        model.addAttribute("socialLinks", socialLinks);
+        System.out.println(socialLinks.size());
         return "admin/dashboard";
     }
 
@@ -69,61 +72,5 @@ public class AdminController {
         return "redirect:/admin/dashboard";
     }
 
-//    Social Links Controllers
-    @GetMapping("/social-link/add")
-    public String addSocialLink(Model model, HttpSession session) {
-        List<SocialLink> socialLinks = this.socialLinkService.findAllSocialLinks();
-        if(socialLinks.size() >= 5){
-            session.setAttribute("message", new Message("Maximum number of social links reached!", MessageType.ERROR));
-            return "redirect:/admin/dashboard";
-        }
-        model.addAttribute("socialLink", new SocialLink());
-        return "admin/add-social-link";
-    }
 
-    @PostMapping("/social-link/save")
-    public String saveSocialLink(SocialLink socialLink, Model model, HttpSession session) {
-        List<SocialLink> socialLinks = this.socialLinkService.findAllSocialLinks();
-        if(socialLinks.size() >= 5){
-            session.setAttribute("message", new Message("Maximum number of social links reached!", MessageType.ERROR));
-            return "redirect:/admin/dashboard";
-        }
-        this.socialLinkService.saveSocialLink(socialLink);
-        session.setAttribute("message", new Message("Social link added successfully!", MessageType.DEFAULT));
-        return "redirect:/admin/dashboard";
-    }
-
-    @GetMapping("/update-social-link/{id}")
-    public String editSocialLink(Model model, @PathVariable Long id) {
-        SocialLink socialLink = this.socialLinkService.findSocialLinkById(id);
-        model.addAttribute("socialLink", socialLink);
-        return "admin/edit-social-link";
-    }
-
-    @PostMapping("/edit-social-link/{id}")
-    public String updateSocialLink(SocialLink socialLink, Model model, HttpSession session, @PathVariable Long id) {
-        SocialLink existingSocialLink = this.socialLinkService.findSocialLinkById(id);
-        if(existingSocialLink == null) {
-            session.setAttribute("message", new Message("Social link not found!", MessageType.ERROR));
-            return "redirect:/admin/dashboard";
-        }
-        existingSocialLink.setName(socialLink.getName());
-        existingSocialLink.setIcon(socialLink.getIcon());
-        existingSocialLink.setLink(socialLink.getLink());
-        this.socialLinkService.updateSocialLink(existingSocialLink);
-        session.setAttribute("message", new Message("Social link updated successfully!", MessageType.DEFAULT));
-        return "redirect:/admin/dashboard";
-    }
-
-    @GetMapping("/social-link/delete/{id}")
-    public String deleteSocialLink(Model model, @PathVariable Long id, HttpSession session) {
-        SocialLink socialLink = this.socialLinkService.findSocialLinkById(id);
-        if(socialLink == null) {
-            session.setAttribute("message", new Message("Social link not found!", MessageType.ERROR));
-            return "redirect:/admin/dashboard";
-        }
-        this.socialLinkService.deleteSocialLink(id);
-        session.setAttribute("message", new Message("Social link deleted successfully!", MessageType.DEFAULT));
-        return "redirect:/admin/dashboard";
-    }
 }

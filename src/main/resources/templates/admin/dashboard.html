@@ -196,6 +196,68 @@
                     <a
                       th:href="@{/admin/social-link/add}"
                       class="header__trigger btn"
+                      th:classappend="${socialLinks.size}>=5?'disabled':''"
+                    >
+                      <span class="btn-caption">Add</span>
+                      <i class="fa-solid fa-add"></i>
+                    </a>
+                  </div>
+                </div>
+                <div
+                  class="row g-0 social-lines__item animate-in-up overflow-hidden"
+                  th:each="socialLink: ${socialLinks}"
+                >
+                  <div class="col-12 col-md-2 d-flex align-items-center">
+                    <div class="d-social-links">
+                      <i
+                        th:class="${socialLink.icon}"
+                        th:classappend="'fa-lg'"
+                      ></i>
+                    </div>
+                  </div>
+                  <div
+                    class="col-12 col-md-7 d-flex flex-column justify-content-center"
+                  >
+                    <h5
+                      class="resume-lines__title animate-in-up"
+                      th:text="${socialLink.name}"
+                    ></h5>
+
+                    <a
+                      class="link-color"
+                      th:href="@{${socialLink.link}}"
+                      th:text="${socialLink.link}"
+                    ></a>
+                  </div>
+                  <div class="col-12 col-md-3 d-flex align-items-center gap-3">
+                    <a
+                      th:href="@{'/admin/update-social-link/'+${socialLink.id}}"
+                      class="btn social-action-btn edit"
+                    >
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+
+                    <a
+                      th:onclick="deleteSocialLink([[${socialLink.id}]])"
+                      class="btn social-action-btn delete"
+                    >
+                      <i class="fa-solid fa-trash"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="projects">
+            <div class="container">
+              <div class="main_container mb-3">
+                <div class="card-head d-flex justify-content-between mb-3">
+                  <h1 class="title">Projects</h1>
+                  <div class="d-flex align-items-center">
+                    <a
+                      th:href="@{/admin/project/add}"
+                      class="header__trigger btn"
                     >
                       <span class="btn-caption">Add</span>
                       <i class="fa-solid fa-add"></i>
@@ -205,6 +267,9 @@
               </div>
             </div>
           </section>
+          <div class="container mt-5">
+            <div class="row"></div>
+          </div>
         </div>
       </div>
     </div>

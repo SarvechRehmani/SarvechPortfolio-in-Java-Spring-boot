@@ -54,6 +54,7 @@
     <link rel="stylesheet" th:href="@{/css/loaders/loader.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/plugins.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
     <!-- Template Styles End -->
 
     <!-- Custom Browser Color Start -->
@@ -68,7 +69,7 @@
       content="#111111"
     />
     <style>
-      .container {
+      /* .container {
         width: 45%;
         margin: 40px auto;
       }
@@ -89,7 +90,7 @@
       }
       .title {
         font-size: 4.5rem;
-      }
+      } */
     </style>
   </head>
   <body>
@@ -120,57 +121,59 @@
       <div class="blur"></div>
     </div>
     <!-- Gradient Background End -->
+
+    <div th:if="${session.message}" th:object="${session.message}">
+      <h2 th:text="*{content}"></h2>
+      <p th:text="*{type}"></p>
+      <th:block th:text="${@sessionHelper.removeMessage()}"></th:block>
+    </div>
+
     <div class="container">
-      <div class="login-wrapper">
-        <h1 class="title">Welcome Back! Sarvech</h1>
-        <p class="subtitle">Sign-in to your account</p>
-        <form
-          th:action="@{/authenticate}"
-          method="POST"
-          class="form login-form"
-          id="login-form"
-        >
-          <div class="row gx-0">
-            <div class="col-12 form__item animate-in-up">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <div
+            class="main_container d-flex flex-column align-items-center gap-3"
+          >
+            <h2 class="text-center">Welcome Back! Sarvech</h2>
+            <p>Sign-in to your account</p>
+            <form
+              th:action="@{/authenticate}"
+              method="POST"
+              class="form text-center"
+              id="login-form"
+            >
               <input
+                class="mb-5"
                 type="text"
                 name="username"
                 id="username"
                 placeholder="Please Enter Username here*"
                 required
               />
-            </div>
 
-            <div class="col-12 form__item animate-in-up">
               <input
+                class="mb-5"
                 type="password"
                 name="password"
                 id="passowrd"
                 placeholder="Please Enter Password here*"
                 required
               />
-            </div>
 
-            <div class="col-12 form__item animate-in-up">
-              <button
-                class="btn btn-default btn-hover btn-hover-accent"
-                type="submit"
-              >
-                <span class="btn-caption">Sign-in</span>
-                <i class="ph-bold ph-paper-plane-tilt"></i>
-              </button>
-            </div>
+              <div class="col-12 form__item animate-in-up mt-5">
+                <button
+                  class="btn btn-default btn-hover btn-hover-accent"
+                  type="submit"
+                >
+                  <span class="btn-caption">Sign-in</span>
+                  <i class="ph-bold ph-paper-plane-tilt"></i>
+                </button>
+              </div>
+            </form>
           </div>
-        </form>
+        </div>
       </div>
     </div>
-    <div th:text="${session}"></div>
-
-    <div th:if="${session.message}" th:object="${session.message}">
-      <h2 th:text="*{content}"></h2>
-      <p th:text="*{type}"></p>
-    </div>
-
     <!-- Template Scripts Start -->
     <script th:src="@{/js/libs.min.js}"></script>
     <script th:src="@{/js/app.js}"></script>
