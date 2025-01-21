@@ -24,5 +24,5 @@ public class Project {
     private String liveLink;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "project_id")
-    private List<image> images;
+    private List<Image> images;
 }
