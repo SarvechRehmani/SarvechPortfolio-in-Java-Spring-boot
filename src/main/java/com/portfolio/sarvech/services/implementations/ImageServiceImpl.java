@@ -52,8 +52,8 @@ public class ImageServiceImpl implements ImageService {
             image.getInputStream().read(data);
             cloudinary.uploader().upload(data, ObjectUtils.asMap(
                     "public_id", fileName.substring(this.constants.CLOUDINARY_PROJECT_IMAGE_FOLDER.length()),
-                    "tags", "project_image",
-                    "folder", "project_image"
+                    "tags", "project_images",
+                    "folder", "project_images"
             ));
             return this.getUrlFromPublicId(fileName);
         }catch (IOException e) {

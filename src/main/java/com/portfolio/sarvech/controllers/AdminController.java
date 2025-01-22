@@ -4,8 +4,10 @@ import com.portfolio.sarvech.helper.AppConstants;
 import com.portfolio.sarvech.helper.Message;
 import com.portfolio.sarvech.helper.MessageType;
 import com.portfolio.sarvech.models.Details;
+import com.portfolio.sarvech.models.Project;
 import com.portfolio.sarvech.models.SocialLink;
 import com.portfolio.sarvech.services.DetailsService;
+import com.portfolio.sarvech.services.ProjectService;
 import com.portfolio.sarvech.services.SocialLinkService;
 import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
@@ -28,11 +30,13 @@ public class AdminController {
 
     private final DetailsService detailsService;
     private final SocialLinkService socialLinkService;
+    private final ProjectService projectService;
     private final AppConstants constants;
 
-    public AdminController(DetailsService detailsService, SocialLinkService socialLinkService, AppConstants constants) {
+    public AdminController(DetailsService detailsService, SocialLinkService socialLinkService, ProjectService projectService, AppConstants constants) {
         this.detailsService = detailsService;
         this.socialLinkService = socialLinkService;
+        this.projectService = projectService;
         this.constants = constants;
     }
 
@@ -41,9 +45,11 @@ public class AdminController {
     public String dashboard(Model model) {
         Details details = this.detailsService.findById(this.constants.DetailsID).orElse(null);
         List<SocialLink> socialLinks = this.socialLinkService.findAllSocialLinks();
+        List<Project> selfProjects = this.projectService.findAllProjectsByClient("self");
         model.addAttribute("details", details);
         model.addAttribute("socialLinks", socialLinks);
-        System.out.println(socialLinks.size());
+        model.addAttribute("selfProjects", selfProjects);
+        System.out.println(selfProjects);
         return "admin/dashboard";
     }
 
