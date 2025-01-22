@@ -281,14 +281,14 @@
                         itemtype="http://schema.org/ImageObject"
                       >
                         <a
-                          th:href="@{${project.images[2].imageUrl}}"
-                          th:data-image="@{${project.images[2].imageUrl}}"
+                          th:href="@{${project.images[1].imageUrl}}"
+                          th:data-image="@{${project.images[1].imageUrl}}"
                           class="gallery__link"
                           itemprop="contentUrl"
                           data-size="1400x1400"
                         >
                           <img
-                            th:src="@{${project.images[2].imageUrl}}"
+                            th:src="@{${project.images[1].imageUrl}}"
                             class="gallery__image"
                             itemprop="thumbnail"
                             th:alt="${project.title}+' thumbnail'"
@@ -298,18 +298,22 @@
                           class="gallery__descr"
                           itemprop="caption description"
                         >
-                          <h5 th:text="${project.title}"></h5>
+                          <a th:href="@{/admin/project/add}">
+                            <h5 th:text="${project.title}"></h5>
+                          </a>
+
                           <div class="card__tags d-flex flex-wrap">
                             <span
                               class="rounded-tag opposite"
                               th:text="${project.date}"
-                              >Illustrations</span
-                            >
+                            ></span>
                           </div>
-                          <p class="small">
+
+                          <p class="small" th:text="${project.summery}">
                             Mauris porttitor lobortis ligula, quis molestie
                             lorem scelerisque eu. Morbi aliquam enim odio.
                           </p>
+                          <p><a href="">More...</a></p>
                         </figcaption>
                       </figure>
                       <!-- Works Gallery Single Item End -->
@@ -319,6 +323,32 @@
               </div>
             </div>
           </section>
+
+          <section id="education">
+            <div class="container">
+              <div class="main_container mb-3">
+                <div class="card-head d-flex justify-content-between mb-3">
+                  <h1 class="title">Educations</h1>
+                  <div class="d-flex align-items-center">
+                    <a
+                      th:href="@{/admin/education/add}"
+                      class="header__trigger btn"
+                    >
+                      <span class="btn-caption">Add</span>
+                      <i class="fa-solid fa-add"></i>
+                    </a>
+                  </div>
+                </div>
+                <div class="container-fluid p-0 resume-lines">
+                  <!-- education single item -->
+                  <div class="row g-0 resume-lines__item animate-in-up">
+                    <h1>here education own design</h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
           <div class="container mt-5">
             <div class="row"></div>
           </div>

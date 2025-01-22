@@ -4,9 +4,11 @@ import com.portfolio.sarvech.helper.AppConstants;
 import com.portfolio.sarvech.helper.Message;
 import com.portfolio.sarvech.helper.MessageType;
 import com.portfolio.sarvech.models.Details;
+import com.portfolio.sarvech.models.Education;
 import com.portfolio.sarvech.models.Project;
 import com.portfolio.sarvech.models.SocialLink;
 import com.portfolio.sarvech.services.DetailsService;
+import com.portfolio.sarvech.services.EducationService;
 import com.portfolio.sarvech.services.ProjectService;
 import com.portfolio.sarvech.services.SocialLinkService;
 import jakarta.servlet.http.HttpSession;
@@ -31,12 +33,14 @@ public class AdminController {
     private final DetailsService detailsService;
     private final SocialLinkService socialLinkService;
     private final ProjectService projectService;
+    private final EducationService educationService;
     private final AppConstants constants;
 
-    public AdminController(DetailsService detailsService, SocialLinkService socialLinkService, ProjectService projectService, AppConstants constants) {
+    public AdminController(DetailsService detailsService, SocialLinkService socialLinkService, ProjectService projectService, EducationService educationService, AppConstants constants) {
         this.detailsService = detailsService;
         this.socialLinkService = socialLinkService;
         this.projectService = projectService;
+        this.educationService = educationService;
         this.constants = constants;
     }
 
@@ -46,10 +50,12 @@ public class AdminController {
         Details details = this.detailsService.findById(this.constants.DetailsID).orElse(null);
         List<SocialLink> socialLinks = this.socialLinkService.findAllSocialLinks();
         List<Project> selfProjects = this.projectService.findAllProjectsByClient("self");
+        List<Education> educations = this.educationService.findEducationByType("academic");
         model.addAttribute("details", details);
         model.addAttribute("socialLinks", socialLinks);
         model.addAttribute("selfProjects", selfProjects);
-        System.out.println(selfProjects);
+        model.addAttribute("educations", educations);
+        System.out.println(educations);
         return "admin/dashboard";
     }
 
