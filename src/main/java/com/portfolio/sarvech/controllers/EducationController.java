@@ -36,7 +36,7 @@ public class EducationController {
         this.educationService.saveEducation(education);
         session.setAttribute("message", new Message("Education added successfully!", MessageType.SUCCESS));
         logger.info("New education saved: {}", education);
-        return "redirect:/admin/education";
+        return "redirect:/admin/dashboard";
     }
 
     @GetMapping("/edit/{id}")
