@@ -12,9 +12,10 @@
   <body>
     <div>
       <!-- Page Content Start -->
-      <div id="content" class="content" th:object="${details}">
+      <div id="content" class="content">
         <div class="content__wrapper">
-          <section id="dashboard">
+          <!-- DAASHBOARD -->
+          <section id="dashboard" th:object="${details}">
             <div class="dashboard-title">
               <h2>Welcome Back to your portfolio Admin Panel</h2>
             </div>
@@ -187,6 +188,7 @@
             </div>
           </section>
 
+          <!-- SOCIAL LINKS -->
           <section id="social-links">
             <div class="container">
               <div class="main_container mb-3">
@@ -231,7 +233,7 @@
                   </div>
                   <div class="col-12 col-md-3 d-flex align-items-center gap-3">
                     <a
-                      th:href="@{'/admin/social-link/update/'+${socialLink.id}}"
+                      th:href="@{'/admin/social-link/edit/'+${socialLink.id}}"
                       class="btn social-action-btn edit"
                     >
                       <i class="fa-solid fa-pen-to-square"></i>
@@ -249,6 +251,7 @@
             </div>
           </section>
 
+          <!-- SELF PROJECTS -->
           <section id="projects">
             <div class="container">
               <div class="main_container mb-3">
@@ -256,7 +259,7 @@
                   <h1 class="title">Projects</h1>
                   <div class="d-flex align-items-center">
                     <a
-                      th:href="@{/admin/project/add}"
+                      th:href="@{/admin/project/self/add}"
                       class="header__trigger btn"
                     >
                       <span class="btn-caption">Add</span>
@@ -324,6 +327,7 @@
             </div>
           </section>
 
+          <!-- EDUCATIONS -->
           <section id="education">
             <div class="container">
               <div class="main_container mb-3">
@@ -341,9 +345,297 @@
                 </div>
                 <div class="container-fluid p-0 resume-lines">
                   <!-- education single item -->
-                  <div class="row g-0 resume-lines__item animate-in-up">
-                    <h1>here education own design</h1>
+                  <div
+                    class="row g-0 resume-lines__item py-5 animate-in-up"
+                    th:each="education: ${educations}"
+                  >
+                    <div class="col-12 col-md-6">
+                      <h5
+                        class="resume-lines__title animate-in-up"
+                        th:text="${education.title}"
+                      ></h5>
+
+                      <p class="resume-lines__source animate-in-up">
+                        From :
+                        <a
+                          th:href="@{${education.institutionLink}}"
+                          class="text-link-bold"
+                          target="_blank"
+                          th:text="${education.Institution}"
+                        ></a>
+                        <span class="fs-2">
+                          ( <span th:text="${education.gradeIn}"></span> :
+                          <span th:text="${education.grade}"></span> /
+                          <span th:text="${education.totalGrade}"></span> )
+                        </span>
+                      </p>
+                    </div>
+
+                    <div class="col-12 col-md-6 edu-col-2">
+                      <p class="small animate-in-up">
+                        <span th:text="${education.startDate}"></span> to
+                        <span th:text="${education.endDate}"></span>
+                      </p>
+                      <p class="small animate-in-up fst-italic">
+                        <span th:text="${education.location}"></span>
+                      </p>
+                    </div>
+
+                    <div
+                      class="col-12 col-md-12 d-flex align-items-center justify-content-center gap-3"
+                    >
+                      <a
+                        th:href="@{'/admin/education/edit/'+${education.id}}"
+                        class="btn social-action-btn edit"
+                      >
+                        <i class="fa-solid fa-pen-to-square"></i>
+                      </a>
+
+                      <a class="btn social-action-btn delete">
+                        <i class="fa-solid fa-trash"></i>
+                      </a>
+                    </div>
                   </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- EXPERIENCE -->
+          <section id="experience">
+            <div class="container">
+              <div class="main_container mb-3">
+                <div class="card-head d-flex justify-content-between mb-3">
+                  <h1 class="title">Experience</h1>
+                  <div class="d-flex align-items-center">
+                    <a
+                      th:href="@{/admin/experience/add}"
+                      class="header__trigger btn"
+                    >
+                      <span class="btn-caption">Add</span>
+                      <i class="fa-solid fa-add"></i>
+                    </a>
+                  </div>
+                </div>
+                <div class="container-fluid p-0 resume-lines">
+                  <!-- education single item -->
+                  <div
+                    class="row g-0 resume-lines__item py-5 animate-in-up"
+                    th:each="education: ${educations}"
+                  >
+                    <div class="col-12 col-md-6">
+                      <h5
+                        class="resume-lines__title animate-in-up"
+                        th:text="${education.title}"
+                      ></h5>
+
+                      <p class="resume-lines__source animate-in-up">
+                        From :
+                        <a
+                          th:href="@{${education.institutionLink}}"
+                          class="text-link-bold"
+                          target="_blank"
+                          th:text="${education.Institution}"
+                        ></a>
+                        <span class="fs-2">
+                          ( <span th:text="${education.gradeIn}"></span> :
+                          <span th:text="${education.grade}"></span> /
+                          <span th:text="${education.totalGrade}"></span> )
+                        </span>
+                      </p>
+                    </div>
+
+                    <div class="col-12 col-md-6 edu-col-2">
+                      <p class="small animate-in-up">
+                        <span th:text="${education.startDate}"></span> to
+                        <span th:text="${education.endDate}"></span>
+                      </p>
+                      <p class="small animate-in-up fst-italic">
+                        <span th:text="${education.location}"></span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- CLIENT PROJECTS -->
+          <section id="client-projects">
+            <div class="container">
+              <div class="main_container mb-3">
+                <div class="card-head d-flex justify-content-between mb-3">
+                  <h1 class="title">Client Projects</h1>
+                  <div class="d-flex align-items-center">
+                    <a
+                      th:href="@{/admin/project/client/add}"
+                      class="header__trigger btn"
+                    >
+                      <span class="btn-caption">Add</span>
+                      <i class="fa-solid fa-add"></i>
+                    </a>
+                  </div>
+                </div>
+
+                <div class="content__block grid-block">
+                  <div class="container-fluid px-0 inner__gallery">
+                    <div
+                      class="row gx-0 my-gallery"
+                      itemscope
+                      itemtype="http://schema.org/ImageGallery"
+                    >
+                      <!-- Works Gallery Single Item Start -->
+                      <figure
+                        th:each="project: ${clientProjects}"
+                        class="col-12 col-md-6 gallery__item grid-item animate-card-2"
+                        itemprop="associatedMedia"
+                        itemscope
+                        itemtype="http://schema.org/ImageObject"
+                      >
+                        <a
+                          th:href="@{${project.images[0].imageUrl}}"
+                          th:data-image="@{${project.images[0].imageUrl}}"
+                          class="gallery__link"
+                          itemprop="contentUrl"
+                          data-size="1400x1400"
+                        >
+                          <img
+                            th:src="@{${project.images[0].imageUrl}}"
+                            class="gallery__image"
+                            itemprop="thumbnail"
+                            th:alt="${project.title}+' thumbnail'"
+                          />
+                        </a>
+                        <figcaption
+                          class="gallery__descr"
+                          itemprop="caption description"
+                        >
+                          <a th:href="@{/admin/project/add}">
+                            <h5 th:text="${project.title}"></h5>
+                          </a>
+
+                          <div class="card__tags d-flex flex-wrap">
+                            <span
+                              class="rounded-tag opposite"
+                              th:text="${project.date}"
+                            ></span>
+                          </div>
+
+                          <p class="small" th:text="${project.summery}">
+                            Mauris porttitor lobortis ligula, quis molestie
+                            lorem scelerisque eu. Morbi aliquam enim odio.
+                          </p>
+                          <p><a href="">More...</a></p>
+                        </figcaption>
+                      </figure>
+                      <!-- Works Gallery Single Item End -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SKILLS -->
+          <section id="skills">
+            <div class="container">
+              <div class="main_container mb-3">
+                <div class="card-head d-flex justify-content-between mb-3">
+                  <h1 class="title">Skills</h1>
+                  <div class="d-flex align-items-center">
+                    <a
+                      th:href="@{/admin/skill/add}"
+                      class="header__trigger btn"
+                    >
+                      <span class="btn-caption">Add</span>
+                      <i class="fa-solid fa-add"></i>
+                    </a>
+                  </div>
+                </div>
+                <div class="container-fluid p-0 resume-lines">
+                  <div class="col">
+                    <div class="skills-box">
+                      <div class="skills-header">
+                        <h3>Languages</h3>
+                      </div>
+                      <div class="skills-list">
+                        <a
+                          th:each="skill: ${skills.languages}"
+                          th:object="${skill}"
+                          th:href="@{'/admin/skill/edit/'+*{id}}"
+                        >
+                          <span th:text="*{skillName}">JAVA </span>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="skills-box">
+                      <div class="skills-header">
+                        <h3>Frameworks</h3>
+                      </div>
+                      <div class="skills-list">
+                        <a
+                          th:each="skill: ${skills.Frameworks}"
+                          th:object="${skill}"
+                          th:href="@{'/admin/skill/edit/'+*{id}}"
+                        >
+                          <span th:text="*{skillName}">Sprng Boot </span>
+                        </a>
+                      </div>
+                    </div>
+
+                    <div class="skills-box">
+                      <div class="skills-header">
+                        <h3>Tools</h3>
+                      </div>
+                      <div class="skills-list">
+                        <a
+                          th:each="skill: ${skills.tools}"
+                          th:object="${skill}"
+                          th:href="@{'/admin/skill/edit/'+*{id}}"
+                        >
+                          <span th:text="*{skillName}">Postman</span>
+                        </a>
+                      </div>
+                    </div>
+
+                    <div class="skills-box">
+                      <div class="skills-header">
+                        <h3>Others</h3>
+                      </div>
+                      <div class="skills-list">
+                        <a
+                          th:each="skill: ${skills.others}"
+                          th:object="${skill}"
+                          th:href="@{'/admin/skill/edit/'+*{id}}"
+                        >
+                          <span th:text="*{skillName}">Postman</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- FAVIROUTE TOOLS AND SKILLS -->
+          <section id="faviroute">
+            <div class="container">
+              <div class="main_container mb-3">
+                <div class="card-head d-flex justify-content-between mb-3">
+                  <h1 class="title">Faviroute Tools</h1>
+                  <div class="d-flex align-items-center">
+                    <a
+                      th:href="@{/admin/favourite-tool/add}"
+                      class="header__trigger btn"
+                    >
+                      <span class="btn-caption">Add</span>
+                      <i class="fa-solid fa-add"></i>
+                    </a>
+                  </div>
+                </div>
+                <div class="container-fluid p-0 resume-lines">
+                  <h1>Fav tools here</h1>
                 </div>
               </div>
             </div>
@@ -432,5 +724,6 @@
         </div>
       </div>
     </div>
+    <script></script>
   </body>
 </html>

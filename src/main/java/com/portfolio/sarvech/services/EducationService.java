@@ -10,7 +10,6 @@ public interface EducationService {
     Education updateEducation(Education educations);
     void deleteEducationById(Long id);
     Education findEducationById(Long id);
-    List<Education> findEducationByType(String type);
     List<Education> findAllEducations();
 
 }

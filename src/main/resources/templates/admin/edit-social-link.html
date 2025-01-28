@@ -20,10 +20,16 @@
 
           <div class="container">
             <div class="main_container">
+              <div class="mb-3">
+                <div th:replace="~{admin/message :: alert}"></div>
+              </div>
               <div class="card-head d-flex justify-content-between">
                 <h1 class="title">Social Link</h1>
                 <div>
-                  <a th:href="@{/admin/dashboard}" class="header__trigger btn">
+                  <a
+                    th:href="@{/admin/dashboard#social-links}"
+                    class="header__trigger btn"
+                  >
                     <span class="btn-caption">back</span>
                     <i class="fa-solid fa-circle-arrow-left"></i>
                   </a>
@@ -31,21 +37,14 @@
               </div>
               <form
                 th:object="${socialLink}"
-                th:action="@{'/admin/social-link/edit/'+*{id}}"
+                th:action="@{'/admin/social-link/update/'+*{id}}"
                 method="POST"
                 class="form contact-form"
                 id="contact-form"
+                novalidate
               >
                 <div class="container-fluid p-0">
                   <div class="row gx-0">
-                    <div class="col-12 form__item animate-in-up">
-                      <input
-                        type="hidden"
-                        th:field="*{id}"
-                        placeholder="Social ID here*"
-                        required
-                      />
-                    </div>
                     <div class="col-12 form__item animate-in-up">
                       <input
                         type="text"
@@ -53,13 +52,24 @@
                         placeholder="Social Title here*"
                         required
                       />
+                      <p
+                        class="error"
+                        th:if="${#fields.hasErrors('name')}"
+                        th:errors="*{name}"
+                      ></p>
                     </div>
                     <div class="col-12 form__item animate-in-up">
                       <input
                         type="text"
                         th:field="*{icon}"
                         placeholder="Social Icon here*"
+                        required
                       />
+                      <p
+                        class="error"
+                        th:if="${#fields.hasErrors('icon')}"
+                        th:errors="*{icon}"
+                      ></p>
                     </div>
 
                     <div class="col-12 form__item animate-in-up">
@@ -69,6 +79,11 @@
                         placeholder="Your Social Media Link here*"
                         required
                       />
+                      <p
+                        class="error"
+                        th:if="${#fields.hasErrors('link')}"
+                        th:errors="*{link}"
+                      ></p>
                     </div>
 
                     <div class="col-12 form__item animate-in-up">
@@ -91,5 +106,6 @@
         </div>
       </div>
     </div>
+    <script></script>
   </body>
 </html>

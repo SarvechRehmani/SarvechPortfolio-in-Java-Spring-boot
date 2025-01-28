@@ -7,7 +7,7 @@
 >
   <head>
     <!-- Page Title -->
-    <title>Add Sicial Link - Sarvech Rehmani</title>
+    <title>Add Education - Sarvech Rehmani</title>
   </head>
   <body>
     <div>
@@ -15,74 +15,76 @@
       <div id="content" class="content">
         <div class="content__wrapper">
           <div style="margin: 40px 0 0 65px">
-            <h2>Add Social Link</h2>
+            <h2>Add Experience</h2>
           </div>
 
           <div class="container">
             <div class="main_container">
-              <div class="mb-3">
-                <div th:replace="~{admin/message :: alert}"></div>
-              </div>
               <div class="card-head d-flex justify-content-between">
-                <h1 class="title">Social Link</h1>
+                <h1 class="title">Experience</h1>
                 <div>
-                  <a
-                    th:href="@{/admin/dashboard#social-links}"
-                    class="header__trigger btn"
-                  >
+                  <a th:href="@{/admin/dashboard}" class="header__trigger btn">
                     <span class="btn-caption">back</span>
                     <i class="fa-solid fa-circle-arrow-left"></i>
                   </a>
                 </div>
               </div>
               <form
-                th:action="@{/admin/social-link/save}"
-                th:object="${socialLink}"
+                th:action="@{/admin/education/save}"
+                th:object="${experience}"
                 method="POST"
                 class="form contact-form"
                 id="contact-form"
-                novalidate
               >
                 <div class="container-fluid p-0">
                   <div class="row gx-0">
-                    <div class="col-12 form__item animate-in-up">
+                    <div class="col-12 col-md-6 form__item animate-in-up">
                       <input
                         type="text"
-                        th:field="*{name}"
-                        placeholder="Social Title here*"
+                        th:field="*{company}"
+                        placeholder="Company Name here*"
                         required
                       />
-                      <p
-                        class="error"
-                        th:if="${#fields.hasErrors('name')}"
-                        th:errors="*{name}"
-                      ></p>
                     </div>
-                    <div class="col-12 form__item animate-in-up">
+                    <div class="col-12 col-md-6 form__item animate-in-up">
                       <input
                         type="text"
-                        th:field="*{icon}"
-                        placeholder="Social Icon here*"
+                        th:field="*{position}"
+                        placeholder="Position or designation here*"
                       />
-                      <p
-                        class="error"
-                        th:if="${#fields.hasErrors('icon')}"
-                        th:errors="*{icon}"
-                      ></p>
                     </div>
 
-                    <div class="col-12 form__item animate-in-up">
+                    <div class="col-12 col-md-6 form__item animate-in-up">
                       <input
                         type="url"
-                        th:field="*{link}"
-                        placeholder="Your Social Media Link here*"
+                        th:field="*{startDate}"
+                        placeholder="Start Date here*"
+                      />
+                    </div>
+
+                    <div class="col-12 col-md-6 form__item animate-in-up">
+                      <input
+                        type="text"
+                        th:field="*{endDate}"
+                        placeholder="End Date here*"
                         required
                       />
-                      <p
-                        class="error"
-                        th:if="${#fields.hasErrors('link')}"
-                        th:errors="*{link}"
-                      ></p>
+                    </div>
+
+                    <div class="col-12 col-md-12 form__item animate-in-up">
+                      <input
+                        type="url"
+                        th:field="*{companyLink}"
+                        placeholder="Company Website Link here"
+                        required
+                      />
+                    </div>
+
+                    <div class="col-12 col-md-12 form__item animate-in-up">
+                      <textarea
+                        th:field="*{description}"
+                        placeholder="Enter designation here"
+                      ></textarea>
                     </div>
 
                     <div class="col-12 form__item animate-in-up">

@@ -3,14 +3,8 @@ package com.portfolio.sarvech.controllers;
 import com.portfolio.sarvech.helper.AppConstants;
 import com.portfolio.sarvech.helper.Message;
 import com.portfolio.sarvech.helper.MessageType;
-import com.portfolio.sarvech.models.Details;
-import com.portfolio.sarvech.models.Education;
-import com.portfolio.sarvech.models.Project;
-import com.portfolio.sarvech.models.SocialLink;
-import com.portfolio.sarvech.services.DetailsService;
-import com.portfolio.sarvech.services.EducationService;
-import com.portfolio.sarvech.services.ProjectService;
-import com.portfolio.sarvech.services.SocialLinkService;
+import com.portfolio.sarvech.models.*;
+import com.portfolio.sarvech.services.*;
 import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,13 +28,15 @@ public class AdminController {
     private final SocialLinkService socialLinkService;
     private final ProjectService projectService;
     private final EducationService educationService;
+    private final SkillService skillService;
     private final AppConstants constants;
 
-    public AdminController(DetailsService detailsService, SocialLinkService socialLinkService, ProjectService projectService, EducationService educationService, AppConstants constants) {
+    public AdminController(DetailsService detailsService, SocialLinkService socialLinkService, ProjectService projectService, EducationService educationService, SkillService skillService, AppConstants constants) {
         this.detailsService = detailsService;
         this.socialLinkService = socialLinkService;
         this.projectService = projectService;
         this.educationService = educationService;
+        this.skillService = skillService;
         this.constants = constants;
     }
 
@@ -50,12 +46,20 @@ public class AdminController {
         Details details = this.detailsService.findById(this.constants.DetailsID).orElse(null);
         List<SocialLink> socialLinks = this.socialLinkService.findAllSocialLinks();
         List<Project> selfProjects = this.projectService.findAllProjectsByClient("self");
-        List<Education> educations = this.educationService.findEducationByType("academic");
+        List<Project> clientProjects = this.projectService.findAllProjectsByNotClient("self");
+        List<Education> educations = this.educationService.findAllEducations();
+        List<Skill> languagesSkills = this.skillService.findSkillsByType("languages");
+        List<Skill> frameworksSkills = this.skillService.findSkillsByType("frameworks");
+        List<Skill> toolsSkills = this.skillService.findSkillsByType("tools");
+        List<Skill> othersSkills = this.skillService.findSkillsByType("others");
+        SkillResponseDto skills = new SkillResponseDto(languagesSkills,frameworksSkills,toolsSkills,othersSkills);
         model.addAttribute("details", details);
         model.addAttribute("socialLinks", socialLinks);
         model.addAttribute("selfProjects", selfProjects);
+        model.addAttribute("clientProjects", clientProjects);
         model.addAttribute("educations", educations);
-        System.out.println(educations);
+        model.addAttribute("skills",skills);
+        System.out.println("Dashboard Page");
         return "admin/dashboard";
     }
 
@@ -81,7 +85,7 @@ public class AdminController {
         System.out.println(details);
         this.detailsService.updateDetails(details);
         session.setAttribute("message", new Message("Details updated successfully!", MessageType.DEFAULT));
-        return "redirect:/admin/dashboard";
+        return "redirect:/admin/dashboard#dashboard";
     }
 
 

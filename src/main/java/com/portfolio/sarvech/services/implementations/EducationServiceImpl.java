@@ -36,10 +36,6 @@ public class EducationServiceImpl implements EducationService {
         return this.educationRepo.findById(id).orElse(null);
     }
 
-    @Override
-    public List<Education> findEducationByType(String type) {
-        return this.educationRepo.findByType(type);
-    }
 
     @Override
     public List<Education> findAllEducations() {

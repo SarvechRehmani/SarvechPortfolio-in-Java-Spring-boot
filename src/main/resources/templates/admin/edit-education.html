@@ -7,7 +7,7 @@
 >
   <head>
     <!-- Page Title -->
-    <title>Add Education - Sarvech Rehmani</title>
+    <title>Update Education - Sarvech Rehmani</title>
   </head>
   <body>
     <div>
@@ -15,7 +15,7 @@
       <div id="content" class="content">
         <div class="content__wrapper">
           <div style="margin: 40px 0 0 65px">
-            <h2>Add Education</h2>
+            <h2>Update Education</h2>
           </div>
 
           <div class="container">
@@ -33,7 +33,7 @@
                 </div>
               </div>
               <form
-                th:action="@{/admin/education/save}"
+                th:action="@{'/admin/education/update/'+*{id}}"
                 th:object="${education}"
                 method="POST"
                 class="form contact-form"

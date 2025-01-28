@@ -29,9 +29,9 @@ public class ProjectController {
         this.projectService = projectService;
     }
 
-    @GetMapping("/add")
+    @GetMapping("/self/add")
     private String addProject(Model model){
-        model.addAttribute("project", new Project());
+        model.addAttribute("project", new Project("self"));
         return "admin/add-project";
     }
 
@@ -42,5 +42,11 @@ public class ProjectController {
        session.setAttribute("message", new Message("Project added successfully!", MessageType.SUCCESS));
        this.logger.info("Project saved");
        return "redirect:/admin/dashboard";
+    }
+
+    @GetMapping("/client/add")
+    private String addClientProject(Model model){
+        model.addAttribute("project", new Project());
+        return "admin/add-project";
     }
 }

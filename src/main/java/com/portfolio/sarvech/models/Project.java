@@ -28,4 +28,8 @@ public class Project {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "project_id")
     private List<Image> images;
+
+    public Project(String client) {
+        this.client = client;
+    }
 }

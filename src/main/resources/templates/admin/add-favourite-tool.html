@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  dir="ltr"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{admin/base :: parent(~{::#content},~{::title}, ~{::script})}"
+>
+  <head>
+    <!-- Page Title -->
+    <title>Add Favourite Tool - Sarvech Rehmani</title>
+  </head>
+  <body>
+    <div>
+      <!-- Page Content Start -->
+      <div id="content" class="content">
+        <div class="content__wrapper">
+          <div style="margin: 40px 0 0 65px">
+            <h2>Add Favourite Tool</h2>
+          </div>
+
+          <div class="container">
+            <div class="main_container">
+              <div class="card-head d-flex justify-content-between">
+                <h1 class="title">Favourite Tool</h1>
+                <div>
+                  <a th:href="@{/admin/dashboard}" class="header__trigger btn">
+                    <span class="btn-caption">back</span>
+                    <i class="fa-solid fa-circle-arrow-left"></i>
+                  </a>
+                </div>
+              </div>
+              <form
+                th:action="@{/admin/favourite-tool/save}"
+                th:object="${favouriteTool}"
+                method="POST"
+                enctype="multipart/form-data"
+                class="form contact-form"
+                id="contact-form"
+              >
+                <div class="container-fluid p-0">
+                  <div class="row gx-0">
+                    <div class="col-12 col-md-6 form__item animate-in-up">
+                      <input
+                        type="text"
+                        id="input-tool-name"
+                        th:field="*{name}"
+                        placeholder="Favourite Tool Name here*"
+                        required
+                      />
+                    </div>
+
+                    <div class="col-12 col-md-6 form__item animate-in-up">
+                      <input
+                        id="icon-file"
+                        type="file"
+                        name="files"
+                        accept="image/*"
+                        required
+                      />
+                    </div>
+
+                    <div class="col-12 col-md-6 form__item animate-in-up">
+                      <button
+                        class="btn btn-default btn-hover btn-hover-accent"
+                        type="submit"
+                      >
+                        <span class="btn-caption">Save</span>
+                        <i class="fa-solid fa-floppy-disk"></i>
+                      </button>
+                    </div>
+
+                    <div
+                      class="tools-cards d-flex flex-column align-items-center flex-wrap"
+                    >
+                      <h2>Preview</h2>
+                      <div
+                        class="tools-cards__item d-flex grid-item-s animate-card-5"
+                      >
+                        <div class="tools-cards__card">
+                          <img
+                            class="tools-cards__icon animate-in-up"
+                            style="cursor: pointer"
+                            src="/img/icons/icon-photoshop.svg"
+                            id="icon-preview"
+                            alt="Preview icon"
+                          />
+                          <h6
+                            class="tools-cards__caption animate-in-up"
+                            id="tool-name"
+                          >
+                            Photoshop
+                          </h6>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="container mt-5">
+            <div class="row"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      let toolName = document.getElementById("tool-name");
+      let inputToolName = document.getElementById("input-tool-name");
+
+      inputToolName.addEventListener("input", function (event) {
+        // Update the <h5> text dynamically as the user types
+        toolName.textContent = event.target.value;
+      });
+
+      // Display iamge in image container in add contact form and update contact form
+      let fileInput = document.getElementById("icon-file");
+      let imagePreview = document.getElementById("icon-preview");
+
+      fileInput.addEventListener("change", function (event) {
+        var file = event.target.files[0];
+        let reader = new FileReader();
+        reader.onload = function () {
+          imagePreview.src = reader.result;
+        };
+        reader.readAsDataURL(file);
+        imgContainer.classList.remove("hidden");
+        imgContainer.classList.add("flex");
+      });
+
+      imagePreview.onclick = function () {
+        fileInput.click();
+      };
+    </script>
+  </body>
+</html>

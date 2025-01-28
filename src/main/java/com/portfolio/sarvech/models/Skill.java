@@ -5,24 +5,22 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SocialLink {
+@ToString
+public class Skill {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @NotBlank(message = "Social media name is required")
-    private String name;
-    @NotBlank(message = "Icon is required")
-    private String icon;
-    @NotBlank(message = "Social link is required")
-    private String link;
+    @NotBlank(message = "Skill Name is required.")
+    private String skillName;
+    @NotBlank(message = "Skill Type is required.")
+    private String skillType;
+
 }
