@@ -272,53 +272,78 @@
                   <div class="container-fluid px-0 inner__gallery">
                     <div
                       class="row gx-0 my-gallery"
-                      itemscope
-                      itemtype="http://schema.org/ImageGallery"
+                      th:each="project: ${selfProjects}"
                     >
-                      <!-- Works Gallery Single Item Start -->
-                      <figure
-                        th:each="project: ${selfProjects}"
-                        class="col-12 col-md-6 gallery__item grid-item animate-card-2"
-                        itemprop="associatedMedia"
+                      <div
                         itemscope
-                        itemtype="http://schema.org/ImageObject"
+                        itemtype="http://schema.org/ImageGallery"
+                        class="col-12 col-md-6 gallery__item grid-item animate-card-2"
                       >
-                        <a
-                          th:href="@{${project.images[1].imageUrl}}"
-                          th:data-image="@{${project.images[1].imageUrl}}"
-                          class="gallery__link"
-                          itemprop="contentUrl"
-                          data-size="1400x1400"
+                        <!-- Works Gallery Single Item Start -->
+                        <figure
+                          itemprop="associatedMedia"
+                          itemscope
+                          itemtype="http://schema.org/ImageObject"
                         >
-                          <img
-                            th:src="@{${project.images[1].imageUrl}}"
-                            class="gallery__image"
-                            itemprop="thumbnail"
-                            th:alt="${project.title}+' thumbnail'"
-                          />
-                        </a>
-                        <figcaption
-                          class="gallery__descr"
-                          itemprop="caption description"
-                        >
-                          <a th:href="@{/admin/project/add}">
-                            <h5 th:text="${project.title}"></h5>
+                          <a
+                            th:href="@{${project.images[0].imageUrl}}"
+                            th:data-image="@{${project.images[0].imageUrl}}"
+                            class="gallery__link"
+                            itemprop="contentUrl"
+                            data-size="1400x1400"
+                          >
+                            <img
+                              th:src="@{${project.images[0].imageUrl}}"
+                              class="gallery__image"
+                              itemprop="thumbnail"
+                              th:alt="${project.title}+' thumbnail'"
+                            />
                           </a>
+                          <figcaption
+                            class="gallery__descr"
+                            itemprop="caption description"
+                          >
+                            <a th:href="@{/admin/project/add}">
+                              <h5 th:text="${project.title}"></h5>
+                            </a>
 
-                          <div class="card__tags d-flex flex-wrap">
-                            <span
-                              class="rounded-tag opposite"
-                              th:text="${project.date}"
-                            ></span>
-                          </div>
+                            <div class="card__tags d-flex flex-wrap">
+                              <span
+                                class="rounded-tag opposite"
+                                th:text="${project.date}"
+                              ></span>
+                            </div>
+                          </figcaption>
+                        </figure>
+                      </div>
 
-                          <p class="small" th:text="${project.summery}">
-                            Mauris porttitor lobortis ligula, quis molestie
-                            lorem scelerisque eu. Morbi aliquam enim odio.
-                          </p>
-                          <p><a href="">More...</a></p>
-                        </figcaption>
-                      </figure>
+                      <div
+                        class="col-md-6 grid-item animate-card-2 fs-1"
+                        style="margin-top: 35px"
+                      >
+                        <h4 class="text-justify" th:text="${project.title}">
+                          Title here
+                        </h4>
+                        <p class="text-justify" th:text="${project.summery}">
+                          Lorem ipsum, dolor sit amet consectetur adipisicing
+                          elit. Assumenda quos quo minus praesentium odio itaque
+                          impedit delectus. Deserunt sapiente minima ducimus
+                          pariatur eum quasi quisquam ipsam dignissimos,
+                          numquam, iure distinctio!
+                        </p>
+                        <a th:href="@{'/admin/project/edit/'+${project.id}}">
+                          <span class="rounded-btn opposite edit"> Edit </span>
+                        </a>
+                        <a
+                          th:onclick="deleteProject([[${project.id}]])"
+                          href="#"
+                        >
+                          <span class="rounded-btn delete">Delete</span>
+                        </a>
+                        <a href="">
+                          <span class="rounded-btn edit">read more...</span>
+                        </a>
+                      </div>
                       <!-- Works Gallery Single Item End -->
                     </div>
                   </div>

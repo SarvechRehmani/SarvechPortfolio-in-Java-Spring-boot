@@ -19,13 +19,14 @@ public class ImageServiceImpl implements ImageService {
 
     private final Logger logger = LoggerFactory.getLogger(ImageServiceImpl.class);
 
-    private ImageRepo imageRepo;
+    private final ImageRepo imageRepo;
 
     private final Cloudinary cloudinary;
 
     private final AppConstants constants;
 
-    public ImageServiceImpl(Cloudinary cloudinary, AppConstants constants) {
+    public ImageServiceImpl(ImageRepo imageRepo, Cloudinary cloudinary, AppConstants constants) {
+        this.imageRepo = imageRepo;
         this.cloudinary = cloudinary;
         this.constants = constants;
     }
@@ -37,7 +38,12 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public void deleteImage(long id) {
-        Image image = this.imageRepo.findById(id).get();
+        Image image = this.imageRepo.findById(id).orElse(null);
+       if(image == null) {
+            this.logger.error("Cannot delete image: Image with id {} not found.", id);
+            return;
+
+       }
         if(this.deleteImageFromCloudinary(image.getPublicId())){
             this.logger.info("Image deleted from cloudinary with id : {}", image.getId());
         }

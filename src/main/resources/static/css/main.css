@@ -113,6 +113,7 @@
   --t-alert-warning-light: rgb(180, 83, 9);
   --bg-alert-warning-light: rgb(254, 235, 156);
 
+
   /* dark color scheme */
   --base--dark: #0c0d13; /* Base dark background */
   --base-tint--dark: #12131b; /* Slightly lighter for elements */
@@ -1122,6 +1123,25 @@ p.additional-text a {
   font: normal 400 1.5rem/1 var(--_font-default);
   font-variant-numeric: lining-nums;
 }
+
+.rounded-btn {
+  display: -webkit-inline-box;
+  display: -moz-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 3.4rem;
+  padding: 1rem 1.7rem;
+  margin: 0.5rem 1rem 0.5rem 0;
+  -moz-border-radius: var(--_radius-s);
+  border-radius: var(--_radius-s);
+  font: normal 400 2.5rem/1 var(--_font-default);
+  font-variant-numeric: lining-nums;
+}
+
 .rounded-tag.tag-base {
   background-color: var(--base);
   color: var(--t-bright);
@@ -3812,7 +3832,7 @@ form textarea:required:valid {
 }
 @media only screen and (min-width: 1200px) {
   .pswp__caption__center {
-    max-width: 600px;
+    max-width: 900px;
   }
 }
 @media only screen and (min-width: 1600px) {

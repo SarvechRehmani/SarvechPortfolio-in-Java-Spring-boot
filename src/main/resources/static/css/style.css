@@ -43,14 +43,6 @@
   padding: 15px 20px;
   border-radius: var(--_radius-m);
 }
-.edit {
-  color: var(--t-alert-default);
-  background-color: var(--bg-alert-default);
-}
-.delete {
-  color: var(--t-alert-error);
-  background-color: var(--bg-alert-error);
-}
 
 .disabled {
   pointer-events: none !important;
@@ -72,6 +64,7 @@
   border-bottom: 1px solid var(--stroke-elements);
 }
 
+/* Custom alert like Tailwind CSS */
 .custom-alert {
   display: flex;
   align-items: center;
@@ -131,6 +124,7 @@
   box-shadow: 0 0 0 2px #3182ce8b;
 }
 
+/* Alerts colors */
 .DEFAULT {
   background-color: var(--bg-alert-default);
   color: var(--t-alert-default);
@@ -155,6 +149,7 @@ option {
   background-color: var(--base-tint);
 }
 
+/* Skills shows */
 .skills-box {
   margin: 25px;
 }
@@ -175,7 +170,23 @@ option {
   background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
 }
 
+/* Error text for validate forms */
 .error {
   font-size: 20px;
   color: red !important;
+}
+
+/* actions buttons and rouded btn  */
+.edit {
+  color: var(--t-alert-default) !important;
+  background-color: var(--bg-alert-default) !important;
+}
+.delete {
+  color: var(--t-alert-error) !important;
+  background-color: var(--bg-alert-error) !important;
+}
+
+.rounded-btn:hover {
+  background-color: #0000008b !important;
+  color: white !important;
 }

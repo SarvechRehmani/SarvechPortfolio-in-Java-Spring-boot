@@ -7,7 +7,7 @@
 >
   <head>
     <!-- Page Title -->
-    <title>Add Project - Sarvech Rehmani</title>
+    <title>Update Project - Sarvech Rehmani</title>
   </head>
   <body>
     <div>
@@ -15,7 +15,7 @@
       <div id="content" class="content">
         <div class="content__wrapper">
           <div style="margin: 40px 0 0 65px">
-            <h2>Add Project</h2>
+            <h2>Update Project</h2>
           </div>
 
           <div class="container">
@@ -33,7 +33,7 @@
                 </div>
               </div>
               <form
-                th:action="@{/admin/project/save}"
+                th:action="@{'/admin/project/edit/'+${project.id}}"
                 th:object="${project}"
                 method="POST"
                 enctype="multipart/form-data"

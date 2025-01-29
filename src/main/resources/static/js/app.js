@@ -524,7 +524,6 @@ function deleteSocialLink(id) {
     cancelButtonColor: isDarkTheme ? "#ff4c4c" : "#d33",
     confirmButtonText: "Yes, delete it!",
     background: backgroundColor,
-    confirmButtonText: "Yes, delete it!",
   }).then((result) => {
     if (result.isConfirmed) {
       // Delete logic here
@@ -534,6 +533,38 @@ function deleteSocialLink(id) {
         title: "Deleted!",
         text: "Your file has been deleted.",
         icon: "success",
+        background: backgroundColor,
+      });
+    }
+  });
+}
+
+function deleteProject(id) {
+  // Determine the current theme based on the `color-scheme` attribute
+  const isDarkTheme =
+    document.documentElement.getAttribute("color-scheme") === "dark";
+
+  // Define theme-specific styles
+  const backgroundColor = isDarkTheme ? "#2b2b2b" : "#ffffff";
+  const textColor = isDarkTheme ? "#ffffff" : "#000000";
+
+  Swal.fire({
+    title: "Are you sure?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#5a45c4",
+    cancelButtonColor: isDarkTheme ? "#ff4c4c" : "#d33",
+    confirmButtonText: "Yes, delete it!",
+    background: backgroundColor,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Delete logic here
+      var url = "http://localhost:8080/admin/project/delete/" + id;
+      window.location.href = url;
+      Swal.fire({
+        title: "Deleted!",
+        icon: "success",
+        background: backgroundColor,
       });
     }
   });

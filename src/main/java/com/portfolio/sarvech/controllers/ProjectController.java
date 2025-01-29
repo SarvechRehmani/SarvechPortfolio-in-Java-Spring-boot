@@ -5,14 +5,13 @@ import com.portfolio.sarvech.helper.MessageType;
 import com.portfolio.sarvech.models.Project;
 import com.portfolio.sarvech.services.ProjectService;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -32,11 +31,24 @@ public class ProjectController {
     @GetMapping("/self/add")
     private String addProject(Model model){
         model.addAttribute("project", new Project("self"));
-        return "admin/add-project";
+        return "/admin/add-project";
     }
 
     @PostMapping("/save")
-    private String saveProject(@ModelAttribute("project") Project project, List<MultipartFile> files, HttpSession session){
+    private String saveProject(@Valid Project project, BindingResult result, List<MultipartFile> files, HttpSession session){
+
+        if(result.hasErrors()){
+            session.setAttribute("message",new Message("Please fix the following errors",MessageType.ERROR));
+            return "/admin/add-project";
+        }
+
+        // Log received files
+        if (files == null || files.isEmpty() || files.stream().allMatch(MultipartFile::isEmpty)) {
+            session.setAttribute("message",new Message("Please fix the following errors",MessageType.ERROR));
+            session.setAttribute("fileMessage", "Please select at least one valid file.");
+            return "/admin/add-project";
+        }
+
         // save project to database
        this.projectService.saveProject(project, files);
        session.setAttribute("message", new Message("Project added successfully!", MessageType.SUCCESS));
@@ -48,5 +60,19 @@ public class ProjectController {
     private String addClientProject(Model model){
         model.addAttribute("project", new Project());
         return "admin/add-project";
+    }
+
+    @GetMapping("/delete/{id}")
+    private String deleteProject(@PathVariable long id, HttpSession session){
+        Project project = this.projectService.findProjectById(id);
+        if(project == null){
+            logger.error("Project not found with id: {}", id);
+            session.setAttribute("message", new Message("Project not found with id: "+id, MessageType.ERROR));
+            return "redirect:/admin/dashboard#projects";
+        }
+        this.projectService.deleteProjectById(id);
+        session.setAttribute("message", new Message("Project deleted successfully!", MessageType.SUCCESS));
+        this.logger.info("Project deleted: {}", project);
+        return "redirect:/admin/dashboard#projects";
     }
 }
