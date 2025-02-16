@@ -1709,6 +1709,7 @@ table {
   display: inline-block !important;
 }
 
+
 .d-block {
   display: block !important;
 }
@@ -6255,6 +6256,9 @@ table {
 
 .overflow-y-scroll {
   overflow-y: scroll !important;
+}
+.d-hidden {
+  display: none;
 }
 
 .d-inline {

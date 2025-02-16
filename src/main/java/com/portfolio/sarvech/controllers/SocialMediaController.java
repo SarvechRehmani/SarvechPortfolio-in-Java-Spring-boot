@@ -33,19 +33,19 @@ public class SocialMediaController {
         List<SocialLink> socialLinks = this.socialLinkService.findAllSocialLinks();
         if(socialLinks.size() >= 5){
             session.setAttribute("message", new Message("Maximum number of social links reached!", MessageType.ERROR));
-            return "redirect:/admin/dashboard#social-links";
+            return "redirect:/admin/dashboard";
         }
         model.addAttribute("socialLink", new SocialLink());
         return "admin/add-social-link";
     }
 
-    @PostMapping("/save")
+    @PostMapping("/add")
     public String saveSocialLink(@Valid SocialLink socialLink, BindingResult result, Model model, HttpSession session) {
 
         List<SocialLink> socialLinks = this.socialLinkService.findAllSocialLinks();
         if(socialLinks.size() >= 5){
             session.setAttribute("message", new Message("Maximum number of social links reached!", MessageType.ERROR));
-            return "redirect:/admin/dashboard#social-links";
+            return "redirect:/admin/dashboard";
         }
 
         if (result.hasErrors()){
@@ -55,16 +55,16 @@ public class SocialMediaController {
 
         this.socialLinkService.saveSocialLink(socialLink);
         session.setAttribute("message", new Message("Social link added successfully!", MessageType.SUCCESS));
-        return "redirect:/admin/dashboard#social-links";
+        return "redirect:/admin/dashboard";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/update/{id}")
     public String editSocialLink(Model model, @PathVariable Long id) {
 
         SocialLink socialLink = this.socialLinkService.findSocialLinkById(id);
         if(socialLink == null) {
             model.addAttribute("message", new Message("Social link not found!", MessageType.ERROR));
-            return "redirect:/admin/dashboard#social-links";
+            return "redirect:/admin/dashboard";
         }
         model.addAttribute("socialLink", socialLink);
         return "admin/edit-social-link";
@@ -75,7 +75,7 @@ public class SocialMediaController {
         SocialLink existingSocialLink = this.socialLinkService.findSocialLinkById(id);
         if(existingSocialLink == null) {
             session.setAttribute("message", new Message("Social link not found!", MessageType.ERROR));
-            return "redirect:/admin/dashboard#social-links";
+            return "redirect:/admin/dashboard";
         }
 
         if (result.hasErrors()){
@@ -87,7 +87,7 @@ public class SocialMediaController {
         existingSocialLink.setLink(socialLink.getLink());
         this.socialLinkService.updateSocialLink(existingSocialLink);
         session.setAttribute("message", new Message("Social link updated successfully!", MessageType.SUCCESS));
-        return "redirect:/admin/dashboard#social-links";
+        return "redirect:/admin/dashboard";
     }
 
     @GetMapping("/delete/{id}")
@@ -95,10 +95,10 @@ public class SocialMediaController {
         SocialLink socialLink = this.socialLinkService.findSocialLinkById(id);
         if(socialLink == null) {
             session.setAttribute("message", new Message("Social link not found!", MessageType.ERROR));
-            return "redirect:/admin/dashboard#social-links";
+            return "redirect:/admin/dashboard";
         }
         this.socialLinkService.deleteSocialLink(id);
         session.setAttribute("message", new Message("Social link deleted successfully!", MessageType.SUCCESS));
-        return "redirect:/admin/dashboard#social-links";
+        return "redirect:/admin/dashboard";
     }
 }

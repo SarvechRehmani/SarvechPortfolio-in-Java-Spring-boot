@@ -33,7 +33,7 @@
                 </div>
               </div>
               <form
-                th:action="@{'/admin/project/edit/'+${project.id}}"
+                th:action="@{'/admin/project/update/'+${project.id}}"
                 th:object="${project}"
                 method="POST"
                 enctype="multipart/form-data"
@@ -43,7 +43,7 @@
               >
                 <div class="container-fluid p-0">
                   <div class="row gx-0">
-                    <div class="col-12 col-md-6 form__item animate-in-up">
+                    <div class="col-12 col-md-12 form__item animate-in-up">
                       <input
                         type="text"
                         th:field="*{title}"
@@ -68,18 +68,6 @@
                         th:if="${#fields.hasErrors('date')}"
                         th:errors="*{date}"
                       ></p>
-                    </div>
-
-                    <div class="col-12 col-md-6 form__item animate-in-up">
-                      <input type="file" name="files" multiple required />
-                      <p
-                        class="error"
-                        th:if="${session.fileMessage != null}"
-                        th:text="${session.fileMessage}"
-                      ></p>
-                      <th:block
-                        th:text="${@sessionHelper.removeMessage()}"
-                      ></th:block>
                     </div>
 
                     <div class="col-12 col-md-6 form__item animate-in-up">

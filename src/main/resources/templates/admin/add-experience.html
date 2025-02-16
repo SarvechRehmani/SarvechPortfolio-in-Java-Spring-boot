@@ -23,14 +23,17 @@
               <div class="card-head d-flex justify-content-between">
                 <h1 class="title">Experience</h1>
                 <div>
-                  <a th:href="@{/admin/dashboard}" class="header__trigger btn">
+                  <a
+                    th:href="@{/admin/dashboard#experience}"
+                    class="header__trigger btn"
+                  >
                     <span class="btn-caption">back</span>
                     <i class="fa-solid fa-circle-arrow-left"></i>
                   </a>
                 </div>
               </div>
               <form
-                th:action="@{/admin/education/save}"
+                th:action="@{/admin/experience/save}"
                 th:object="${experience}"
                 method="POST"
                 class="form contact-form"
@@ -57,6 +60,24 @@
                     <div class="col-12 col-md-6 form__item animate-in-up">
                       <input
                         type="url"
+                        th:field="*{companyLink}"
+                        placeholder="Company Website Link here"
+                        required
+                      />
+                    </div>
+
+                    <div class="col-12 col-md-6 form__item animate-in-up">
+                      <input
+                        type="text"
+                        th:field="*{location}"
+                        placeholder="Company location here"
+                        required
+                      />
+                    </div>
+
+                    <div class="col-12 col-md-6 form__item animate-in-up">
+                      <input
+                        type="text"
                         th:field="*{startDate}"
                         placeholder="Start Date here*"
                       />
@@ -73,9 +94,9 @@
 
                     <div class="col-12 col-md-12 form__item animate-in-up">
                       <input
-                        type="url"
-                        th:field="*{companyLink}"
-                        placeholder="Company Website Link here"
+                        type="text"
+                        th:field="*{keySkills}"
+                        placeholder="Key Skills here* 1-3"
                         required
                       />
                     </div>

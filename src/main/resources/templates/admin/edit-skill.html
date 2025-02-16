@@ -78,13 +78,20 @@
                       </p>
                     </div>
 
-                    <div class="col-12 form__item animate-in-up">
+                    <div class="col-12 d-flex form__item animate-in-up gap-3">
                       <button
                         class="btn btn-default btn-hover btn-hover-accent"
                         type="submit"
                       >
-                        <span class="btn-caption">Save</span>
-                        <i class="fa-solid fa-floppy-disk"></i>
+                        <span class="btn-caption">Update</span>
+                        <i class="fa-solid fa-check"></i>
+                      </button>
+                      <button
+                        class="btn btn-default danger-btn"
+                        th:onclick="deleteItem([[${skill.id}]],'skill')"
+                      >
+                        <span class="btn-caption">Delete</span>
+                        <i class="fa-solid fa-trash"></i>
                       </button>
                     </div>
                   </div>

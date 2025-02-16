@@ -7,7 +7,7 @@
 >
   <head>
     <!-- Page Title -->
-    <title>Add Favourite Tool - Sarvech Rehmani</title>
+    <title>Add Certificate - Sarvech Rehmani</title>
   </head>
   <body>
     <div>
@@ -15,16 +15,16 @@
       <div id="content" class="content">
         <div class="content__wrapper">
           <div style="margin: 40px 0 0 65px">
-            <h2>Add Favourite Tool</h2>
+            <h2>Add Certificate</h2>
           </div>
 
           <div class="container">
             <div class="main_container">
               <div class="card-head d-flex justify-content-between">
-                <h1 class="title">Favourite Tool</h1>
+                <h1 class="title">Certififcate</h1>
                 <div>
                   <a
-                    th:href="@{/admin/dashboard#favourite}"
+                    th:href="@{/admin/dashboard#certificate}"
                     class="header__trigger btn"
                   >
                     <span class="btn-caption">back</span>
@@ -33,8 +33,7 @@
                 </div>
               </div>
               <form
-                th:action="@{/admin/favourite-tool/add}"
-                th:object="${favouriteTool}"
+                th:action="@{/admin/certificate/add}"
                 method="POST"
                 enctype="multipart/form-data"
                 class="form contact-form"
@@ -43,24 +42,9 @@
               >
                 <div class="container-fluid p-0">
                   <div class="row gx-0">
-                    <div class="col-12 col-md-6 form__item animate-in-up">
+                    <div class="col-12 col-md-12 form__item animate-in-up">
                       <input
-                        type="text"
-                        id="input-tool-name"
-                        th:field="*{name}"
-                        placeholder="Favourite Tool Name here*"
-                        required
-                      />
-                      <p
-                        class="error"
-                        th:if="${#fields.hasErrors('name')}"
-                        th:errors="*{name}"
-                      ></p>
-                    </div>
-
-                    <div class="col-12 col-md-6 form__item animate-in-up">
-                      <input
-                        id="icon-file"
+                        id="certificate-file"
                         type="file"
                         name="file"
                         accept="image/*"
@@ -90,23 +74,15 @@
                       class="tools-cards d-flex flex-column align-items-center flex-wrap"
                     >
                       <h2>Preview</h2>
-                      <div
-                        class="tools-cards__item d-flex grid-item-s animate-card-5"
-                      >
+                      <div class="d-flex grid-item-s animate-card-5">
                         <div class="tools-cards__card">
                           <img
-                            class="tools-cards__icon animate-in-up"
+                            class="animate-in-up"
                             style="cursor: pointer"
-                            src="/img/icons/icon-photoshop.svg"
-                            id="icon-preview"
-                            alt="Preview icon"
+                            src="/img/certificate.png"
+                            id="certificate-preview"
+                            alt="Preview Certificate"
                           />
-                          <h6
-                            class="tools-cards__caption animate-in-up"
-                            id="tool-name"
-                          >
-                            Photoshop
-                          </h6>
                         </div>
                       </div>
                     </div>
@@ -122,17 +98,9 @@
       </div>
     </div>
     <script>
-      let toolName = document.getElementById("tool-name");
-      let inputToolName = document.getElementById("input-tool-name");
-
-      inputToolName.addEventListener("input", function (event) {
-        // Update the <h5> text dynamically as the user types
-        toolName.textContent = event.target.value;
-      });
-
       // Display iamge in image container in add contact form and update contact form
-      let fileInput = document.getElementById("icon-file");
-      let imagePreview = document.getElementById("icon-preview");
+      let fileInput = document.getElementById("certificate-file");
+      let imagePreview = document.getElementById("certificate-preview");
 
       fileInput.addEventListener("change", function (event) {
         var file = event.target.files[0];

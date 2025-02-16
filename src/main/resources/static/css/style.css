@@ -52,7 +52,6 @@
 .edu-col-2 {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: flex-end;
 }
 
@@ -162,7 +161,8 @@ option {
   flex-wrap: wrap;
   gap: 5px;
 }
-.skills-list span {
+.skills-list span,
+.project-skill {
   font-size: 18px;
   padding: 4px 20px;
   border-radius: var(--_radius-s);
@@ -189,4 +189,37 @@ option {
 .rounded-btn:hover {
   background-color: #0000008b !important;
   color: white !important;
+}
+
+.danger-btn {
+  background-color: red;
+  color: white;
+  transition: 0.2s ease-in-out;
+}
+
+.danger-btn:hover {
+  background-color: rgba(148, 0, 0, 0.812);
+}
+
+.action-btns {
+  padding: 10px 20px;
+  border-radius: var(--_radius-m);
+}
+
+.edit-action-btns {
+  background-color: var(--bg-alert-warning);
+  color: var(--t-alert-warning);
+}
+
+.edit-action-btns:hover {
+  background-color: var(--bg-h-alert-warning);
+}
+
+.delete-action-btns {
+  background-color: var(--bg-alert-error);
+  color: var(--t-alert-error);
+}
+
+.delete-action-btns:hover {
+  background-color: var(--bg-h-alert-error);
 }

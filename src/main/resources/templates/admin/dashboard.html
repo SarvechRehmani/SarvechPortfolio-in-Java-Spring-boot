@@ -233,14 +233,14 @@
                   </div>
                   <div class="col-12 col-md-3 d-flex align-items-center gap-3">
                     <a
-                      th:href="@{'/admin/social-link/edit/'+${socialLink.id}}"
+                      th:href="@{'/admin/social-link/update/'+${socialLink.id}}"
                       class="btn social-action-btn edit"
                     >
                       <i class="fa-solid fa-pen-to-square"></i>
                     </a>
 
                     <a
-                      th:onclick="deleteSocialLink([[${socialLink.id}]])"
+                      th:onclick="deleteItem([[${socialLink.id}]],'social-link')"
                       class="btn social-action-btn delete"
                     >
                       <i class="fa-solid fa-trash"></i>
@@ -267,82 +267,91 @@
                     </a>
                   </div>
                 </div>
-
-                <div class="content__block grid-block">
-                  <div class="container-fluid px-0 inner__gallery">
-                    <div
-                      class="row gx-0 my-gallery"
-                      th:each="project: ${selfProjects}"
-                    >
+                <div itemscope itemtype="http://schema.org/ImageGallery">
+                  <div class="content__block grid-block">
+                    <div class="container-fluid px-0 inner__gallery">
                       <div
-                        itemscope
-                        itemtype="http://schema.org/ImageGallery"
-                        class="col-12 col-md-6 gallery__item grid-item animate-card-2"
+                        class="row gx-0 my-gallery"
+                        th:each="project: ${selfProjects}"
                       >
-                        <!-- Works Gallery Single Item Start -->
-                        <figure
-                          itemprop="associatedMedia"
-                          itemscope
-                          itemtype="http://schema.org/ImageObject"
+                        <div
+                          class="col-12 col-md-6 gallery__item grid-item animate-card-2"
+                        >
+                          <!-- Works Gallery Single Item Start -->
+                          <figure
+                            itemprop="associatedMedia"
+                            itemscope
+                            itemtype="http://schema.org/ImageObject"
+                          >
+                            <a
+                              th:href="@{${project.images[0].imageUrl}}"
+                              th:data-image="@{${project.images[0].imageUrl}}"
+                              class="gallery__link"
+                              itemprop="contentUrl"
+                              data-size="1400x1400"
+                            >
+                              <img
+                                th:src="@{${project.images[0].imageUrl}}"
+                                class="gallery__image"
+                                itemprop="thumbnail"
+                                th:alt="${project.title}+' thumbnail'"
+                              />
+                            </a>
+                            <figcaption
+                              class="gallery__descr"
+                              itemprop="caption description"
+                            >
+                              <a th:href="@{/admin/project/add}">
+                                <h5 th:text="${project.title}"></h5>
+                              </a>
+
+                              <div class="card__tags d-flex flex-wrap">
+                                <span
+                                  class="rounded-tag opposite"
+                                  th:text="${project.date}"
+                                ></span>
+                              </div>
+                            </figcaption>
+                          </figure>
+                        </div>
+
+                        <div
+                          class="col-md-6 grid-item animate-card-2 fs-1"
+                          style="margin-top: 35px"
                         >
                           <a
-                            th:href="@{${project.images[0].imageUrl}}"
-                            th:data-image="@{${project.images[0].imageUrl}}"
-                            class="gallery__link"
-                            itemprop="contentUrl"
-                            data-size="1400x1400"
+                            href="#"
+                            th:onclick="redirectLocation([[${project.id}]],'project','view')"
                           >
-                            <img
-                              th:src="@{${project.images[0].imageUrl}}"
-                              class="gallery__image"
-                              itemprop="thumbnail"
-                              th:alt="${project.title}+' thumbnail'"
-                            />
+                            <h4
+                              class="text-justify"
+                              th:text="${project.title}"
+                            ></h4>
                           </a>
-                          <figcaption
-                            class="gallery__descr"
-                            itemprop="caption description"
+
+                          <p
+                            class="text-justify"
+                            th:text="${project.summery}"
+                          ></p>
+                          <a
+                            th:onclick="redirectLocation([[${project.id}]],'project','update')"
+                            href="#"
                           >
-                            <a th:href="@{/admin/project/add}">
-                              <h5 th:text="${project.title}"></h5>
-                            </a>
-
-                            <div class="card__tags d-flex flex-wrap">
-                              <span
-                                class="rounded-tag opposite"
-                                th:text="${project.date}"
-                              ></span>
-                            </div>
-                          </figcaption>
-                        </figure>
-                      </div>
-
-                      <div
-                        class="col-md-6 grid-item animate-card-2 fs-1"
-                        style="margin-top: 35px"
-                      >
-                        <h4 class="text-justify" th:text="${project.title}">
-                          Title here
-                        </h4>
-                        <p class="text-justify" th:text="${project.summery}">
-                          Lorem ipsum, dolor sit amet consectetur adipisicing
-                          elit. Assumenda quos quo minus praesentium odio itaque
-                          impedit delectus. Deserunt sapiente minima ducimus
-                          pariatur eum quasi quisquam ipsam dignissimos,
-                          numquam, iure distinctio!
-                        </p>
-                        <a th:href="@{'/admin/project/edit/'+${project.id}}">
-                          <span class="rounded-btn opposite edit"> Edit </span>
-                        </a>
-                        <a
-                          th:onclick="deleteProject([[${project.id}]])"
-                          href="#"
-                        >
-                          <span class="rounded-btn delete">Delete</span>
-                        </a>
-                        <a href="">
-                          <span class="rounded-btn edit">read more...</span>
-                        </a>
+                            <span class="rounded-btn edit"> Edit </span>
+                          </a>
+                          <a
+                            th:onclick="deleteItem([[${project.id}]],'project')"
+                            href="#"
+                          >
+                            <span class="rounded-btn delete">Delete</span>
+                          </a>
+                          <a
+                            th:onclick="redirectLocation([[${project.id}]],'project','view')"
+                            href="#"
+                          >
+                            <span class="rounded-btn edit">read more...</span>
+                          </a>
+                        </div>
                       </div>
                       <!-- Works Gallery Single Item End -->
                     </div>
@@ -374,7 +383,7 @@
                     class="row g-0 resume-lines__item py-5 animate-in-up"
                     th:each="education: ${educations}"
                   >
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-md-5">
                       <h5
                         class="resume-lines__title animate-in-up"
                         th:text="${education.title}"
@@ -396,7 +405,7 @@
                       </p>
                     </div>
 
-                    <div class="col-12 col-md-6 edu-col-2">
+                    <div class="col-12 col-md-5 edu-col-2">
                       <p class="small animate-in-up">
                         <span th:text="${education.startDate}"></span> to
                         <span th:text="${education.endDate}"></span>
@@ -407,7 +416,7 @@
                     </div>
 
                     <div
-                      class="col-12 col-md-12 d-flex align-items-center justify-content-center gap-3"
+                      class="col-12 col-md-2 d-flex align-items-center justify-content-center gap-3"
                     >
                       <a
                         th:href="@{'/admin/education/edit/'+${education.id}}"
@@ -416,7 +425,10 @@
                         <i class="fa-solid fa-pen-to-square"></i>
                       </a>
 
-                      <a class="btn social-action-btn delete">
+                      <a
+                        th:onclick="deleteItem([[${education.id}]],'education')"
+                        class="btn social-action-btn delete"
+                      >
                         <i class="fa-solid fa-trash"></i>
                       </a>
                     </div>
@@ -443,41 +455,73 @@
                   </div>
                 </div>
                 <div class="container-fluid p-0 resume-lines">
-                  <!-- education single item -->
+                  <!-- Experience single item -->
                   <div
                     class="row g-0 resume-lines__item py-5 animate-in-up"
-                    th:each="education: ${educations}"
+                    th:each="experience: ${experiences}"
                   >
                     <div class="col-12 col-md-6">
                       <h5
                         class="resume-lines__title animate-in-up"
-                        th:text="${education.title}"
+                        th:text="${experience.position}"
                       ></h5>
-
                       <p class="resume-lines__source animate-in-up">
-                        From :
+                        at :
                         <a
-                          th:href="@{${education.institutionLink}}"
+                          th:href="@{${experience.companyLink}}"
                           class="text-link-bold"
                           target="_blank"
-                          th:text="${education.Institution}"
+                          th:text="${experience.company}"
                         ></a>
-                        <span class="fs-2">
-                          ( <span th:text="${education.gradeIn}"></span> :
-                          <span th:text="${education.grade}"></span> /
-                          <span th:text="${education.totalGrade}"></span> )
-                        </span>
                       </p>
                     </div>
 
-                    <div class="col-12 col-md-6 edu-col-2">
+                    <div class="col-12 col-md-6 edu-col-2 animate-in-up">
                       <p class="small animate-in-up">
-                        <span th:text="${education.startDate}"></span> to
-                        <span th:text="${education.endDate}"></span>
+                        <span th:text="${experience.startDate}"></span> to
+                        <span th:text="${experience.endDate}"></span>
                       </p>
                       <p class="small animate-in-up fst-italic">
-                        <span th:text="${education.location}"></span>
+                        <span th:text="${experience.location}"></span>
                       </p>
+                    </div>
+                    <div class="col-12 col-md-12 animate-in-up">
+                      <style>
+                        li {
+                          list-style: inside;
+                        }
+                      </style>
+                      <p class="fs-3" th:utext="${experience.description}"></p>
+                    </div>
+
+                    <div
+                      class="col-12 col-md-8 animate-in-up d-flex flex-row align-items-center"
+                    >
+                      <h5 class="resume-lines__title animate-in-up">
+                        Key Skills:
+                      </h5>
+                      <span
+                        class="project-skill"
+                        th:text="${experience.keySkills}"
+                      >
+                      </span>
+                    </div>
+                    <div
+                      class="col-12 col-md-4 animate-in-up d-flex flex-row align-items-center"
+                    >
+                      <a
+                        th:href="@{'/admin/experience/update/'+${experience.id}}"
+                        class="btn social-action-btn edit"
+                      >
+                        <i class="fa-solid fa-pen-to-square"></i>
+                      </a>
+
+                      <a
+                        th:onclick="deleteItem([[${experience.id}]],'experience')"
+                        class="btn social-action-btn delete"
+                      >
+                        <i class="fa-solid fa-trash"></i>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -589,7 +633,10 @@
                           th:object="${skill}"
                           th:href="@{'/admin/skill/edit/'+*{id}}"
                         >
-                          <span th:text="*{skillName}">JAVA </span>
+                          <span>
+                            <i th:text="*{skillName}"></i>
+                            <i class="fa-solid fa-pencil"></i>
+                          </span>
                         </a>
                       </div>
                     </div>
@@ -603,7 +650,10 @@
                           th:object="${skill}"
                           th:href="@{'/admin/skill/edit/'+*{id}}"
                         >
-                          <span th:text="*{skillName}">Sprng Boot </span>
+                          <span>
+                            <i th:text="*{skillName}"></i>
+                            <i class="fa-solid fa-pencil"></i>
+                          </span>
                         </a>
                       </div>
                     </div>
@@ -618,7 +668,10 @@
                           th:object="${skill}"
                           th:href="@{'/admin/skill/edit/'+*{id}}"
                         >
-                          <span th:text="*{skillName}">Postman</span>
+                          <span>
+                            <i th:text="*{skillName}"></i>
+                            <i class="fa-solid fa-pencil"></i>
+                          </span>
                         </a>
                       </div>
                     </div>
@@ -633,7 +686,10 @@
                           th:object="${skill}"
                           th:href="@{'/admin/skill/edit/'+*{id}}"
                         >
-                          <span th:text="*{skillName}">Postman</span>
+                          <span>
+                            <i th:text="*{skillName}"></i>
+                            <i class="fa-solid fa-pencil"></i>
+                          </span>
                         </a>
                       </div>
                     </div>
@@ -660,8 +716,110 @@
                   </div>
                 </div>
                 <div class="container-fluid p-0 resume-lines">
-                  <h1>Fav tools here</h1>
+                  <div class="content__block grid-block block-large p-0">
+                    <!-- Tools List Start -->
+                    <div
+                      class="tools-cards d-flex justify-content-start flex-wrap"
+                    >
+                      <!-- tools simgle item -->
+                      <div
+                        class="tools-cards__item d-flex grid-item-s animate-card-5"
+                        th:each="favouriteTool : *{favouriteTools}"
+                        th:object="${favouriteTool}"
+                      >
+                        <div class="tools-cards__card">
+                          <img
+                            class="tools-cards__icon animate-in-up"
+                            th:src="@{*{logoUrl}}"
+                            alt="Tools Icon"
+                          />
+                          <h6
+                            class="tools-cards__caption animate-in-up"
+                            th:text="*{name}"
+                          ></h6>
+                          <a
+                            th:onclick="deleteItem([[*{id}]],'favourite-tool')"
+                            href="#"
+                          >
+                            <span class="rounded-btn delete">Delete</span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Tools List End -->
+                  </div>
                 </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- CERTIFICATES  -->
+          <section id="certificate">
+            <div class="container">
+              <div class="main_container mb-3">
+                <div class="card-head d-flex justify-content-between mb-3">
+                  <h1 class="title">Certificate</h1>
+                  <div class="d-flex align-items-center">
+                    <a
+                      th:href="@{/admin/certificate/add}"
+                      class="header__trigger btn"
+                    >
+                      <span class="btn-caption">Add</span>
+                      <i class="fa-solid fa-add"></i>
+                    </a>
+                  </div>
+                </div>
+                <!-- Content Block - Works Gallery Start -->
+                <div class="content__block grid-block">
+                  <div class="container-fluid px-0 inner__gallery">
+                    <div
+                      class="row gx-0 my-gallery"
+                      itemscope
+                      itemtype="http://schema.org/ImageGallery"
+                    >
+                      <!-- Works Gallery Single Item Start -->
+                      <figure
+                        th:each="certificate: *{certificates}"
+                        th:object="${certificate}"
+                        class="col-12 col-md-6 gallery__item grid-item animate-card-2"
+                        itemprop="associatedMedia"
+                        itemscope
+                        itemtype="http://schema.org/ImageObject"
+                      >
+                        <a
+                          th:href="@{*{certificateUrl}}"
+                          th:data-image="@{*{certificateUrl}}"
+                          class="gallery__link"
+                          itemprop="contentUrl"
+                          data-size="1755x1240"
+                        >
+                          <img
+                            th:src="@{*{certificateUrl}}"
+                            class="gallery__image"
+                            itemprop="thumbnail"
+                            alt="Certificate Image"
+                          />
+                        </a>
+                        <figcaption
+                          class="gallery__descr"
+                          itemprop="caption description"
+                        >
+                          <div class="card__tags d-flex flex-wrap">
+                            <a
+                              th:onclick="deleteItem([[*{id}]],'certificate')"
+                              href="#"
+                            >
+                              <span class="rounded-btn delete">Delete</span>
+                            </a>
+                          </div>
+                          <p class="small"></p>
+                        </figcaption>
+                      </figure>
+                      <!-- Works Gallery Single Item End -->
+                    </div>
+                  </div>
+                </div>
+                <!-- Content Block - Works Gallery End -->
               </div>
             </div>
           </section>

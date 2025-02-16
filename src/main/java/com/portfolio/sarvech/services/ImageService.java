@@ -10,7 +10,8 @@ public interface ImageService {
     void deleteImage(long id);
 
 //    Cloudinary
-    public String uploadImage(MultipartFile image, String fileName);
+    public String uploadImage(MultipartFile image, String fileName, String folder);
     public String getUrlFromPublicId(String publicId);
     public boolean deleteImageFromCloudinary(String publicId);
+    public String getUrlFromPublicIdForCertificate(String publicId, int width, int height);
 }

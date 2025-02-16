@@ -32,7 +32,6 @@ public class SkillController {
 
     @PostMapping("/save")
     public String saveSkill(@Valid Skill skill, BindingResult result, HttpSession session) {
-
         Skill foundSkill = this.skillService.findSkillBySkillName(skill.getSkillName());
         if (foundSkill != null) {
             result.rejectValue("skillName", "error.skillName", "Skill is already added");
@@ -78,6 +77,20 @@ public class SkillController {
         // Update skill in database
         this.skillService.updateSkill(skill);
         session.setAttribute("message", new Message("Skill updated successfully!", MessageType.SUCCESS));
+        return "redirect:/admin/dashboard#skills";
+    }
+
+
+    // Delete skill from database and redirect to dashboard with success message.
+    @GetMapping("/delete/{id}")
+    public String deleteSkill(@PathVariable long id, HttpSession session){
+        Skill skill = this.skillService.findSkillById(id);
+        if(skill == null){
+            session.setAttribute("message", new Message("Skill not found with id: "+id, MessageType.ERROR));
+            return "redirect:/admin/dashboard#skills";
+        }
+        this.skillService.deleteSkillById(id);
+        session.setAttribute("message", new Message("Skill deleted successfully!", MessageType.SUCCESS));
         return "redirect:/admin/dashboard#skills";
     }
 }

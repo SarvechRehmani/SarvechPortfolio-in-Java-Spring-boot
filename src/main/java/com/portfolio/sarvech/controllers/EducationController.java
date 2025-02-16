@@ -29,13 +29,13 @@ public class EducationController {
     }
 
     @GetMapping("/add")
-    private String addEducation(Model model){
+    public String addEducation(Model model){
         model.addAttribute("education", new Education());
         return "admin/add-education";
     }
 
     @PostMapping("/save")
-    private String saveEducation(@Valid Education education, BindingResult result, HttpSession session){
+    public String saveEducation(@Valid Education education, BindingResult result, HttpSession session){
 
         if (result.hasErrors()){
             logger.error("Error saving education: {}", result.getAllErrors());
@@ -50,7 +50,7 @@ public class EducationController {
     }
 
     @GetMapping("/edit/{id}")
-    private String editEducation(@PathVariable long id, Model model, HttpSession session){
+    public String editEducation(@PathVariable long id, Model model, HttpSession session){
         Education education = this.educationService.findEducationById(id);
         if(education == null){
             logger.error("Education not found with id: {}", id);
@@ -62,28 +62,28 @@ public class EducationController {
     }
 
     @PostMapping("/update/{id}")
-    private String updateEducation(Education education, HttpSession session){
-        Education oldEducation = this.educationService.findEducationById(education.getId());
-        if(oldEducation == null){
+    public String updateEducation(@Valid Education education, BindingResult result, HttpSession session){
+        if(result.hasErrors()){
+            logger.error("Error updating education: {}", result.getAllErrors());
+            session.setAttribute("message", new Message("Please Fix following errors", MessageType.ERROR));
+            return "admin/edit-education";
+        }
+        Education existigEducation = this.educationService.findEducationById(education.getId());
+        if(existigEducation == null){
             logger.error("Can no =t update! Because Education not found with id:: {}", education.getId());
             session.setAttribute("message", new Message("Education not found with id: "+education.getId(), MessageType.ERROR));
             return "redirect:/admin/dashboard#education";
         }
-        oldEducation.setTitle(education.getTitle());
-        oldEducation.setInstitution(education.getInstitution());
-        oldEducation.setStartDate(education.getStartDate());
-        oldEducation.setEndDate(education.getEndDate());
-        oldEducation.setLocation(education.getLocation());
-        oldEducation.setGrade(education.getGrade());
-        oldEducation.setTotalGrade(education.getTotalGrade());
-        this.educationService.saveEducation(oldEducation);
+        education.setId(existigEducation.getId());
+
+        this.educationService.saveEducation(education);
         session.setAttribute("message", new Message("Education updated successfully!", MessageType.SUCCESS));
-        logger.info("Education updated: {}", oldEducation);
+        logger.info("Education updated: {}", education);
         return "redirect:/admin/dashboard#education";
     }
 
     @GetMapping("/delete/{id}")
-    private String deleteEducation(Long id, HttpSession session){
+    public String deleteEducation(@PathVariable long id, HttpSession session){
         Education education = this.educationService.findEducationById(id);
         if(education == null){
             this.logger.error("Can not delete! because Education  not found with id: {}", id);

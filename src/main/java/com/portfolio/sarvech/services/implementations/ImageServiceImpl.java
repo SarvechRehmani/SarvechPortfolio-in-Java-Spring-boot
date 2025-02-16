@@ -52,15 +52,18 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public String uploadImage(MultipartFile image, String fileName) {
+    public String uploadImage(MultipartFile image, String fileName, String folder) {
         try{
             byte[] data = new byte[image.getInputStream().available()];
             image.getInputStream().read(data);
             cloudinary.uploader().upload(data, ObjectUtils.asMap(
-                    "public_id", fileName.substring(this.constants.CLOUDINARY_PROJECT_IMAGE_FOLDER.length()),
-                    "tags", "project_images",
-                    "folder", "project_images"
+                    "public_id", fileName.substring(folder.length()),
+                    "tags", folder,
+                    "folder", folder
             ));
+            if(folder.equals(this.constants.CLOUDINARY_CERTIFICATE_FOLDER)){
+                return this.getUrlFromPublicIdForCertificate(fileName,this.constants.CERTIFICATE_WIDTH,this.constants.CERTIFICATE_HEIGHT);
+            }
             return this.getUrlFromPublicId(fileName);
         }catch (IOException e) {
             e.printStackTrace();
@@ -74,6 +77,16 @@ public class ImageServiceImpl implements ImageService {
                 new Transformation()
                         .width(this.constants.PROJECT_IMAGE_WIDTH)
                         .height(this.constants.PROJECT_IMAGE_HEIGHT)
+                        .crop(this.constants.PROJECT_IMAGE_CROP)
+        ).generate(publicId);
+    }
+
+    @Override
+    public String getUrlFromPublicIdForCertificate(String publicId, int width, int height) {
+        return cloudinary.url().transformation(
+                new Transformation()
+                        .width(width)
+                        .height(height)
                         .crop(this.constants.PROJECT_IMAGE_CROP)
         ).generate(publicId);
     }

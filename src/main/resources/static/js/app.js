@@ -507,7 +507,8 @@ var typingEffect = new Typed("#typedText", {
 //  Sweet Alert Start
 // --------------------------------------------- //
 
-function deleteSocialLink(id) {
+function deleteItem(id, type) {
+  event.preventDefault();
   // Determine the current theme based on the `color-scheme` attribute
   const isDarkTheme =
     document.documentElement.getAttribute("color-scheme") === "dark";
@@ -527,39 +528,7 @@ function deleteSocialLink(id) {
   }).then((result) => {
     if (result.isConfirmed) {
       // Delete logic here
-      var url = "http://localhost:8080/admin/social-link/delete/" + id;
-      window.location.href = url;
-      Swal.fire({
-        title: "Deleted!",
-        text: "Your file has been deleted.",
-        icon: "success",
-        background: backgroundColor,
-      });
-    }
-  });
-}
-
-function deleteProject(id) {
-  // Determine the current theme based on the `color-scheme` attribute
-  const isDarkTheme =
-    document.documentElement.getAttribute("color-scheme") === "dark";
-
-  // Define theme-specific styles
-  const backgroundColor = isDarkTheme ? "#2b2b2b" : "#ffffff";
-  const textColor = isDarkTheme ? "#ffffff" : "#000000";
-
-  Swal.fire({
-    title: "Are you sure?",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#5a45c4",
-    cancelButtonColor: isDarkTheme ? "#ff4c4c" : "#d33",
-    confirmButtonText: "Yes, delete it!",
-    background: backgroundColor,
-  }).then((result) => {
-    if (result.isConfirmed) {
-      // Delete logic here
-      var url = "http://localhost:8080/admin/project/delete/" + id;
+      var url = `http://localhost:8080/admin/${type}/delete/${id}`;
       window.location.href = url;
       Swal.fire({
         title: "Deleted!",
@@ -573,3 +542,6 @@ function deleteProject(id) {
 // --------------------------------------------- //
 //  Sweet Alert END
 // --------------------------------------------- //
+function redirectLocation(id, type, action) {
+  window.location.href = `http://localhost:8080/admin/${type}/${action}/${id}`;
+}

@@ -5,10 +5,12 @@ import com.portfolio.sarvech.helper.MessageType;
 import com.portfolio.sarvech.models.Experience;
 import com.portfolio.sarvech.services.ExperienceService;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,13 +27,18 @@ public class ExperienceController {
     }
 
     @GetMapping("/add")
-    private String addExperience(Model model){
+    public String addExperience(Model model){
         model.addAttribute("experience",new Experience());
         return "admin/add-experience";
     }
 
     @PostMapping("/save")
-    private String saveExperience(Experience experience, HttpSession session){
+    public String saveExperience(@Valid Experience experience, BindingResult result, HttpSession session){
+        if (result.hasErrors()){
+            logger.error("Error saving experience: {}", result.getAllErrors());
+            session.setAttribute("message",new Message("Please fix following errors", MessageType.ERROR));
+            return "admin/add-experience";
+        }
         experienceService.saveExperience(experience);
         session.setAttribute("message", new Message("Experience added successfully!", MessageType.SUCCESS));
         this.logger.info("Experience saved successfully!");
@@ -39,7 +46,7 @@ public class ExperienceController {
     }
 
     @GetMapping("/edit/{id}")
-    private String editExperience(Model model, Long id, HttpSession session){
+    public String editExperience(Model model, Long id, HttpSession session){
         Experience experience = experienceService.findExperienceById(id);
         if(experience == null){
             this.logger.error("Can not edit! Experience not found with id: {}", id);
@@ -66,7 +73,7 @@ public class ExperienceController {
     }
 
     @GetMapping("/delete/{id}")
-    private String deleteExperience(Long id, HttpSession session){
+    public String deleteExperience(Long id, HttpSession session){
         Experience experience = experienceService.findExperienceById(id);
         if(experience == null){
             this.logger.error("Can not delete! Experience not found with id: {}", id);

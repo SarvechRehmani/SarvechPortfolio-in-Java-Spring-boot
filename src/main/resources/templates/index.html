@@ -52,6 +52,8 @@
     <link rel="stylesheet" th:href="@{css/loaders/loader.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{css/plugins.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{css/main.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/skill.css}" />
     <!-- Template Styles End -->
 
     <!-- Custom Browser Color Start -->
@@ -75,7 +77,7 @@
     <!-- Custom Browser Color End -->
   </head>
 
-  <body th:object="${details}">
+  <body th:object="${data}">
     <!-- Loader Start -->
     <div id="loader" class="loader">
       <div id="loaderContent" class="loader__content">
@@ -171,54 +173,11 @@
                 th:src="@{img/logo.png}"
                 alt="Braxton - Personal Portfolio & Resume HTML Template Logo"
               />
-              <!-- <svg
-                xmlns="http://www.w3.org/2000/svg"
-                x="0px"
-                y="0px"
-                width="85px"
-                height="85px"
-                viewBox="0 0 85 85"
-                style="enable-background: new 0 0 85 85"
-                xml:space="preserve"
-                class="gradient-fill"
-              >
-                <style type="text/css">
-                  .gradient-fill {
-                    fill: url(#gradientFill);
-                  }
-                </style>
-                <g>
-                  <linearGradient
-                    id="gradientFill"
-                    gradientUnits="userSpaceOnUse"
-                    x1="9.9604"
-                    y1="75.0338"
-                    x2="75.0387"
-                    y2="9.9555"
-                  >
-                    <stop offset="0" style="stop-color: var(--accent)" />
-                    <stop offset="1" style="stop-color: var(--secondary)" />
-                  </linearGradient>
-                  <path
-                    class="gradient-fill"
-                    d="M51,0H34C15.2,0,0,15.2,0,34v17c0,14.3,8.9,26.6,21.4,31.6c0,0,0,0,0,0l0,0C25.3,84.1,29.5,85,34,85h17
-                    c6,0,11.7-1.6,16.6-4.3c0.1-0.1,0.2-0.1,0.3-0.2C78.1,74.6,85,63.6,85,51V34C85,15.2,69.8,0,51,0z M83,51c0,10.7-5.3,20.2-13.4,26
-                    v-2.5v-3.9h3.9v-3.9h-3.9v-3.9h3.9v-3.9h-3.9H67v-3.9V51h-3.9v3.9v3.9h2.6v3.9v3.9v3.9h-3.9h-3.9v3.9h3.9h3.9v3.9v1
-                    C61.3,81.7,56.3,83,51,83H34c-4.5,0-8.7-0.9-12.6-2.6v-2v-3.9h3.9h3.9v-3.9h-3.9h-3.9v-3.9v-3.9v-3.9H24v-3.9V51h-3.9v3.9v3.9h-2.6
-                    h-3.9v3.9h3.9v3.9h-3.9v3.9h3.9v3.9v3.9C8.2,72.8,2,62.6,2,51V34C2,16.4,16.4,2,34,2h17c17.6,0,32,14.4,32,32V51z M50.1,54.9H54
-                    v3.9v3.9h-3.9v-3.9V54.9z M33.1,54.9H37v3.9v3.9h-3.9v-3.9V54.9z M27.9,51H24v-3.9v-3.9v-3.9h3.9v3.9v3.9V51z M31.8,39.3h-3.9v-3.9
-                    h3.9V39.3z M31.8,43.2v-3.9h3.9v3.9H31.8z M63.1,47.1V51h-3.9v-3.9v-3.9v-3.9h3.9v3.9V47.1z M35.7,47.1v-3.9h3.9h3.9h3.9h3.9v3.9
-                    h-3.9h-3.9h-3.9H35.7z M59.2,39.3h-3.9v-3.9h3.9V39.3z M55.3,43.2h-3.9v-3.9h3.9V43.2z"
-                  />
-                </g>
-              </svg> -->
             </div>
             <div class="logo__caption">
               <p>
-                <span th:text="*{firstName}">Sarvech </span><br /><span
-                  th:text="*{lastName}"
-                  >Rehmani</span
-                >
+                <span th:text="*{details.firstName}"></span><br />
+                <span th:text="*{details.lastName}"></span>
               </p>
             </div>
           </div>
@@ -233,60 +192,31 @@
         <div class="avatar__block">
           <h6>
             <small class="top">Specialization:</small>
-            Java Developer<br />
+            <span th:text="*{details.specialization}"></span>
           </h6>
         </div>
         <!-- data caption #2 -->
         <div class="avatar__block">
           <h6>
             <small class="top">Based in:</small>
-            Karachi, Pakistan
+            <span th:text="*{details.address}"></span>
           </h6>
         </div>
-        <!-- socials and CTA button -->
+        <!-- socials and CTA button Start -->
         <div class="avatar__block">
           <div class="avatar__socials">
             <ul class="socials-square d-flex justify-content-between">
-              <li class="socials-square__item">
+              <li
+                class="socials-square__item"
+                th:each="socialLink: *{socialLinks}"
+                th:object="${socialLink}"
+              >
                 <a
                   class="socials-square__link btn"
-                  href="https://dribbble.com/"
-                  target="_blank"
-                  ><i class="ph-bold ph-dribbble-logo"></i>
-                </a>
-              </li>
-              <li class="socials-square__item">
-                <a
-                  class="socials-square__link btn"
-                  href="https://www.behance.net/"
-                  target="_blank"
-                  ><i class="ph-bold ph-behance-logo"></i>
-                </a>
-              </li>
-              <li class="socials-square__item">
-                <a
-                  class="socials-square__link btn"
-                  href="https://www.instagram.com/"
-                  target="_blank"
-                  ><i class="ph-bold ph-instagram-logo"></i>
-                </a>
-              </li>
-              <li class="socials-square__item">
-                <a
-                  class="socials-square__link btn"
-                  href="https://www.twitch.tv/"
-                  target="_blank"
-                  ><i class="ph-bold ph-twitch-logo"></i>
-                </a>
-              </li>
-              <li class="socials-square__item">
-                <a
-                  class="socials-square__link btn"
-                  href="https://www.pinterest.com/"
+                  th:href="@{*{link}}"
                   target="_blank"
                 >
-                  <i class="fa-brands fa-pinterest" th:class="${nn}"></i>
-                  <i class="ph-bold ph-pinterest-logo"></i>
+                  <i th:class="*{icon}"></i>
                 </a>
               </li>
             </ul>
@@ -301,6 +231,7 @@
             </a>
           </div>
         </div>
+        <!-- socials and CTA button End -->
       </div>
     </div>
     <!-- Avatar Side Block End -->
@@ -339,9 +270,12 @@
               I'm <br />
               Sarvech Rehmani<br />
               <div class="d-none">
-                <span class="text">Spring Boot Dev</span>
-                <span class="text">Java Developer</span>
-                <span class="text">Angular Developer</span>
+                <span
+                  class="text"
+                  th:each="sklill: *{typingSkills}"
+                  th:object="${sklill}"
+                  th:text="${sklill.skillName}"
+                ></span>
               </div>
               <span id="typedText"></span>
             </h1>
@@ -355,7 +289,8 @@
               </a>
               <a
                 class="btn mobile-vertical btn-default btn-hover btn-hover-outline-mobile animate-headline"
-                href="#0"
+                target="_blank"
+                th:href="@{*{details.resumeLink}}"
               >
                 <span class="btn-caption">Download CV</span>
                 <i class="ph-bold ph-download-simple"></i>
@@ -364,7 +299,7 @@
           </div>
           <!-- Headline End -->
 
-          <!-- Scroll Button Start -->
+          <!-- Rounded Scroll Button Start -->
           <div class="rotating-btn">
             <a href="#portfolio" class="rotating-btn__link slide-down">
               <!-- SVG rotating text -->
@@ -443,20 +378,22 @@
               >
                 <!-- Works Gallery Single Item Start -->
                 <figure
+                  th:each="project: *{selfProjects}"
+                  th:object="${project}"
                   class="col-12 col-md-6 gallery__item grid-item animate-card-2"
                   itemprop="associatedMedia"
                   itemscope
                   itemtype="http://schema.org/ImageObject"
                 >
                   <a
-                    href="img/works/1400x1400_w01.webp"
-                    data-image="img/works/1400x1400_w01.webp"
+                    th:href="@{*{images[0].imageUrl}}"
+                    th:data-image="@{*{images[0].imageUrl}}"
                     class="gallery__link"
                     itemprop="contentUrl"
                     data-size="1400x1400"
                   >
                     <img
-                      src="img/works/800_w01-thumb.webp"
+                      th:src="@{*{images[0].imageUrl}}"
                       class="gallery__image"
                       itemprop="thumbnail"
                       alt="Image description"
@@ -466,132 +403,16 @@
                     class="gallery__descr"
                     itemprop="caption description"
                   >
-                    <h5>Isometric House</h5>
+                    <a th:href="@{'/project/'+*{id}}"
+                      ><h5 th:text="*{title}"></h5
+                    ></a>
                     <div class="card__tags d-flex flex-wrap">
-                      <span class="rounded-tag opposite">Illustrations</span>
-                      <span class="rounded-tag opposite">3D Render</span>
+                      <span
+                        class="rounded-tag opposite"
+                        th:text="*{date}"
+                      ></span>
                     </div>
-                    <p class="small">
-                      Mauris porttitor lobortis ligula, quis molestie lorem
-                      scelerisque eu. Morbi aliquam enim odio.
-                    </p>
-                  </figcaption>
-                </figure>
-                <!-- Works Gallery Single Item End -->
-
-                <!-- Works Gallery Single Item Start -->
-                <figure
-                  class="col-12 col-md-6 gallery__item grid-item animate-card-2"
-                  itemprop="associatedMedia"
-                  itemscope
-                  itemtype="http://schema.org/ImageObject"
-                >
-                  <a
-                    href="img/works/1400x1400_w02.webp"
-                    data-image="img/works/800_w02-thumb.webp"
-                    class="gallery__link"
-                    itemprop="contentUrl"
-                    data-size="1400x1400"
-                  >
-                    <img
-                      src="img/works/800_w02-thumb.webp"
-                      class="gallery__image"
-                      itemprop="thumbnail"
-                      alt="Image description"
-                    />
-                  </a>
-                  <figcaption
-                    class="gallery__descr opposite"
-                    itemprop="caption description"
-                  >
-                    <h5 class="opposite">Dashboard Template</h5>
-                    <div class="card__tags d-flex flex-wrap">
-                      <span class="rounded-tag">UI Design</span>
-                      <span class="rounded-tag">Figma</span>
-                    </div>
-                    <p class="small">
-                      Mauris porttitor lobortis ligula, quis molestie lorem
-                      scelerisque eu. Morbi aliquam enim odio, a mollis ipsum
-                      tristique eu.
-                    </p>
-                  </figcaption>
-                </figure>
-                <!-- Works Gallery Single Item End -->
-
-                <!-- Works Gallery Single Item Start -->
-                <figure
-                  class="col-12 col-md-6 gallery__item grid-item animate-card-2"
-                  itemprop="associatedMedia"
-                  itemscope
-                  itemtype="http://schema.org/ImageObject"
-                >
-                  <a
-                    href="img/works/1400x1400_w03.webp"
-                    data-image="img/works/800_w03-thumb.webp"
-                    class="gallery__link"
-                    itemprop="contentUrl"
-                    data-size="1400x1400"
-                  >
-                    <img
-                      src="img/works/800_w03-thumb.webp"
-                      class="gallery__image"
-                      itemprop="thumbnail"
-                      alt="Image description"
-                    />
-                  </a>
-                  <figcaption
-                    class="gallery__descr opposite"
-                    itemprop="caption description"
-                  >
-                    <h5 class="opposite">Notification Icon</h5>
-                    <div class="card__tags d-flex flex-wrap">
-                      <span class="rounded-tag">Illustrations</span>
-                      <span class="rounded-tag">3D Render</span>
-                    </div>
-                    <p class="small">
-                      Mauris porttitor lobortis ligula, quis molestie lorem
-                      scelerisque eu. Morbi aliquam enim odio, a mollis ipsum
-                      tristique eu.
-                    </p>
-                  </figcaption>
-                </figure>
-                <!-- Works Gallery Single Item End -->
-
-                <!-- Works Gallery Single Item Start -->
-                <figure
-                  class="col-12 col-md-6 gallery__item grid-item animate-card-2"
-                  itemprop="associatedMedia"
-                  itemscope
-                  itemtype="http://schema.org/ImageObject"
-                >
-                  <a
-                    href="img/works/1400x1400_w04.webp"
-                    data-image="img/works/800_w04-thumb.webp"
-                    class="gallery__link"
-                    itemprop="contentUrl"
-                    data-size="1400x1400"
-                  >
-                    <img
-                      src="img/works/800_w04-thumb.webp"
-                      class="gallery__image"
-                      itemprop="thumbnail"
-                      alt="Image description"
-                    />
-                  </a>
-                  <figcaption
-                    class="gallery__descr"
-                    itemprop="caption description"
-                  >
-                    <h5>Smart Penguin</h5>
-                    <div class="card__tags d-flex flex-wrap">
-                      <span class="rounded-tag opposite">Illustrations</span>
-                      <span class="rounded-tag opposite">AI Experiment</span>
-                    </div>
-                    <p class="small">
-                      Mauris porttitor lobortis ligula, quis molestie lorem
-                      scelerisque eu. Morbi aliquam enim odio, a mollis ipsum
-                      tristique eu.
-                    </p>
+                    <p class="small" th:text="*{summery}"></p>
                   </figcaption>
                 </figure>
                 <!-- Works Gallery Single Item End -->
@@ -602,8 +423,96 @@
         </section>
         <!-- Portfolio Section End -->
 
+        <!-- Skill Section Start -->
+        <section id="skills">
+          <div class="container">
+            <div class="card-head d-flex justify-content-between mb-3">
+              <h1 class="title">Skills</h1>
+            </div>
+            <div class="container-fluid p-0 resume-lines">
+              <div class="col">
+                <div class="col-md-12">
+                  <div class="skills-box">
+                    <div class="skills-header">
+                      <h4>Languages</h4>
+                    </div>
+                    <div class="skills-list">
+                      <a
+                        th:each="skill: *{skills.languages}"
+                        th:object="${skill}"
+                      >
+                        <span>
+                          <i
+                            th:text="*{skillName}"
+                            class="skill-slider-name"
+                          ></i>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="skills-box">
+                    <div class="skills-header">
+                      <h4>Frameworks</h4>
+                    </div>
+                    <div class="skills-list">
+                      <a
+                        th:each="skill: *{skills.Frameworks}"
+                        th:object="${skill}"
+                      >
+                        <span>
+                          <i
+                            th:text="*{skillName}"
+                            class="skill-slider-name"
+                          ></i>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="skills-box">
+                    <div class="skills-header">
+                      <h4>Tools</h4>
+                    </div>
+                    <div class="skills-list">
+                      <a th:each="skill: *{skills.tools}" th:object="${skill}">
+                        <span>
+                          <i
+                            th:text="*{skillName}"
+                            class="skill-slider-name"
+                          ></i>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="skills-box">
+                    <div class="skills-header">
+                      <h4>Others</h4>
+                    </div>
+                    <div class="skills-list">
+                      <a th:each="skill: *{skills.others}" th:object="${skill}">
+                        <span>
+                          <i
+                            th:text="*{skillName}"
+                            class="skill-slider-name"
+                          ></i>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Skill Section End -->
+
         <!-- About Section Start -->
-        <section id="about" class="inner about">
+        <section id="about" class="inner about" th:object="${data.details}">
           <!-- Content Block - H2 Section Title Start -->
           <div class="content__block section-grid-title">
             <p class="h2__subtitle animate-in-up">
@@ -631,7 +540,7 @@
           </div>
           <!-- Content Block - H2 Section Title End -->
 
-          <!-- Content Block - Achievements Start -->
+          <!-- Client Project done Content Block - Achievements Start -->
           <div class="content__block grid-block">
             <div
               class="achievements d-flex flex-column flex-md-row align-items-md-stretch"
@@ -641,7 +550,9 @@
                 class="achievements__item d-flex flex-column grid-item animate-card-3"
               >
                 <div class="achievements__card">
-                  <p class="achievements__number">40+</p>
+                  <p class="achievements__number">
+                    <span th:text="*{happyClients}"></span>+
+                  </p>
                   <p class="achievements__descr">Happy clients</p>
                 </div>
               </div>
@@ -650,8 +561,12 @@
                 class="achievements__item d-flex flex-column grid-item animate-card-3"
               >
                 <div class="achievements__card">
-                  <p class="achievements__number">1+</p>
-                  <p class="achievements__descr">Years of experience</p>
+                  <p class="achievements__number">
+                    <span th:text="*{experience}"></span>+
+                  </p>
+                  <p class="achievements__descr">
+                    <span th:text="*{experiencedIn}"></span> of experience
+                  </p>
                 </div>
               </div>
               <!-- achievements single item -->
@@ -659,40 +574,34 @@
                 class="achievements__item d-flex flex-column grid-item animate-card-3"
               >
                 <div class="achievements__card">
-                  <p class="achievements__number">15+</p>
+                  <p class="achievements__number">
+                    <span th:text="*{projects}"></span>+
+                  </p>
                   <p class="achievements__descr">Projects done</p>
                 </div>
               </div>
             </div>
           </div>
-          <!-- Content Block - Achievements End -->
+          <!-- Client Project done Content Block - Achievements End -->
 
-          <!-- Content Block - About Me Data Start -->
+          <!-- About Content Block - About Me Data Start -->
           <div class="content__block grid-block block-large">
             <div class="container-fluid p-0">
               <div class="row g-0 justify-content-between">
                 <!-- About Me Description Start -->
                 <div class="col-12 col-xl-8 grid-item about-descr">
-                  <p class="about-descr__text animate-in-up">
-                    I wonder if I've been changed in the night? Let me think.
-                    Was I the same when I got up this morning? I almost think I
-                    can remember feeling a little different. But if I'm not the
-                    same, the
-                    <a href="#0" class="text-link">next question</a>
-                    is 'Who in the world am I?' Ah, that's the great puzzle!
-                  </p>
-                  <p class="about-descr__text animate-in-up">
-                    Be what you would seem to be - or, if you'd like it put more
-                    simply - never imagine yourself not to be otherwise than
-                    what it might appear to others that what you were or
-                    <a href="#0" class="text-link">might have been</a>
-                    was not otherwise than what you had been would have appeared
-                    to them to be otherwise.
-                  </p>
+                  <p
+                    class="about-descr__text animate-in-up"
+                    th:text="*{descriptionOne}"
+                  ></p>
+                  <p
+                    class="about-descr__text animate-in-up"
+                    th:text="*{descriptionTwo}"
+                  ></p>
                   <div class="btn-group about-descr__btnholder animate-in-up">
                     <a
                       class="btn mobile-vertical btn-default btn-hover btn-hover-accent"
-                      href="#0"
+                      th:href="@{*{resumeLink}}"
                     >
                       <span class="btn-caption">Download CV</span>
                       <i class="ph-bold ph-download-simple"></i>
@@ -706,15 +615,17 @@
                   <div class="about-info__item animate-in-up">
                     <h6>
                       <small class="top">Name</small>
-                      Sarvech Rehmani
+                      <span th:text="*{firstName+' '+lastName}"></span>
                     </h6>
                   </div>
                   <div class="about-info__item animate-in-up">
                     <h6>
                       <small class="top">Phone</small>
-                      <a class="text-link-bold" href="tel:+923133599267"
-                        >+92 313-3599267</a
-                      >
+                      <a
+                        class="text-link-bold"
+                        th:href="@{*{'tel:'+phoneNumber}}"
+                        th:text="*{phoneNumber}"
+                      ></a>
                     </h6>
                   </div>
                   <div class="about-info__item animate-in-up">
@@ -722,9 +633,9 @@
                       <small class="top">Email</small>
                       <a
                         class="text-link-bold"
-                        href="mailto:sarwech99@gmail.com?subject=Message%20From%20Your%20Site"
-                        >sarwech99@gmail.com</a
-                      >
+                        th:href="@{*{'mailto:'+email+'?subject=Message%20From%20Your%20Site'}}"
+                        th:text="*{email}"
+                      ></a>
                     </h6>
                   </div>
                   <div class="about-info__item animate-in-up">
@@ -732,10 +643,10 @@
                       <small class="top">Location</small>
                       <a
                         class="text-link-bold"
-                        href="https://maps.app.goo.gl/uersU2G9wwhu8cZU7"
+                        th:href="@{*{addressLink}}"
                         target="_blank"
-                        >Karachi, Pakistan</a
-                      >
+                        ><span th:text="*{address}"></span
+                      ></a>
                     </h6>
                   </div>
                 </div>
@@ -743,41 +654,12 @@
               </div>
             </div>
           </div>
-          <!-- Content Block - About Me Data End -->
+          <!-- About Content Block - About Me Data End -->
 
-          <!-- Content Block - Services Start -->
+          <!-- 2 Main Skills Start Content Block - Services Start -->
           <div class="content__block grid-block">
             <div class="container-fluid p-0">
               <div class="row g-0 align-items-stretch cards">
-                <!-- services cards grid single item -->
-                <div
-                  class="col-12 col-md-6 cards__item grid-item animate-card-2"
-                >
-                  <div class="cards__card d-flex flex-column">
-                    <div class="cards__descr">
-                      <h4 class="cards__title animate-in-up">
-                        Frontend<br />development
-                      </h4>
-                      <div class="cards__tags d-flex flex-wrap animate-in-up">
-                        <span class="rounded-tag tag-outline"
-                          >UI/UX Design</span
-                        >
-                        <span class="rounded-tag tag-outline"
-                          >Design to Code</span
-                        >
-                      </div>
-                      <p class="small cards__text animate-in-up">
-                        I work with HTML/CSS, Framer and WordPress.
-                      </p>
-                    </div>
-                    <div class="cards__image d-flex animate-in-up">
-                      <img
-                        src="img/services/1200x900_s01.webp"
-                        alt="Service/Feature Image"
-                      />
-                    </div>
-                  </div>
-                </div>
                 <!-- services grid cards single item -->
                 <div
                   class="col-12 col-md-6 cards__item grid-item animate-card-2"
@@ -785,47 +667,15 @@
                   <div class="cards__card d-flex flex-column">
                     <div class="cards__descr">
                       <h4 class="cards__title animate-in-up">
-                        Digital art and graphic design
+                        Backend Development
                       </h4>
                       <div class="cards__tags d-flex flex-wrap animate-in-up">
-                        <span class="rounded-tag tag-outline"
-                          >Illustrations</span
-                        >
-                        <span class="rounded-tag tag-outline"
-                          >AI Experiments</span
-                        >
+                        <span class="rounded-tag tag-outline">Java</span>
+                        <span class="rounded-tag tag-outline">Spring Boot</span>
                       </div>
                       <p class="small cards__text animate-in-up">
-                        I use Adobe Photoshop, Fresco and Blender to create
-                        illustrations and 3D renders for my clients and stocks.
-                      </p>
-                    </div>
-                    <div class="cards__image d-flex animate-in-up">
-                      <img
-                        src="img/services/1200x900_s02.webp"
-                        alt="Service/Feature Image"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <!-- services grid cards single item -->
-                <div
-                  class="col-12 col-md-6 cards__item grid-item animate-card-2"
-                >
-                  <div class="cards__card d-flex flex-column">
-                    <div class="cards__descr">
-                      <h4 class="cards__title animate-in-up">
-                        SEO/Digital marketing solutions
-                      </h4>
-                      <div class="cards__tags d-flex flex-wrap animate-in-up">
-                        <span class="rounded-tag tag-outline"
-                          >Social Media</span
-                        >
-                        <span class="rounded-tag tag-outline">Analytics</span>
-                      </div>
-                      <p class="small cards__text animate-in-up">
-                        Social media content plans, media monitoring, email and
-                        text messaging and search engine optimization.
+                        Building scalable APIs, database management,
+                        authentication, and server-side logic.
                       </p>
                     </div>
                     <div class="cards__image d-flex">
@@ -843,22 +693,20 @@
                   <div class="cards__card d-flex flex-column">
                     <div class="cards__descr">
                       <h4 class="cards__title animate-in-up">
-                        Brand<br />identity
+                        Frontend Development
                       </h4>
                       <div class="cards__tags d-flex flex-wrap animate-in-up">
-                        <span class="rounded-tag tag-outline">Logo Design</span>
-                        <span class="rounded-tag tag-outline"
-                          >Style Guides</span
-                        >
+                        <span class="rounded-tag tag-outline">Angular</span>
+                        <span class="rounded-tag tag-outline">TypeScript</span>
                       </div>
                       <p class="small cards__text animate-in-up">
-                        I help my clients to develop a personality and brand
-                        voice, design the brand look and logo.
+                        Building dynamic and interactive web applications with
+                        Angular.
                       </p>
                     </div>
                     <div class="cards__image d-flex animate-in-up">
                       <img
-                        src="img/services/1200x900_s04.webp"
+                        src="img/services/1200x900_s02.webp"
                         alt="Service/Feature Image"
                       />
                     </div>
@@ -867,13 +715,13 @@
               </div>
             </div>
           </div>
-          <!-- Content Block - Services End -->
+          <!-- 2 Mail Skills End Content Block - Services End -->
         </section>
         <!-- About Section End -->
 
         <!-- Resume Section Start -->
         <section id="resume" class="inner resume">
-          <!-- Content Block - H2 Section Title Start -->
+          <!-- Resume Title Content Block - H2 Section Title Start -->
           <div class="content__block block-large">
             <p class="h2__subtitle animate-in-up">
               <svg
@@ -904,9 +752,56 @@
               every opportunity.
             </p>
           </div>
-          <!-- Content Block - H2 Section Title End -->
+          <!-- Resume Title  Content Block - H2 Section Title End -->
 
-          <!-- Content Block - Education Start -->
+          <!-- Experince Content Block - Experience Start -->
+          <div class="content__block block-large">
+            <!-- H3 Block Start -->
+            <div class="section-h3">
+              <h3 class="h3__title animate-in-up">Work experience</h3>
+            </div>
+            <!-- H3 Block End -->
+
+            <!-- Experience Lines Start -->
+            <div
+              class="container-fluid p-0 resume-lines"
+              th:each="experience: ${data.experiences}"
+              th:object="${experience}"
+            >
+              <!-- experience single item -->
+              <div class="row g-0 resume-lines__item animate-in-up">
+                <div class="col-12 col-md-6">
+                  <h5
+                    class="resume-lines__title animate-in-up"
+                    th:text="*{position}"
+                  ></h5>
+                  <p class="resume-lines__source animate-in-up">
+                    at
+                    <a
+                      th:href="@{*{companyLink}}"
+                      class="text-link-bold"
+                      target="_blank"
+                      th:text="*{company}"
+                    ></a>
+                  </p>
+                </div>
+                <div class="col-12 col-md-6 text-end">
+                  <p class="resume-lines__date animate-in-up">
+                    <span th:text="*{startDate}"></span> -
+                    <span th:text="*{endDate}"></span>
+                  </p>
+                  <p th:text="*{location}"></p>
+                </div>
+                <div class="col-12 col-md-12">
+                  <div th:utext="*{description}"></div>
+                </div>
+              </div>
+            </div>
+            <!-- Experience Lines End -->
+          </div>
+          <!-- Experince Content Block - Experience End -->
+
+          <!-- Education Content Block - Education Start -->
           <div class="content__block block-large">
             <!-- H3 Block Start -->
             <div class="section-h3">
@@ -917,175 +812,123 @@
             <!-- Education Lines Start -->
             <div class="container-fluid p-0 resume-lines">
               <!-- education single item -->
-              <div class="row g-0 resume-lines__item animate-in-up">
-                <div class="col-12 col-md-2">
-                  <span class="resume-lines__date animate-in-up"
-                    >2015 - 2016</span
-                  >
+              <div
+                class="row g-0 resume-lines__item animate-in-up"
+                th:each="education: ${data.educations}"
+                th:object="${education}"
+              >
+                <div class="col-12 col-md-3">
+                  <span class="resume-lines__date animate-in-up">
+                    <span th:text="*{startDate}"></span> -
+                    <span th:text="*{endDate}"></span>
+                  </span>
                 </div>
                 <div class="col-12 col-md-5">
-                  <h5 class="resume-lines__title animate-in-up">
-                    Drawing Concentration
-                  </h5>
+                  <h5
+                    class="resume-lines__title animate-in-up"
+                    th:text="*{title}"
+                  ></h5>
                   <p class="resume-lines__source animate-in-up">
-                    Course by
-                    <a href="#0" class="text-link-bold" target="_blank"
-                      >New York Academy of Art</a
-                    >
+                    From
+                    <a
+                      th:href="@{*{institutionLink}}"
+                      class="text-link-bold"
+                      target="_blank"
+                      th:text="*{institution}"
+                    ></a>
                   </p>
                 </div>
-                <div class="col-12 col-md-5">
+                <div class="col-12 col-md-4">
                   <p class="small resume-lines__descr animate-in-up">
-                    Intensive drawing courses that present the fundamental
-                    principles of drawing.
-                  </p>
-                </div>
-              </div>
-              <!-- education single item -->
-              <div class="row g-0 resume-lines__item animate-in-up">
-                <div class="col-12 col-md-2">
-                  <span class="resume-lines__date animate-in-up"
-                    >2019 - 2021</span
-                  >
-                </div>
-                <div class="col-12 col-md-5">
-                  <h5 class="resume-lines__title animate-in-up">
-                    UI/UX Design Specialization
-                  </h5>
-                  <p class="resume-lines__source animate-in-up">
-                    Course by
-                    <a href="#0" class="text-link-bold" target="_blank"
-                      >California Institute of Arts</a
-                    >
-                  </p>
-                </div>
-                <div class="col-12 col-md-5">
-                  <p class="small resume-lines__descr animate-in-up">
-                    Research, design, and prototype effective, visually-driven
-                    websites and apps.
-                  </p>
-                </div>
-              </div>
-              <!-- education single item -->
-              <div class="row g-0 resume-lines__item animate-in-up">
-                <div class="col-12 col-md-2">
-                  <span class="resume-lines__date animate-in-up">2022</span>
-                </div>
-                <div class="col-12 col-md-5">
-                  <h5 class="resume-lines__title animate-in-up">
-                    UI/UX Designer
-                  </h5>
-                  <p class="resume-lines__source animate-in-up">
-                    Course by
-                    <a href="#0" class="text-link-bold" target="_blank"
-                      >Coursera</a
-                    >
-                  </p>
-                </div>
-                <div class="col-12 col-md-5">
-                  <p class="small resume-lines__descr animate-in-up">
-                    This cource is about how to complete the design process from
-                    beginning to end.
+                    <span th:text="*{location}"></span> <br />
+                    <span th:text="*{gradeIn+': '+grade+'/'+totalGrade}">
+                    </span>
                   </p>
                 </div>
               </div>
             </div>
             <!-- Education Lines End -->
           </div>
-          <!-- Content Block - Education End -->
+          <!-- Education Content Block - Education End -->
 
-          <!-- Content Block - Experience Start -->
-          <div class="content__block block-large">
-            <!-- H3 Block Start -->
-            <div class="section-h3">
-              <h3 class="h3__title animate-in-up">Work experience</h3>
+          <!-- ---------------------------- -->
+
+          <!-- Portfolio Section Start -->
+          <section id="portfolio" class="inner inner-first portfolio">
+            <!-- Content Block - H2 Section Title Start -->
+            <div class="content__block section-grid-title">
+              <p class="h2__subtitle animate-in-up">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  x="0px"
+                  y="0px"
+                  width="13px"
+                  height="13px"
+                  viewBox="0 0 13 13"
+                  fill="currentColor"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M5.6,12.6c-0.5-0.8-0.7-2.4-1.7-3.5c-1-1-2.7-1.2-3.5-1.7C-0.1,7-0.1,6,0.4,5.6c0.8-0.5,2.3-0.6,3.5-1.8
+                  C5,2.8,5.1,1.2,5.6,0.4C6-0.1,7-0.1,7.4,0.4c0.5,0.8,0.7,2.4,1.8,3.5c1.2,1.2,2.6,1.2,3.5,1.7c0.6,0.4,0.6,1.4,0,1.7
+                  C11.8,7.9,10.2,8,9.1,9.1c-1,1-1.2,2.7-1.7,3.5C7,13.1,6,13.1,5.6,12.6z"
+                  />
+                </svg>
+                <span>Certificates</span>
+              </p>
+              <h2 class="h2__title animate-in-up">
+                Check out my earned certifications
+              </h2>
             </div>
-            <!-- H3 Block End -->
+            <!-- Content Block - H2 Section Title End -->
 
-            <!-- Experience Lines Start -->
-            <div class="container-fluid p-0 resume-lines">
-              <!-- experience single item -->
-              <div class="row g-0 resume-lines__item animate-in-up">
-                <div class="col-12 col-md-2">
-                  <span class="resume-lines__date animate-in-up"
-                    >2018 - 2019</span
+            <!-- Content Block - Works Gallery Start -->
+            <div class="content__block grid-block">
+              <div class="container-fluid px-0 inner__gallery">
+                <div
+                  class="row gx-0 my-gallery"
+                  itemscope
+                  itemtype="http://schema.org/ImageGallery"
+                >
+                  <!-- Works Gallery Single Item Start -->
+                  <figure
+                    th:each="certificate: *{certificates}"
+                    th:object="${certificate}"
+                    class="col-12 col-md-6 gallery__item grid-item animate-card-2"
+                    itemprop="associatedMedia"
+                    itemscope
+                    itemtype="http://schema.org/ImageObject"
                   >
-                </div>
-                <div class="col-12 col-md-5">
-                  <h5 class="resume-lines__title animate-in-up">Illustrator</h5>
-                  <p class="resume-lines__source animate-in-up">
-                    in the
-                    <a href="#0" class="text-link-bold" target="_blank"
-                      >Creative Mind</a
+                    <a
+                      th:href="@{*{certificateUrl}}"
+                      th:data-image="@{*{certificateUrl}}"
+                      class="gallery__link"
+                      itemprop="contentUrl"
+                      data-size="1755x1240"
                     >
-                    agency
-                  </p>
-                </div>
-                <div class="col-12 col-md-5">
-                  <p class="small resume-lines__descr animate-in-up">
-                    I created original images for a range of digital and printed
-                    products.
-                  </p>
-                </div>
-              </div>
-              <!-- experience single item -->
-              <div class="row g-0 resume-lines__item animate-in-up">
-                <div class="col-12 col-md-2">
-                  <span class="resume-lines__date animate-in-up"
-                    >2019 - 2021</span
-                  >
-                </div>
-                <div class="col-12 col-md-5">
-                  <h5 class="resume-lines__title animate-in-up">
-                    Graphic Designer
-                  </h5>
-                  <p class="resume-lines__source animate-in-up">
-                    in the
-                    <a href="#0" class="text-link-bold" target="_blank"
-                      >Moon Light</a
-                    >
-                    agency
-                  </p>
-                </div>
-                <div class="col-12 col-md-5">
-                  <p class="small resume-lines__descr animate-in-up">
-                    My job was to create adverts, branding, signage and other
-                    media products.
-                  </p>
-                </div>
-              </div>
-              <!-- experience single item -->
-              <div class="row g-0 resume-lines__item animate-in-up">
-                <div class="col-12 col-md-2">
-                  <span class="resume-lines__date animate-in-up"
-                    >2021 - now</span
-                  >
-                </div>
-                <div class="col-12 col-md-5">
-                  <h5 class="resume-lines__title animate-in-up">
-                    UI/UX Designer
-                  </h5>
-                  <p class="resume-lines__source animate-in-up">
-                    in the
-                    <a href="#0" class="text-link-bold" target="_blank"
-                      >Moon Light</a
-                    >
-                    agency
-                  </p>
-                </div>
-                <div class="col-12 col-md-5">
-                  <p class="small resume-lines__descr animate-in-up">
-                    I am actively involved in creating user interfaces for
-                    mobile apps and websites.
-                  </p>
+                      <img
+                        th:src="@{*{certificateUrl}}"
+                        class="gallery__image"
+                        itemprop="thumbnail"
+                        alt="Certificate Image"
+                      />
+                    </a>
+                    <figcaption
+                      class="gallery__descr"
+                      itemprop="caption description"
+                    ></figcaption>
+                  </figure>
+                  <!-- Works Gallery Single Item End -->
                 </div>
               </div>
             </div>
-            <!-- Experience Lines End -->
-          </div>
-          <!-- Content Block - Experience End -->
+            <!-- Content Block - Works Gallery End -->
+          </section>
+          <!-- Portfolio Section End -->
 
-          <!-- Content Block - H3 Block Start -->
+          <!-- ---------------------------- -->
+
+          <!-- Faviroute Tool Content Block - H3 Block Start -->
           <div class="content__block">
             <div class="section-h3 section-h3-grid">
               <h3 class="h3__title animate-in-up">My favourite tools</h3>
@@ -1093,267 +936,41 @@
           </div>
           <!-- Content Block - H3 Block End -->
 
-          <!-- Content Block - Tools List Start -->
+          <!-- Favorite Skill Content Block - Tools List Start -->
           <div class="content__block grid-block block-large">
             <!-- Tools List Start -->
             <div class="tools-cards d-flex justify-content-start flex-wrap">
               <!-- tools simgle item -->
-              <div class="tools-cards__item d-flex grid-item-s animate-card-5">
+              <div
+                class="tools-cards__item d-flex grid-item-s animate-card-5"
+                th:each="favouriteTool : *{favouriteTools}"
+                th:object="${favouriteTool}"
+              >
                 <div class="tools-cards__card">
                   <img
                     class="tools-cards__icon animate-in-up"
-                    src="img/icons/icon-photoshop.svg"
+                    th:src="@{*{logoUrl}}"
                     alt="Tools Icon"
                   />
-                  <h6 class="tools-cards__caption animate-in-up">Photoshop</h6>
-                </div>
-              </div>
-              <!-- tools simgle item -->
-              <div class="tools-cards__item d-flex grid-item-s animate-card-5">
-                <div class="tools-cards__card">
-                  <img
-                    class="tools-cards__icon animate-in-up"
-                    src="img/icons/icon-figma.svg"
-                    alt="Tools Icon"
-                  />
-                  <h6 class="tools-cards__caption animate-in-up">Figma</h6>
-                </div>
-              </div>
-              <!-- tools simgle item -->
-              <div class="tools-cards__item d-flex grid-item-s animate-card-5">
-                <div class="tools-cards__card">
-                  <img
-                    class="tools-cards__icon animate-in-up"
-                    src="img/icons/icon-illustrator.svg"
-                    alt="Tools Icon"
-                  />
-                  <h6 class="tools-cards__caption animate-in-up">
-                    Illustrator
-                  </h6>
-                </div>
-              </div>
-              <!-- tools simgle item -->
-              <div class="tools-cards__item d-flex grid-item-s animate-card-5">
-                <div class="tools-cards__card">
-                  <img
-                    class="tools-cards__icon animate-in-up"
-                    src="img/icons/icon-scketch.svg"
-                    alt="Tools Icon"
-                  />
-                  <h6 class="tools-cards__caption animate-in-up">Sketch</h6>
-                </div>
-              </div>
-              <!-- tools simgle item -->
-              <div class="tools-cards__item d-flex grid-item-s animate-card-5">
-                <div class="tools-cards__card">
-                  <img
-                    class="tools-cards__icon animate-in-up"
-                    src="img/icons/icon-blender.svg"
-                    alt="Tools Icon"
-                  />
-                  <h6 class="tools-cards__caption animate-in-up">Blender</h6>
-                </div>
-              </div>
-              <!-- tools simgle item -->
-              <div class="tools-cards__item d-flex grid-item-s animate-card-5">
-                <div class="tools-cards__card">
-                  <img
-                    class="tools-cards__icon animate-in-up"
-                    src="img/icons/icon-html.svg"
-                    alt="Tools Icon"
-                  />
-                  <h6 class="tools-cards__caption animate-in-up">HTML5</h6>
-                </div>
-              </div>
-              <!-- tools simgle item -->
-              <div class="tools-cards__item d-flex grid-item-s animate-card-5">
-                <div class="tools-cards__card">
-                  <img
-                    class="tools-cards__icon animate-in-up"
-                    src="img/icons/icon-css.svg"
-                    alt="Tools Icon"
-                  />
-                  <h6 class="tools-cards__caption animate-in-up">CSS3</h6>
-                </div>
-              </div>
-              <!-- tools simgle item -->
-              <div class="tools-cards__item d-flex grid-item-s animate-card-5">
-                <div class="tools-cards__card">
-                  <img
-                    class="tools-cards__icon animate-in-up"
-                    src="img/icons/icon-notion.svg"
-                    alt="Tools Icon"
-                  />
-                  <h6 class="tools-cards__caption animate-in-up">Notion</h6>
+                  <h6
+                    class="tools-cards__caption animate-in-up"
+                    th:text="*{name}"
+                  ></h6>
                 </div>
               </div>
             </div>
             <!-- Tools List End -->
           </div>
-          <!-- Content Block - Tools List End -->
+          <!-- Favorite Skill  Content Block - Tools List End -->
+          <!-- Faviroute Tool Content Block - H3 Block Start  -->
 
-          <!-- Content Block - H2 Block Start -->
-          <div class="content__block section-title">
-            <p class="h2__subtitle animate-in-up">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                x="0px"
-                y="0px"
-                width="13px"
-                height="13px"
-                viewBox="0 0 13 13"
-                fill="currentColor"
-              >
-                <path
-                  fill="currentColor"
-                  d="M5.6,12.6c-0.5-0.8-0.7-2.4-1.7-3.5c-1-1-2.7-1.2-3.5-1.7C-0.1,7-0.1,6,0.4,5.6c0.8-0.5,2.3-0.6,3.5-1.8
-                  C5,2.8,5.1,1.2,5.6,0.4C6-0.1,7-0.1,7.4,0.4c0.5,0.8,0.7,2.4,1.8,3.5c1.2,1.2,2.6,1.2,3.5,1.7c0.6,0.4,0.6,1.4,0,1.7
-                  C11.8,7.9,10.2,8,9.1,9.1c-1,1-1.2,2.7-1.7,3.5C7,13.1,6,13.1,5.6,12.6z"
-                />
-              </svg>
-              <span>Testimonials</span>
-            </p>
-            <h2 class="h2__title animate-in-up">Clients say about me</h2>
+          <!-- Slider Skills Start -->
+          <div id="slider-skill">
+            <div id="skill-slid" class="animate-in-up"></div>
           </div>
-          <!-- Content Block - H2 Block End -->
-
-          <!-- Content Block - Testimonials Slider Start -->
-          <div class="content__block">
-            <!-- Testimonials Slider Start -->
-            <div class="testimonials-slider">
-              <!-- slider main container -->
-              <div class="swiper-testimonials">
-                <!-- additional required wrapper -->
-                <div class="swiper-wrapper">
-                  <!-- slides -->
-                  <div class="swiper-slide">
-                    <div class="testimonials-card animate-in-up">
-                      <div
-                        class="testimonials-card__tauthor d-flex animate-in-up"
-                      >
-                        <div class="tauthor__avatar">
-                          <img
-                            src="img/avatars/400x400_t01.webp"
-                            alt="Review Author"
-                          />
-                        </div>
-                        <div
-                          class="tauthor__info d-flex flex-column justify-content-center"
-                        >
-                          <p class="tauthor__name">Alex Tomato</p>
-                          <p class="tauthor__position">
-                            Brand Manager in
-                            <a href="#0" class="text-link-bold" target="_blank"
-                              >Instant Design</a
-                            >
-                          </p>
-                          <div class="tauthor__rating d-flex">
-                            <i class="ph-fill ph-star"></i>
-                            <i class="ph-fill ph-star"></i>
-                            <i class="ph-fill ph-star"></i>
-                            <i class="ph-fill ph-star"></i>
-                            <i class="ph-fill ph-star"></i>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="testimonials-card__descr animate-in-up">
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetuer adipiscing
-                          elit, sed diam nonummy nibh euismod tincidunt ut
-                          laoreet dolore magna aliquam erat volutpat. Ut wisi
-                          enim ad minim veniam, quis nostrud. Dolore magna
-                          aliquam.
-                        </p>
-                      </div>
-                      <div class="testimonials-card__btnholder animate-in-up">
-                        <a
-                          class="btn mobile-vertical btn-line btn-transparent slide-right"
-                          href="#0"
-                        >
-                          <span class="btn-caption">Project Page</span>
-                          <i class="ph-bold ph-arrow-right"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="testimonials-card animate-in-up">
-                      <div
-                        class="testimonials-card__tauthor d-flex animate-in-up"
-                      >
-                        <div class="tauthor__avatar">
-                          <img
-                            src="img/avatars/400x400_t02.webp"
-                            alt="Review Author"
-                          />
-                        </div>
-                        <div
-                          class="tauthor__info d-flex flex-column justify-content-center"
-                        >
-                          <p class="tauthor__name">Jenny Pineapple</p>
-                          <p class="tauthor__position">
-                            SEO in
-                            <a href="#0" class="text-link-bold" target="_blank"
-                              >Creative People</a
-                            >
-                          </p>
-                          <div class="tauthor__rating d-flex">
-                            <i class="ph-fill ph-star"></i>
-                            <i class="ph-fill ph-star"></i>
-                            <i class="ph-fill ph-star"></i>
-                            <i class="ph-fill ph-star"></i>
-                            <i class="ph-fill ph-star"></i>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="testimonials-card__descr animate-in-up">
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetuer adipiscing
-                          elit, sed diam nonummy nibh euismod tincidunt ut
-                          laoreet dolore magna aliquam erat volutpat. Ut wisi
-                          enim ad minim veniam, quis nostrud. Dolore magna
-                          aliquam.
-                        </p>
-                      </div>
-                      <div class="testimonials-card__btnholder animate-in-up">
-                        <a
-                          class="btn mobile-vertical btn-line btn-transparent slide-right"
-                          href="#0"
-                        >
-                          <span class="btn-caption">Project Page</span>
-                          <i class="ph-bold ph-arrow-right"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- navigation buttons -->
-                <div
-                  class="swiper-button-prev mxd-slider-btn-square mxd-slider-btn-square-prev animate-in-up"
-                >
-                  <a
-                    class="btn btn-square btn-square-s btn-outline slide-left"
-                    href="#0"
-                  >
-                    <i class="ph-bold ph-caret-left"></i>
-                  </a>
-                </div>
-                <div
-                  class="swiper-button-next mxd-slider-btn-square mxd-slider-btn-square-next animate-in-up"
-                >
-                  <a
-                    class="btn btn-square btn-square-s btn-outline slide-right"
-                    href="#0"
-                  >
-                    <i class="ph-bold ph-caret-right"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <!-- Testimonials Slider End -->
-          </div>
-          <!-- Content Block - Testimonials Slider End -->
+          <!-- Slider Skills End -->
         </section>
+
         <!-- Resume Section End -->
 
         <!-- Contact Section Start -->
@@ -1384,6 +1001,89 @@
             </h2>
           </div>
           <!-- Content Block - H2 Section Title End -->
+
+          <!-- Content Block - Socials Cards Start -->
+          <div class="content__block grid-block">
+            <div class="socials-cards d-flex justify-content-start flex-wrap">
+              <!-- socials item -->
+              <div
+                class="socials-cards__item d-flex grid-item-s animate-card-5"
+                th:each="socialLink: *{socialLinks}"
+                th:object="${socialLink}"
+              >
+                <div class="socials-cards__card">
+                  <i th:class="*{icon}"></i>
+                  <a
+                    class="socials-cards__link"
+                    th:href="@{*{link}}"
+                    target="_blank"
+                  ></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Content Block - Socials Cards End -->
+
+          <!-- Content Block - Teaser Start -->
+          <div class="content__block">
+            <div class="teaser">
+              <p class="teaser__text animate-in-up">
+                Want to know more about me, tell me about your project or just
+                to say hello?
+                <a
+                  class="text-link-bold"
+                  th:href="@{*{'mailto:'+details.email+'?subject=Message%20From%20Your%20Site'}}"
+                  >Drop me a line</a
+                >
+                and I'll get back as soon as possible.
+              </p>
+            </div>
+          </div>
+          <!-- Content Block - Teaser End -->
+
+          <!-- Content Block - Contact Data Start -->
+          <div class="content__block">
+            <div class="container-fluid p-0 contact-lines animate-in-up">
+              <div class="row g-0 contact-lines__item">
+                <!-- Location item -->
+                <div class="col-12 col-md-4 contact-lines__data">
+                  <p class="contact-lines__title animate-in-up">Location</p>
+                  <p class="contact-lines__text animate-in-up">
+                    <a
+                      class="text-link-bold"
+                      th:href="@{*{details.addressLink}}"
+                      target="_blank"
+                      th:text="*{details.address}"
+                    ></a>
+                  </p>
+                </div>
+                <!-- Phone item -->
+                <div class="col-12 col-md-4 contact-lines__data">
+                  <p class="contact-lines__title animate-in-up">Phone</p>
+                  <p class="contact-lines__text animate-in-up">
+                    <a
+                      class="text-link-bold"
+                      th:href="@{*{'tel:'+details.phoneNumber}}"
+                      th:text="*{details.phoneNumber}"
+                    ></a>
+                  </p>
+                </div>
+                <!-- Email item -->
+                <div class="col-12 col-md-4 contact-lines__data">
+                  <p class="contact-lines__title animate-in-up">Email</p>
+                  <p class="contact-lines__text animate-in-up">
+                    <a
+                      class="text-link-bold"
+                      href="mailto:sarwech99@gmail.com?subject=Message%20From%20Your%20Site"
+                      th:text="*{details.email}"
+                      >sarwech99@gmail.com</a
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Content Block - Contact Data End -->
 
           <!-- Content Block - Contact Form Start -->
           <div class="content__block grid-block block-grid-large">
@@ -1474,136 +1174,6 @@
             </div>
           </div>
           <!-- Content Block - Contact Form End -->
-
-          <!-- Content Block - Socials Cards Start -->
-          <div class="content__block grid-block">
-            <div class="socials-cards d-flex justify-content-start flex-wrap">
-              <!-- socials item -->
-              <div
-                class="socials-cards__item d-flex grid-item-s animate-card-5"
-              >
-                <div class="socials-cards__card">
-                  <i class="ph-bold ph-dribbble-logo"></i>
-                  <a
-                    class="socials-cards__link"
-                    href="https://dribbble.com/"
-                    target="_blank"
-                  ></a>
-                </div>
-              </div>
-              <!-- socials item -->
-              <div
-                class="socials-cards__item d-flex grid-item-s animate-card-5"
-              >
-                <div class="socials-cards__card">
-                  <i class="ph-bold ph-behance-logo"></i>
-                  <a
-                    class="socials-cards__link"
-                    href="https://www.behance.net/"
-                    target="_blank"
-                  ></a>
-                </div>
-              </div>
-              <!-- socials item -->
-              <div
-                class="socials-cards__item d-flex grid-item-s animate-card-5"
-              >
-                <div class="socials-cards__card">
-                  <i class="ph-bold ph-instagram-logo"></i>
-                  <a
-                    class="socials-cards__link"
-                    href="https://www.instagram.com/"
-                    target="_blank"
-                  ></a>
-                </div>
-              </div>
-              <!-- socials item -->
-              <div
-                class="socials-cards__item d-flex grid-item-s animate-card-5"
-              >
-                <div class="socials-cards__card">
-                  <i class="ph-bold ph-twitch-logo"></i>
-                  <a
-                    class="socials-cards__link"
-                    href="https://www.twitch.tv/"
-                    target="_blank"
-                  ></a>
-                </div>
-              </div>
-              <!-- socials item -->
-              <div
-                class="socials-cards__item d-flex grid-item-s animate-card-5"
-              >
-                <div class="socials-cards__card">
-                  <i class="ph-bold ph-pinterest-logo"></i>
-                  <a
-                    class="socials-cards__link"
-                    href="https://www.pinterest.com/"
-                    target="_blank"
-                  ></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Content Block - Socials Cards End -->
-
-          <!-- Content Block - Teaser Start -->
-          <div class="content__block">
-            <div class="teaser">
-              <p class="teaser__text animate-in-up">
-                Want to know more about me, tell me about your project or just
-                to say hello?
-                <a
-                  class="text-link-bold"
-                  href="mailto:sarwech99@gmail.com?subject=Message%20From%20Your%20Site"
-                  >Drop me a line</a
-                >
-                and I'll get back as soon as possible.
-              </p>
-            </div>
-          </div>
-          <!-- Content Block - Teaser End -->
-
-          <!-- Content Block - Contact Data Start -->
-          <div class="content__block">
-            <div class="container-fluid p-0 contact-lines animate-in-up">
-              <div class="row g-0 contact-lines__item">
-                <!-- data item -->
-                <div class="col-12 col-md-4 contact-lines__data">
-                  <p class="contact-lines__title animate-in-up">Location</p>
-                  <p class="contact-lines__text animate-in-up">
-                    <a
-                      class="text-link-bold"
-                      href="https://maps.app.goo.gl/uersU2G9wwhu8cZU7"
-                      target="_blank"
-                      >Karachi, Pakistan</a
-                    >
-                  </p>
-                </div>
-                <!-- data item -->
-                <div class="col-12 col-md-4 contact-lines__data">
-                  <p class="contact-lines__title animate-in-up">Phone</p>
-                  <p class="contact-lines__text animate-in-up">
-                    <a class="text-link-bold" href="tel:+923133599267"
-                      >+92 313-3599267</a
-                    >
-                  </p>
-                </div>
-                <!-- data item -->
-                <div class="col-12 col-md-4 contact-lines__data">
-                  <p class="contact-lines__title animate-in-up">Email</p>
-                  <p class="contact-lines__text animate-in-up">
-                    <a
-                      class="text-link-bold"
-                      href="mailto:sarwech99@gmail.com?subject=Message%20From%20Your%20Site"
-                      >sarwech99@gmail.com</a
-                    >
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Content Block - Contact Data End -->
         </section>
         <!-- Contact Section End -->
       </div>
@@ -1693,6 +1263,7 @@
     <script th:scr="@{js/bg/js}"></script>
     <script th:src="@{js/app.js}"></script>
     <script th:src="@{js/gallery-init.js}"></script>
+    <script type="module" th:src="@{js/skill-slid.js}"></script>
 
     <!-- Load Scripts End -->
   </body>

@@ -13,6 +13,7 @@ import java.util.Optional;
 public class SarvechPortfolioApplication implements CommandLineRunner {
 
 	private final DetailsService detailsService;
+	
 
 	private final AppConstants constants;
 

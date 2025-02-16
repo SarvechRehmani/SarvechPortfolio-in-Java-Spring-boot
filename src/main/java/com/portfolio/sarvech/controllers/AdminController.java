@@ -28,15 +28,21 @@ public class AdminController {
     private final SocialLinkService socialLinkService;
     private final ProjectService projectService;
     private final EducationService educationService;
+    private final ExperienceService experienceService;
     private final SkillService skillService;
+    private final FavouriteToolsService favouriteToolsService;
+    private final CertificateService certificateService;
     private final AppConstants constants;
 
-    public AdminController(DetailsService detailsService, SocialLinkService socialLinkService, ProjectService projectService, EducationService educationService, SkillService skillService, AppConstants constants) {
+    public AdminController(DetailsService detailsService, SocialLinkService socialLinkService, ProjectService projectService, EducationService educationService, ExperienceService experienceService, SkillService skillService, FavouriteToolsService favouriteToolsService, CertificateService certificateService, AppConstants constants) {
         this.detailsService = detailsService;
         this.socialLinkService = socialLinkService;
         this.projectService = projectService;
         this.educationService = educationService;
+        this.experienceService = experienceService;
         this.skillService = skillService;
+        this.favouriteToolsService = favouriteToolsService;
+        this.certificateService = certificateService;
         this.constants = constants;
     }
 
@@ -48,17 +54,27 @@ public class AdminController {
         List<Project> selfProjects = this.projectService.findAllProjectsByClient("self");
         List<Project> clientProjects = this.projectService.findAllProjectsByNotClient("self");
         List<Education> educations = this.educationService.findAllEducations();
+        List<Experience> experiences = this.experienceService.findAllExperiences();
+
         List<Skill> languagesSkills = this.skillService.findSkillsByType("languages");
         List<Skill> frameworksSkills = this.skillService.findSkillsByType("frameworks");
         List<Skill> toolsSkills = this.skillService.findSkillsByType("tools");
         List<Skill> othersSkills = this.skillService.findSkillsByType("others");
         SkillResponseDto skills = new SkillResponseDto(languagesSkills,frameworksSkills,toolsSkills,othersSkills);
+
+        List<FavouriteTool> favouriteTools = this.favouriteToolsService.findAllFavouriteTools();
+        List<Certificate> certificates = this.certificateService.findAllCertificates();
+
         model.addAttribute("details", details);
         model.addAttribute("socialLinks", socialLinks);
         model.addAttribute("selfProjects", selfProjects);
         model.addAttribute("clientProjects", clientProjects);
         model.addAttribute("educations", educations);
+        model.addAttribute("experiences", experiences);
         model.addAttribute("skills",skills);
+        model.addAttribute("favouriteTools", favouriteTools);
+        model.addAttribute("certificates", certificates);
+
         System.out.println("Dashboard Page");
         return "admin/dashboard";
     }
@@ -83,9 +99,10 @@ public class AdminController {
     @PostMapping("/edit-details")
     public String editDetails(Details details, Model model, HttpSession session) {
         System.out.println(details);
+        details.setId(this.constants.DetailsID);
         this.detailsService.updateDetails(details);
-        session.setAttribute("message", new Message("Details updated successfully!", MessageType.DEFAULT));
-        return "redirect:/admin/dashboard#dashboard";
+        session.setAttribute("message", new Message("Details updated successfully!", MessageType.SUCCESS));
+        return "redirect:/admin/dashboard";
     }
 
 

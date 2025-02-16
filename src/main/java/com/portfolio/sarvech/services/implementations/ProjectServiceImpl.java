@@ -35,7 +35,7 @@ public class ProjectServiceImpl implements ProjectService {
         List<Image> images = new ArrayList<>();
         for (MultipartFile file : files) {
             String fileName = this.constants.CLOUDINARY_PROJECT_IMAGE_FOLDER + UUID.randomUUID().toString();
-            String imageUrl = this.imageService.uploadImage(file, fileName);
+            String imageUrl = this.imageService.uploadImage(file, fileName, this.constants.CLOUDINARY_PROJECT_IMAGE_FOLDER);
 
             Image image = new Image();
             image.setImageUrl(imageUrl);

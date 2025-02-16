@@ -29,7 +29,7 @@ public class Details {
     private String experiencedIn;
     private int projects;
     @Column(length = 2000)
-    private String descriptionOne;
+        private String descriptionOne;
     @Column(length = 2000)
     private String descriptionTwo;
     private String resumeLink;
