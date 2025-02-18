@@ -16,7 +16,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class MainSkills {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String skillTitle;
     private String tagOne;

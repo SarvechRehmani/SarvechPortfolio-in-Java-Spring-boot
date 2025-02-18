@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 public class AppConstants {
 
     public final long DetailsID = 101;
+    public final long mainSkillOne = 201;
+    public final long mainSkillTwo = 202;
 
     public final int PROJECT_IMAGE_WIDTH = 500;
     public final int PROJECT_IMAGE_HEIGHT = 500;

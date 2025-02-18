@@ -2,23 +2,27 @@ package com.portfolio.sarvech;
 
 import com.portfolio.sarvech.helper.AppConstants;
 import com.portfolio.sarvech.models.Details;
+import com.portfolio.sarvech.models.MainSkills;
 import com.portfolio.sarvech.services.DetailsService;
+import com.portfolio.sarvech.services.MainSkillService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootApplication
 public class SarvechPortfolioApplication implements CommandLineRunner {
 
 	private final DetailsService detailsService;
-	
+	private  final MainSkillService mainSkillService;
 
 	private final AppConstants constants;
 
-	public SarvechPortfolioApplication(DetailsService detailsService, AppConstants constants) {
+	public SarvechPortfolioApplication(DetailsService detailsService, MainSkillService mainSkillService, AppConstants constants) {
         this.detailsService = detailsService;
+        this.mainSkillService = mainSkillService;
         this.constants = constants;
     }
 
@@ -33,6 +37,9 @@ public class SarvechPortfolioApplication implements CommandLineRunner {
 		if (!flag) {
 			Details details = this.detailsService.saveDefaultDetails();
 			System.out.println("Default details saved: " + details);
+		}
+		if(this.mainSkillService.findMainSkillById(this.constants.mainSkillOne) == null || this.mainSkillService.findMainSkillById(this.constants.mainSkillTwo) == null) {
+			this.mainSkillService.saveDefaultMainSkills();
 		}
 	}
 }
