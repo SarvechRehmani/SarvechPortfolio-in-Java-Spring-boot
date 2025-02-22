@@ -37,16 +37,45 @@
 
 <!-- Avatar Side Block Start -->
 <div id="avatar" class="sidebar" th:fragment="sidebar">
-  <div class="sidebar__container d-flex flex-column align-items-center gap-3">
+  <div class="sidebar__container d-flex flex-column align-items-center gap-0">
     <!-- image and logo -->
-    <div class="avatar__block d-flex flex-column align-items-center">
-      <div class="sidebar_avatar_image">
-        <img
-          th:src="@{/img/avatars/1024x1024_a02.webp}"
-          alt="Sarvech Portfolio Profile Photo"
-        />
+    <form
+      id="avatarForm"
+      th:action="@{/admin/profile-upload}"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      <div
+        class="avatar__block d-flex flex-column align-items-center position-relative"
+      >
+        <div class="sidebar_avatar_image position-relative">
+          <img
+            th:src="@{${details.profileUrl}}"
+            onerror="this.onerror=null; this.src='/img/avatars/1024x1024_a02.webp';"
+            alt="Sarvech Portfolio Profile Photo"
+            class="rounded-circle"
+            id="avatarImage"
+            width="120"
+            height="120"
+          />
+          <!-- Camera Icon for Upload -->
+          <span
+            class="camera-icon"
+            onclick="document.getElementById('avatarUpload').click()"
+          >
+            <i class="fas fa-camera"></i>
+          </span>
+          <input
+            type="file"
+            id="avatarUpload"
+            name="profile"
+            accept="image/*"
+            class="d-none"
+            onchange="submitForm()"
+          />
+        </div>
       </div>
-    </div>
+    </form>
     <a
       th:href="@{/admin/dashboard#dashboard}"
       class="btn btn-sidebar btn-hover btn-hover-accent"
@@ -110,7 +139,14 @@
       class="btn btn-sidebar btn-hover btn-hover-accent"
     >
       <span class="btn-caption">Certificates</span>
-      <i class="fa-solid fa-star"></i>
+      <i class="fa-solid fa-certificate"></i>
+    </a>
+    <a
+      th:href="@{/admin/dashboard#main-skills}"
+      class="btn btn-sidebar btn-hover btn-hover-accent"
+    >
+      <span class="btn-caption">Main Skills</span>
+      <i class="fa-solid fa-bullseye"></i>
     </a>
   </div>
 </div>

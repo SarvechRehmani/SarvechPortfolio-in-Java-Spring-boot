@@ -2,15 +2,11 @@ package com.portfolio.sarvech;
 
 import com.portfolio.sarvech.helper.AppConstants;
 import com.portfolio.sarvech.models.Details;
-import com.portfolio.sarvech.models.MainSkills;
 import com.portfolio.sarvech.services.DetailsService;
 import com.portfolio.sarvech.services.MainSkillService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.util.List;
-import java.util.Optional;
 
 @SpringBootApplication
 public class SarvechPortfolioApplication implements CommandLineRunner {

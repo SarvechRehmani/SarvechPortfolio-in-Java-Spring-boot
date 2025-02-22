@@ -1,7 +1,7 @@
 package com.portfolio.sarvech.services.implementations;
 
 import com.portfolio.sarvech.helper.AppConstants;
-import com.portfolio.sarvech.models.MainSkills;
+import com.portfolio.sarvech.models.MainSkill;
 import com.portfolio.sarvech.repositories.MainSkillRepo;
 import com.portfolio.sarvech.services.MainSkillService;
 import org.springframework.stereotype.Service;
@@ -21,13 +21,13 @@ public class MainSkillServiceImpl implements MainSkillService {
 
     @Override
     public void saveDefaultMainSkills() {
-        MainSkills mainSkillOne = new MainSkills();
+        MainSkill mainSkillOne = new MainSkill();
         mainSkillOne.setId(this.constants.mainSkillOne);
         mainSkillOne.setSkillTitle("Backend Development");
         mainSkillOne.setTagOne("Java");
         mainSkillOne.setTagTwo("Spring Boot");
         mainSkillOne.setShortText("Building scalable APIs, database management, authentication, and server-side logic.");
-        MainSkills mainSkillTwo = new MainSkills();
+        MainSkill mainSkillTwo = new MainSkill();
         mainSkillTwo.setId(this.constants.mainSkillTwo);
         mainSkillTwo.setSkillTitle("Frontend Development");
         mainSkillTwo.setTagOne("Angular");
@@ -38,22 +38,22 @@ public class MainSkillServiceImpl implements MainSkillService {
     }
 
     @Override
-    public void saveMainSkill(MainSkills mainSkills) {
+    public void saveMainSkill(MainSkill mainSkills) {
         this.mainSkillRepo.save(mainSkills);
     }
 
     @Override
-    public MainSkills updateMainSkills(MainSkills mainSkill) {
+    public MainSkill updateMainSkills(MainSkill mainSkill) {
         return this.mainSkillRepo.save(mainSkill);
     }
 
     @Override
-    public MainSkills findMainSkillById(long id) {
+    public MainSkill findMainSkillById(long id) {
         return this.mainSkillRepo.findById(id).orElse(null);
     }
 
     @Override
-    public List<MainSkills> findAllMainSkills() {
+    public List<MainSkill> findAllMainSkills() {
         return this.mainSkillRepo.findAll();
     }
 }

@@ -824,6 +824,93 @@
             </div>
           </section>
 
+          <section id="main-skills">
+            <!-- 2 Main Skills Start Content Block - Services Start -->
+            <div class="content__block grid-block">
+              <div class="container-fluid p-0">
+                <div class="row g-0 align-items-stretch cards">
+                  <!-- services grid cards single item -->
+                  <div
+                    class="col-12 col-md-6 cards__item grid-item animate-card-2"
+                    th:object="${mainSkills[0]}"
+                  >
+                    <a th:href="@{'/admin/main-skill/update/'+*{id}}">
+                      <span class="rounded-btn delete">Update</span>
+                    </a>
+                    <div class="cards__card d-flex flex-column">
+                      <div class="cards__descr">
+                        <h4
+                          class="cards__title animate-in-up"
+                          th:text="*{skillTitle}"
+                        ></h4>
+                        <div class="cards__tags d-flex flex-wrap animate-in-up">
+                          <span
+                            class="rounded-tag tag-outline"
+                            th:text="*{tagOne}"
+                          ></span>
+                          <span
+                            class="rounded-tag tag-outline"
+                            th:text="*{tagTwo}"
+                          >
+                          </span>
+                        </div>
+                        <p
+                          class="small cards__text animate-in-up"
+                          th:text="*{shortText}"
+                        ></p>
+                      </div>
+                      <div class="cards__image d-flex">
+                        <img
+                          th:src="@{/img/services/1200x900_s03.webp}"
+                          alt="Service/Feature Image"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <!-- services grid cards single item -->
+                  <div
+                    class="col-12 col-md-6 cards__item grid-item animate-card-2"
+                    th:object="${mainSkills[1]}"
+                  >
+                    <a th:href="@{'/admin/main-skill/update/'+*{id}}">
+                      <span class="rounded-btn delete">Update</span>
+                    </a>
+                    <div class="cards__card d-flex flex-column">
+                      <div class="cards__descr">
+                        <h4
+                          class="cards__title animate-in-up"
+                          th:text="*{skillTitle}"
+                        ></h4>
+                        <div class="cards__tags d-flex flex-wrap animate-in-up">
+                          <span
+                            class="rounded-tag tag-outline"
+                            th:text="*{tagOne}"
+                          ></span>
+                          <span
+                            class="rounded-tag tag-outline"
+                            th:text="*{tagTwo}"
+                          >
+                          </span>
+                        </div>
+                        <p
+                          class="small cards__text animate-in-up"
+                          th:text="*{shortText}"
+                        ></p>
+                      </div>
+                      <div class="cards__image d-flex">
+                        <img
+                          th:src="@{/img/services/1200x900_s03.webp}"
+                          alt="Service/Feature Image"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- 2 Mail Skills End Content Block - Services End -->
+          </section>
+
           <div class="container mt-5">
             <div class="row"></div>
           </div>

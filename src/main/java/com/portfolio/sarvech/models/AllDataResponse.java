@@ -19,6 +19,7 @@ public class AllDataResponse {
     private List<FavouriteTool> favouriteTools;
     private SkillResponseDto skills;
     private List<Certificate> certificates;
+    private List<MainSkill> mainSkills;
 
 
 }

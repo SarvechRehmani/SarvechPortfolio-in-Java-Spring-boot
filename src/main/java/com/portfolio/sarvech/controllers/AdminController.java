@@ -10,13 +10,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.thymeleaf.model.IModel;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/admin")
@@ -32,9 +32,11 @@ public class AdminController {
     private final SkillService skillService;
     private final FavouriteToolsService favouriteToolsService;
     private final CertificateService certificateService;
+    private final MainSkillService mainSkillService;
+    private final ImageService imageService;
     private final AppConstants constants;
 
-    public AdminController(DetailsService detailsService, SocialLinkService socialLinkService, ProjectService projectService, EducationService educationService, ExperienceService experienceService, SkillService skillService, FavouriteToolsService favouriteToolsService, CertificateService certificateService, AppConstants constants) {
+    public AdminController(DetailsService detailsService, SocialLinkService socialLinkService, ProjectService projectService, EducationService educationService, ExperienceService experienceService, SkillService skillService, FavouriteToolsService favouriteToolsService, CertificateService certificateService, MainSkillService mainSkillService, ImageService imageService, AppConstants constants) {
         this.detailsService = detailsService;
         this.socialLinkService = socialLinkService;
         this.projectService = projectService;
@@ -43,6 +45,8 @@ public class AdminController {
         this.skillService = skillService;
         this.favouriteToolsService = favouriteToolsService;
         this.certificateService = certificateService;
+        this.mainSkillService = mainSkillService;
+        this.imageService = imageService;
         this.constants = constants;
     }
 
@@ -65,6 +69,8 @@ public class AdminController {
         List<FavouriteTool> favouriteTools = this.favouriteToolsService.findAllFavouriteTools();
         List<Certificate> certificates = this.certificateService.findAllCertificates();
 
+        List<MainSkill> mainSkills = this.mainSkillService.findAllMainSkills();
+
         model.addAttribute("details", details);
         model.addAttribute("socialLinks", socialLinks);
         model.addAttribute("selfProjects", selfProjects);
@@ -74,6 +80,7 @@ public class AdminController {
         model.addAttribute("skills",skills);
         model.addAttribute("favouriteTools", favouriteTools);
         model.addAttribute("certificates", certificates);
+        model.addAttribute("mainSkills", mainSkills);
 
         System.out.println("Dashboard Page");
         return "admin/dashboard";
@@ -98,10 +105,26 @@ public class AdminController {
 
     @PostMapping("/edit-details")
     public String editDetails(Details details, Model model, HttpSession session) {
-        System.out.println(details);
         details.setId(this.constants.DetailsID);
         this.detailsService.updateDetails(details);
         session.setAttribute("message", new Message("Details updated successfully!", MessageType.SUCCESS));
+        return "redirect:/admin/dashboard";
+    }
+
+    @PostMapping("/profile-upload")
+    public String uploadNewProfile(@RequestParam("profile") MultipartFile profile, HttpSession session){
+        if (profile.isEmpty()) {
+            session.setAttribute("message", new Message("Please select a square image to upload!", MessageType.ERROR));
+            return "redirect:/admin/dashboard";
+        }
+        Details details = this.detailsService.findById(this.constants.DetailsID).get();
+        String profilePublicId = this.constants.CLOUDINARY_PROFILE_FOLDER + UUID.randomUUID().toString();
+        String profileUrl = this.imageService.uploadImage(profile, profilePublicId, this.constants.CLOUDINARY_PROFILE_FOLDER);
+        this.imageService.deleteImageFromCloudinary(details.getProfilePublicId());
+        details.setProfileUrl(profileUrl);
+        details.setProfilePublicId(profilePublicId);
+        this.detailsService.updateDetails(details);
+        session.setAttribute("message", new Message("Profile image uploaded successfully!", MessageType.SUCCESS));
         return "redirect:/admin/dashboard";
     }
 

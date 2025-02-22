@@ -20,7 +20,8 @@ public class LoadAllDataServiceImpl implements LoadAllDataService {
     private final FavouriteToolsService favouriteToolsService;
     private final SkillService skillService;
     private final CertificateService certificateService;
-    public LoadAllDataServiceImpl(AppConstants constants, DetailsService detailsService, TypingSkillService typingSkillService, SocialLinkService socialLinkService, ProjectService projectService, EducationService educationService, ExperienceService experienceService, FavouriteToolsService favouriteToolsService, SkillService skillService, CertificateService certificateService) {
+    private final MainSkillService mainSkillService;
+    public LoadAllDataServiceImpl(AppConstants constants, DetailsService detailsService, TypingSkillService typingSkillService, SocialLinkService socialLinkService, ProjectService projectService, EducationService educationService, ExperienceService experienceService, FavouriteToolsService favouriteToolsService, SkillService skillService, CertificateService certificateService, MainSkillService mainSkillService) {
         this.constants = constants;
         this.detailsService = detailsService;
         this.typingSkillService = typingSkillService;
@@ -31,6 +32,7 @@ public class LoadAllDataServiceImpl implements LoadAllDataService {
         this.favouriteToolsService = favouriteToolsService;
         this.skillService = skillService;
         this.certificateService = certificateService;
+        this.mainSkillService = mainSkillService;
     }
 
 
@@ -51,8 +53,8 @@ public class LoadAllDataServiceImpl implements LoadAllDataService {
         List<Skill> toolsSkills = this.skillService.findSkillsByType("tools");
         List<Skill> othersSkills = this.skillService.findSkillsByType("others");
         data.setSkills(new SkillResponseDto(languagesSkills, frameworksSkills, toolsSkills, othersSkills));
-
         data.setCertificates(this.certificateService.findAllCertificates());
+        data.setMainSkills(this.mainSkillService.findAllMainSkills());
         return data;
     }
 

@@ -14,4 +14,5 @@ public interface ImageService {
     public String getUrlFromPublicId(String publicId);
     public boolean deleteImageFromCloudinary(String publicId);
     public String getUrlFromPublicIdForCertificate(String publicId, int width, int height);
+
 }

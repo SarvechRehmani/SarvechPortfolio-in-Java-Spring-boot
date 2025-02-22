@@ -545,3 +545,7 @@ function deleteItem(id, type) {
 function redirectLocation(id, type, action) {
   window.location.href = `http://localhost:8080/admin/${type}/${action}/${id}`;
 }
+
+function submitForm() {
+  document.getElementById("avatarForm").submit();
+}

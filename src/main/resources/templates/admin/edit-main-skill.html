@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  dir="ltr"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{admin/base :: parent(~{::#content},~{::title}, ~{::script})}"
+>
+  <head>
+    <!-- Page Title -->
+    <title>Update Main Skill - Sarvech Rehmani</title>
+  </head>
+  <body>
+    <div>
+      <!-- Page Content Start -->
+      <div id="content" class="content">
+        <div class="content__wrapper">
+          <div style="margin: 40px 0 0 65px">
+            <h2>Update Main Skill</h2>
+          </div>
+
+          <div class="container">
+            <div class="main_container">
+              <div class="mb-3">
+                <div th:replace="~{admin/message :: alert}"></div>
+              </div>
+              <div class="card-head d-flex justify-content-between">
+                <h1 class="title">Main SKill</h1>
+                <div>
+                  <a
+                    th:href="@{/admin/dashboard#main-skills}"
+                    class="header__trigger btn"
+                  >
+                    <span class="btn-caption">back</span>
+                    <i class="fa-solid fa-circle-arrow-left"></i>
+                  </a>
+                </div>
+              </div>
+              <form
+                th:object="${mainSkill}"
+                th:action="@{'/admin/main-skill/update/'+*{id}}"
+                method="POST"
+                class="form contact-form"
+                id="contact-form"
+                novalidate
+              >
+                <div class="container-fluid p-0">
+                  <div class="row gx-0">
+                    <div class="col-12 col-md-12 form__item animate-in-up">
+                      <input
+                        type="text"
+                        th:field="*{skillTitle}"
+                        placeholder="Skill Title here*"
+                        required
+                      />
+                      <p
+                        class="error"
+                        th:if="${#fields.hasErrors('skillTitle')}"
+                        th:errors="*{skillTitle}"
+                      ></p>
+                    </div>
+                    <div class="col-12 col-md-6 form__item animate-in-up">
+                      <input
+                        type="text"
+                        th:field="*{tagOne}"
+                        placeholder="Tag One here*"
+                        required
+                      />
+                      <p
+                        class="error"
+                        th:if="${#fields.hasErrors('tagOne')}"
+                        th:errors="*{tagOne}"
+                      ></p>
+                    </div>
+
+                    <div class="col-12 col-md-6 form__item animate-in-up">
+                      <input
+                        type="text"
+                        th:field="*{tagTwo}"
+                        placeholder="Tag Two here*"
+                        required
+                      />
+                      <p
+                        class="error"
+                        th:if="${#fields.hasErrors('tagTwo')}"
+                        th:errors="*{tagTwo}"
+                      ></p>
+                    </div>
+
+                    <div class="col-12 form__item animate-in-up">
+                      <textarea
+                        style="height: 10rem"
+                        th:field="*{shortText}"
+                        placeholder="Short Text here*"
+                        rows="1"
+                        required
+                      ></textarea>
+                      <p
+                        class="error"
+                        th:if="${#fields.hasErrors('shortText')}"
+                        th:errors="*{shortText}"
+                      ></p>
+                    </div>
+
+                    <div class="col-12 form__item animate-in-up">
+                      <button
+                        class="btn btn-default btn-hover btn-hover-accent"
+                        type="submit"
+                      >
+                        <span class="btn-caption">Update</span>
+                        <i class="fa-solid fa-floppy-disk"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="container mt-5">
+            <div class="row"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script></script>
+  </body>
+</html>

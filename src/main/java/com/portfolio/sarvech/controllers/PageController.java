@@ -2,6 +2,7 @@ package com.portfolio.sarvech.controllers;
 
 import com.portfolio.sarvech.helper.AppConstants;
 import com.portfolio.sarvech.models.AllDataResponse;
+import com.portfolio.sarvech.models.ContactForm;
 import com.portfolio.sarvech.models.Details;
 import com.portfolio.sarvech.models.Project;
 import com.portfolio.sarvech.services.DetailsService;
@@ -23,15 +24,10 @@ public class PageController {
     private final Logger logger = LoggerFactory.getLogger(PageController.class);
 
     private final LoadAllDataService loadAllDataService;
-    private final DetailsService detailsService;
-    private final SocialLinkService socialLinkService;
-    private final AppConstants constants;
 
-    public PageController(LoadAllDataService loadAllDataService, DetailsService detailsService, SocialLinkService socialLinkService, AppConstants constants) {
+    public PageController(LoadAllDataService loadAllDataService) {
         this.loadAllDataService = loadAllDataService;
-        this.detailsService = detailsService;
-        this.socialLinkService = socialLinkService;
-        this.constants = constants;
+
     }
 
     @GetMapping
@@ -41,8 +37,8 @@ public class PageController {
         if(data.getDetails() == null){
             return "/maintenance";
         }
-        System.out.println(data);
         model.addAttribute("data",data);
+        model.addAttribute("contactForm", new ContactForm());
         return "index";
     }
 

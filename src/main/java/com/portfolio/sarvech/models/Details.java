@@ -17,6 +17,8 @@ public class Details {
 
     @Id
     private long id;
+    private String profileUrl;
+    private String profilePublicId;
     private String firstName;
     private String lastName;
     private String email;

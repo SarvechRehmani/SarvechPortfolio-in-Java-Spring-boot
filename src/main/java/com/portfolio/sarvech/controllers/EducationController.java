@@ -61,6 +61,7 @@ public class EducationController {
         return "admin/edit-education";
     }
 
+
     @PostMapping("/update/{id}")
     public String updateEducation(@Valid Education education, BindingResult result, HttpSession session){
         if(result.hasErrors()){

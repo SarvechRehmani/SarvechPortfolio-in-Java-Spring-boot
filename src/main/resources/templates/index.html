@@ -664,23 +664,34 @@
                 <div
                   class="col-12 col-md-6 cards__item grid-item animate-card-2"
                 >
-                  <div class="cards__card d-flex flex-column">
+                  <div
+                    class="cards__card d-flex flex-column"
+                    th:object="${data.mainSkills[0]}"
+                  >
                     <div class="cards__descr">
-                      <h4 class="cards__title animate-in-up">
-                        Backend Development
-                      </h4>
+                      <h4
+                        class="cards__title animate-in-up"
+                        th:text="*{skillTitle} ?: 'Backend Development'"
+                      ></h4>
                       <div class="cards__tags d-flex flex-wrap animate-in-up">
-                        <span class="rounded-tag tag-outline">Java</span>
-                        <span class="rounded-tag tag-outline">Spring Boot</span>
+                        <span
+                          class="rounded-tag tag-outline"
+                          th:text="*{tagOne} ?: 'Java'"
+                        ></span>
+                        <span
+                          class="rounded-tag tag-outline"
+                          th:if="*{tagTwo}"
+                          th:text="*{tagTwo}?:'Spring Boot'"
+                        ></span>
                       </div>
-                      <p class="small cards__text animate-in-up">
-                        Building scalable APIs, database management,
-                        authentication, and server-side logic.
-                      </p>
+                      <p
+                        class="small cards__text animate-in-up"
+                        th:text="*{shortText} ?: 'Building scalable APIs, database management, authentication, and server-side logic.'"
+                      ></p>
                     </div>
                     <div class="cards__image d-flex">
                       <img
-                        src="img/services/1200x900_s03.webp"
+                        th:src="@{/img/services/1200x900_s03.webp}"
                         alt="Service/Feature Image"
                       />
                     </div>
@@ -689,20 +700,29 @@
                 <!-- services grid cards single item -->
                 <div
                   class="col-12 col-md-6 cards__item grid-item animate-card-2"
+                  th:object="${data.mainSkills[1]}"
                 >
                   <div class="cards__card d-flex flex-column">
                     <div class="cards__descr">
-                      <h4 class="cards__title animate-in-up">
-                        Frontend Development
-                      </h4>
+                      <h4
+                        class="cards__title animate-in-up"
+                        th:text="*{skillTitle}?:'Frontend Development'"
+                      ></h4>
                       <div class="cards__tags d-flex flex-wrap animate-in-up">
-                        <span class="rounded-tag tag-outline">Angular</span>
-                        <span class="rounded-tag tag-outline">TypeScript</span>
+                        <span
+                          class="rounded-tag tag-outline"
+                          th:text="*{tagOne}?:'Angular'"
+                        ></span>
+                        <span
+                          class="rounded-tag tag-outline"
+                          th:text="*{tagTwo}?:'TypeScript'"
+                        ></span>
                       </div>
-                      <p class="small cards__text animate-in-up">
-                        Building dynamic and interactive web applications with
-                        Angular.
-                      </p>
+                      <p
+                        class="small cards__text animate-in-up"
+                        th:text="*{shortText}?:'Building dynamic and interactive web applications with
+                        Angular.'"
+                      ></p>
                     </div>
                     <div class="cards__image d-flex animate-in-up">
                       <img
@@ -1100,30 +1120,18 @@
               <!-- Reply Messages End -->
 
               <!-- Contact Form Start -->
-              <form class="form contact-form" id="contact-form">
-                <!-- Hidden Required Fields -->
-                <input
-                  type="hidden"
-                  name="project_name"
-                  value="Starter Template"
-                />
-                <input
-                  type="hidden"
-                  name="admin_email"
-                  value="support@mixdesign.club"
-                />
-                <input
-                  type="hidden"
-                  name="form_subject"
-                  value="Contact Form Message"
-                />
-                <!-- END Hidden Required Fields-->
+              <form
+                class="form contact-form"
+                id="contact-form"
+                onsubmit="contactFormSubmit(this)"
+                th:object="${contactForm}"
+              >
                 <div class="container-fluid p-0">
                   <div class="row gx-0">
                     <div class="col-12 col-md-6 form__item animate-in-up">
                       <input
                         type="text"
-                        name="Name"
+                        th:field="*{name}"
                         placeholder="Your Name*"
                         required
                       />
@@ -1131,14 +1139,14 @@
                     <div class="col-12 col-md-6 form__item animate-in-up">
                       <input
                         type="text"
-                        name="Company"
+                        th:field="*{Company}"
                         placeholder="Company Name"
                       />
                     </div>
                     <div class="col-12 col-md-6 form__item animate-in-up">
                       <input
                         type="email"
-                        name="E-mail"
+                        th:field="*{email}"
                         placeholder="Email Adress*"
                         required
                       />
@@ -1146,20 +1154,21 @@
                     <div class="col-12 col-md-6 form__item animate-in-up">
                       <input
                         type="tel"
-                        name="Phone"
+                        th:field="*{Phone}"
                         placeholder="Phone Number*"
                         required
                       />
                     </div>
                     <div class="col-12 form__item animate-in-up">
                       <textarea
-                        name="Message"
+                        th:field="*{message}"
                         placeholder="A Few Words*"
                         required
                       ></textarea>
                     </div>
                     <div class="col-12 form__item animate-in-up">
                       <button
+                        id="contact-btn"
                         class="btn btn-default btn-hover btn-hover-accent"
                         type="submit"
                       >
@@ -1264,6 +1273,59 @@
     <script th:src="@{js/app.js}"></script>
     <script th:src="@{js/gallery-init.js}"></script>
     <script type="module" th:src="@{js/skill-slid.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      const baseURL = "http://localhost:8080";
+      async function contactFormSubmit(contactForm) {
+        const submitBtn = document.getElementById("contact-btn");
+
+        submitBtn.innerHTML = `<span class="btn-caption">Loading...</span>
+                    <i class="fa-solid fa-spinner fa-spin fa-xl"></i>`;
+        submitBtn.disabled = true;
+
+        event.preventDefault();
+
+        // Collect form data using FormData
+        const formData = new FormData(contactForm);
+
+        // Send the request with form data
+        const response = await fetch(`${baseURL}/contact/send`, {
+          method: "POST",
+          body: formData, // FormData sets the correct Content-Type automatically
+        });
+        const text = await response.text(); // Read response as text, not JSON
+        console.log(text);
+
+        // Determine the current theme based on the `color-scheme` attribute
+        const isDarkTheme =
+          document.documentElement.getAttribute("color-scheme") === "dark";
+
+        // Define theme-specific styles
+        const backgroundColor = isDarkTheme ? "#2b2b2b" : "#ffffff";
+
+        if (text === "success") {
+          Swal.fire({
+            title: "Message sent!",
+            text: "We'll get back to you shortly.",
+            icon: "success",
+            background: backgroundColor,
+          });
+          submitBtn.innerHTML = `<span class="btn-caption">Send Message</span>
+                    <i class="ph-bold ph-paper-plane-tilt"></i>`;
+        } else {
+          Swal.fire({
+            title: "Error!",
+            text: "Something went wrong. Please try again later.",
+            icon: "error",
+            background: backgroundColor,
+          });
+          submitBtn.innerHTML = `<span class="btn-caption">Send Message</span>
+                    <i class="ph-bold ph-paper-plane-tilt"></i>`;
+        }
+        // Optionally re-enable the button if needed
+        submitBtn.disabled = false;
+      }
+    </script>
 
     <!-- Load Scripts End -->
   </body>
